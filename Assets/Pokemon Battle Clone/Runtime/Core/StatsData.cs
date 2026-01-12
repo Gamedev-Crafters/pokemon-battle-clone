@@ -10,7 +10,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core
         public int Level
         {
             get => _level;
-            set => _level = Math.Clamp(value, 0, 100);
+            set => _level = Math.Clamp(value, 1, 100);
         }
         private StatSet _evs;
         public StatSet EVs
@@ -18,31 +18,47 @@ namespace Pokemon_Battle_Clone.Runtime.Core
             get => _evs;
             set
             {
-                Assert.IsTrue(value.Sum <= 508);
+                Assert.IsTrue(value.Sum <= 510);
                 _evs = value;
+                Stats = CalculateStats(Level, BaseStats, EVs, IVs, Nature);
             }
         }
-        public StatSet IVs { get; set; }
+
+        private StatSet _ivs;
+        public StatSet IVs
+        {
+            get => _ivs;
+            set
+            {
+                _ivs = value;
+                Stats = CalculateStats(Level, BaseStats, EVs, IVs, Nature);
+            }
+        }
         public StatSet BaseStats { get; }
         public StatSet Stats { get; private set; }
+        
+        public Nature Nature { get; }
 
-        public StatsData(int level, StatSet baseStats)
+        public StatsData(int level, StatSet baseStats, Nature nature)
         {
             Level = level;
             BaseStats = baseStats;
-            EVs = StatSet.BlankEVsSet();
-            IVs = StatSet.BlankIVsSet();
+            Nature = nature;
+            _evs = StatSet.BlankEVsSet();
+            _ivs = StatSet.BlankIVsSet();
+
+            Stats = CalculateStats(Level, BaseStats, EVs, IVs, Nature);
         }
 
-        private static StatSet CalculateStats(int level, StatSet baseStats, StatSet evs, StatSet ivs)
+        private static StatSet CalculateStats(int level, StatSet baseStats, StatSet evs, StatSet ivs, Nature nature)
         {
             return new StatSet(
                 CalculateHPStat(level, baseStats.HP, evs.HP, ivs.HP),
-                CalculateStat(level, baseStats.Attack, evs.Attack, ivs.Attack),
-                CalculateStat(level, baseStats.SpcAttack, evs.SpcAttack, ivs.SpcAttack),
-                CalculateStat(level, baseStats.Defense, evs.Defense, ivs.Defense),
-                CalculateStat(level, baseStats.SpcDefense, evs.SpcDefense, ivs.SpcDefense),
-                CalculateStat(level, baseStats.Speed, evs.Speed, ivs.Speed));
+                CalculateStat(level, baseStats.Attack, evs.Attack, ivs.Attack, nature.Attack),
+                CalculateStat(level, baseStats.Defense, evs.Defense, ivs.Defense, nature.Defense),
+                CalculateStat(level, baseStats.SpcAttack, evs.SpcAttack, ivs.SpcAttack, nature.SpcAttack),
+                CalculateStat(level, baseStats.SpcDefense, evs.SpcDefense, ivs.SpcDefense, nature.SpcDefense),
+                CalculateStat(level, baseStats.Speed, evs.Speed, ivs.Speed, nature.Speed));
         }
 
         private static int CalculateHPStat(int level, int baseHP, int hpEV, int hpIV)
@@ -50,10 +66,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core
             return Mathf.FloorToInt((2f * baseHP + hpIV + Mathf.FloorToInt(hpEV / 4f)) * level / 100) + level + 10;
         }
 
-        private static int CalculateStat(int level, int baseStat, int ev, int iv)
+        private static int CalculateStat(int level, int baseStat, int ev, int iv, float natureModifier)
         {
-            var nature = 0f;
-            return Mathf.FloorToInt((Mathf.FloorToInt((2f * baseStat + iv + Mathf.FloorToInt(ev /4f)) * level / 100) + 5) * nature);
+            int stat = Mathf.FloorToInt(((2 * baseStat + iv + ev / 4) * level / 100 + 5) * natureModifier);
+            
+            // return Mathf.FloorToInt((Mathf.FloorToInt((2f * baseStat + iv + Mathf.FloorToInt(ev /4f)) * level / 100) + 5) * natureModifier);
+            return stat;
         }
     }
 }

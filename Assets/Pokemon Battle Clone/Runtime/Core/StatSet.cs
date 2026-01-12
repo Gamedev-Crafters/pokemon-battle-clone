@@ -7,12 +7,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core
     {
         public int HP { get; private set; }
         public int Attack { get; private set; }
-        public int SpcAttack { get; private set; }
         public int Defense { get; private set; }
+        public int SpcAttack { get; private set; }
         public int SpcDefense { get; private set; }
         public int Speed { get; private set; }
 
-        public int Sum => HP + Attack + SpcAttack + Defense + SpcDefense + Speed;
+        public int Sum => HP + Attack + Defense + SpcAttack + SpcDefense + Speed;
         
         private int _maxStatValue;
         private int _minStatValue;
@@ -30,12 +30,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core
             _minStatValue = int.MinValue;
         }
 
-        public StatSet(int hp, int attack, int spcAttack, int defense, int spcDefense, int speed)
+        public StatSet(int hp, int attack, int defense, int spcAttack, int spcDefense, int speed)
         {
             HP = hp;
             Attack = attack;
-            SpcAttack = spcAttack;
             Defense = defense;
+            SpcAttack = spcAttack;
             SpcDefense = spcDefense;
             Speed = speed;
             
@@ -76,10 +76,32 @@ namespace Pokemon_Battle_Clone.Runtime.Core
         {
             HP = Math.Clamp(HP, _minStatValue, _maxStatValue);
             Attack = Math.Clamp(Attack, _minStatValue, _maxStatValue);
-            SpcAttack = Math.Clamp(SpcAttack, _minStatValue, _maxStatValue);
             Defense = Math.Clamp(Defense, _minStatValue, _maxStatValue);
+            SpcAttack = Math.Clamp(SpcAttack, _minStatValue, _maxStatValue);
             SpcDefense = Math.Clamp(SpcDefense, _minStatValue, _maxStatValue);
             Speed = Math.Clamp(Speed, _minStatValue, _maxStatValue);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(this, obj))
+                return true;
+
+            if (obj is not StatSet other)
+                return false;
+            
+            return HP == other.HP && Attack == other.Attack && Defense == other.Defense &&
+                SpcAttack == other.SpcAttack && SpcDefense == other.SpcDefense && Speed == other.Speed;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(HP, Attack, Defense, SpcAttack, SpcDefense, Speed);
+        }
+
+        public override string ToString()
+        {
+            return $"({HP}, {Attack}, {Defense}, {SpcAttack}, {SpcDefense}, {Speed})";
         }
     }
 }
