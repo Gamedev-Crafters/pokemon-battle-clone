@@ -5,5 +5,6 @@
     ],
     "includePlatforms": [
         "Editor"
-    ]
+    ],
+    "references":[ "GUID:7f75275fcf115174fa5f7515748c3d72" ]
 }
