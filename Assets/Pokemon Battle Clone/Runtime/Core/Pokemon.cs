@@ -16,6 +16,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core
             return 1f;
         }
 
-        public void Damage(int damage) => Stats.Health -= damage;
+        public void Damage(int damage) => Stats.Health.Damage(damage);
     }
 }
