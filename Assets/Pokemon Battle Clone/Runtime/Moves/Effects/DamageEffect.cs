@@ -7,7 +7,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Effects
         public void Apply(Move move, Pokemon user, Pokemon target)
         {
             var damage = GetDamage(move, user, target);
-            target.Damage(damage);
+            target.Health.Damage(damage);
         }
 
         private int GetDamage(Move move, Pokemon user, Pokemon target)

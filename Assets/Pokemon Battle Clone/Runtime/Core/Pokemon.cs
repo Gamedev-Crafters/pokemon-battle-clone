@@ -8,6 +8,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core
         public ElementalType Type2 { get; private set; }
         public StatsData Stats { get; private set; }
         public MoveSet MoveSet { get; private set; }
+        public Health Health { get; }
 
         public float STAB(ElementalType moveType)
         {
@@ -15,7 +16,5 @@ namespace Pokemon_Battle_Clone.Runtime.Core
                 return 1.5f;
             return 1f;
         }
-
-        public void Damage(int damage) => Stats.Health.Damage(damage);
     }
 }

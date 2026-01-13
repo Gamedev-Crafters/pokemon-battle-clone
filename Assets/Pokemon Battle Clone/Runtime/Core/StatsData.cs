@@ -7,7 +7,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core
 {
     public class StatsData
     {
-        public Health Health { get; }
         private int _level;
         public int Level
         {
@@ -41,10 +40,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core
         
         public Nature Nature { get; }
 
-        public StatsData(int level, int maxHealth, StatSet baseStats, Nature nature)
+        public StatsData(int level, StatSet baseStats, Nature nature)
         {
             Level = level;
-            Health = new Health(maxHealth);
             BaseStats = baseStats;
             Nature = nature;
             _evs = StatSet.BlankEVsSet();
