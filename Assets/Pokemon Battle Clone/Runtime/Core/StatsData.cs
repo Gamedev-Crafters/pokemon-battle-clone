@@ -1,4 +1,5 @@
 ﻿using System;
+using Pokemon_Battle_Clone.Runtime.Moves;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -6,6 +7,13 @@ namespace Pokemon_Battle_Clone.Runtime.Core
 {
     public class StatsData
     {
+        // todo: health class
+        private int _health;
+        public int Health
+        {
+            get => _health;
+            set => _health = Math.Max(value, 0);
+        }
         private int _level;
         public int Level
         {
@@ -48,6 +56,26 @@ namespace Pokemon_Battle_Clone.Runtime.Core
             _ivs = StatSet.BlankIVsSet();
 
             Stats = CalculateStats(Level, BaseStats, EVs, IVs, Nature);
+        }
+
+        public int GetAttackByCategory(MoveCategory category)
+        {
+            return category switch
+            {
+                MoveCategory.Physical => Stats.Attack,
+                MoveCategory.Special => Stats.SpcAttack,
+                _ => 0
+            };
+        }
+        
+        public int GetDefenseByCategory(MoveCategory category)
+        {
+            return category switch
+            {
+                MoveCategory.Physical => Stats.Defense,
+                MoveCategory.Special => Stats.SpcDefense,
+                _ => 0
+            };
         }
 
         private static StatSet CalculateStats(int level, StatSet baseStats, StatSet evs, StatSet ivs, Nature nature)
