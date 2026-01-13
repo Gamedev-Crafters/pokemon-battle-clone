@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 62
+  controlID: 80
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -459,7 +459,7 @@ MonoBehaviour:
   m_TestListGUIs:
   - m_Window: {fileID: 16}
     runProgress:
-      RunGuid: c8037829-4dcb-4d1f-a793-39dd61fa9148
+      RunGuid: 043ecec2-88cf-41fc-bf23-368c676b14b7
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -472,10 +472,7 @@ MonoBehaviour:
         filters:
         - testMode: 1
           testNames:
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel1Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel50Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel100Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.sdfsdgsd
+          - Pokemon_Battle_Clone.Tests.DamageTests.AttackDamage
           groupNames: []
           categoryNames: []
           assemblyNames:
@@ -786,7 +783,7 @@ MonoBehaviour:
     m_SelectedOption: 0
   - m_Window: {fileID: 16}
     runProgress:
-      RunGuid: c8037829-4dcb-4d1f-a793-39dd61fa9148
+      RunGuid: 043ecec2-88cf-41fc-bf23-368c676b14b7
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -799,10 +796,7 @@ MonoBehaviour:
         filters:
         - testMode: 1
           testNames:
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel1Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel50Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel100Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.sdfsdgsd
+          - Pokemon_Battle_Clone.Tests.DamageTests.AttackDamage
           groupNames: []
           categoryNames: []
           assemblyNames:
@@ -874,7 +868,7 @@ MonoBehaviour:
     m_SelectedOption: 0
   - m_Window: {fileID: 16}
     runProgress:
-      RunGuid: c8037829-4dcb-4d1f-a793-39dd61fa9148
+      RunGuid: 043ecec2-88cf-41fc-bf23-368c676b14b7
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -887,10 +881,7 @@ MonoBehaviour:
         filters:
         - testMode: 1
           testNames:
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel1Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel50Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel100Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.sdfsdgsd
+          - Pokemon_Battle_Clone.Tests.DamageTests.AttackDamage
           groupNames: []
           categoryNames: []
           assemblyNames:
@@ -1840,8 +1831,7 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 0
     m_SearchArea: 1
-    m_Folders:
-    - Assets/Pokemon Battle Clone/Runtime
+    m_Folders: []
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1859,7 +1849,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b0620000
     m_LastClickedID: 25264
-    m_ExpandedIDs: 00000000d6b10000d8b10000dab10000dcb10000
+    m_ExpandedIDs: 00000000eeb10000f0b10000f2b10000f4b10000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1888,7 +1878,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000d6b10000d8b10000dab10000dcb10000
+    m_ExpandedIDs: 00000000eeb10000f0b10000f2b10000f4b10000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1987,7 +1977,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0cfbffff
+      m_ExpandedIDs: b2aaffff32aeffffb4b1ffff4cbdffffcec0ffff50c4ffffd2c7ffff50cdffffd2d0ffff4cd8ffffcedbffff64e9ffff0cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
