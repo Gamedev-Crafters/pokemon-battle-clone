@@ -4,5 +4,6 @@
     {
         public ElementalType Type1 { get; private set; }
         public ElementalType Type2 { get; private set; }
+        public StatsData Stats { get; private set; }
     }
 }
