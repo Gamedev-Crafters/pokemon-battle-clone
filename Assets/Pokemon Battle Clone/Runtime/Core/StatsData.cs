@@ -96,10 +96,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core
 
         private static int CalculateStat(int level, int baseStat, int ev, int iv, float natureModifier)
         {
-            int stat = Mathf.FloorToInt(((2 * baseStat + iv + ev / 4) * level / 100 + 5) * natureModifier);
-            
-            // return Mathf.FloorToInt((Mathf.FloorToInt((2f * baseStat + iv + Mathf.FloorToInt(ev /4f)) * level / 100) + 5) * natureModifier);
-            return stat;
+            return Mathf.FloorToInt(((2 * baseStat + iv + ev / 4) * level / 100 + 5) * natureModifier);
         }
     }
 }
