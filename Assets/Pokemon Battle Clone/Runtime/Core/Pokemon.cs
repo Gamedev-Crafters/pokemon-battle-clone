@@ -4,12 +4,24 @@ namespace Pokemon_Battle_Clone.Runtime.Core
 {
     public class Pokemon
     {
+        public string Name { get; }
         public ElementalType Type1 { get; private set; }
         public ElementalType Type2 { get; private set; }
         public StatsData Stats { get; private set; }
         public MoveSet MoveSet { get; private set; }
         public Health Health { get; }
 
+        public Pokemon(string name, StatsData stats, ElementalType type1, ElementalType type2 = ElementalType.None)
+        {
+            Name = name;
+            Stats = stats;
+            Type1 = type1;
+            Type2 = type2;
+
+            MoveSet = new MoveSet();
+            Health = new Health(stats.Stats.HP);
+        }
+        
         public float STAB(ElementalType moveType)
         {
             if (moveType == Type1 || moveType == Type2)

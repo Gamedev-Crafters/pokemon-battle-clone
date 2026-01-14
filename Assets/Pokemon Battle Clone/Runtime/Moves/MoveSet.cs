@@ -8,6 +8,12 @@ namespace Pokemon_Battle_Clone.Runtime.Moves
     {
         public List<Move> Moves { get; private set; } = new List<Move>();
 
+        public void AddMoves(IEnumerable<Move> moves)
+        {
+            foreach (var move in moves)
+                AddMove(move);
+        }
+        
         public void AddMove(Move move)
         {
             Assert.IsNotNull(move);
