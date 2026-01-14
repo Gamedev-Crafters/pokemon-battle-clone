@@ -39,12 +39,15 @@ namespace Pokemon_Battle_Clone.Runtime.Core
         public StatSet Stats { get; private set; }
         
         public Nature Nature { get; }
+        public StatsModifier Modifiers { get; }
 
         public StatsData(int level, StatSet baseStats, Nature nature)
         {
             Level = level;
             BaseStats = baseStats;
             Nature = nature;
+            Modifiers = new StatsModifier();
+            
             _evs = StatSet.BlankEVsSet();
             _ivs = StatSet.BlankIVsSet();
 
@@ -55,8 +58,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core
         {
             return category switch
             {
-                MoveCategory.Physical => Stats.Attack,
-                MoveCategory.Special => Stats.SpcAttack,
+                MoveCategory.Physical => Mathf.FloorToInt(Stats.Attack * Modifiers.AttackBoost),
+                MoveCategory.Special => Mathf.FloorToInt(Stats.SpcAttack * Modifiers.SpcAttackBoost),
                 _ => 0
             };
         }
@@ -65,8 +68,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core
         {
             return category switch
             {
-                MoveCategory.Physical => Stats.Defense,
-                MoveCategory.Special => Stats.SpcDefense,
+                MoveCategory.Physical => Mathf.FloorToInt(Stats.Defense * Modifiers.DefenseBoost),
+                MoveCategory.Special => Mathf.FloorToInt(Stats.SpcDefense * Modifiers.SpcDefenseBoost),
                 _ => 0
             };
         }

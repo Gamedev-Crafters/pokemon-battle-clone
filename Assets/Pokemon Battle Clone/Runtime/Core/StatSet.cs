@@ -71,6 +71,18 @@ namespace Pokemon_Battle_Clone.Runtime.Core
             
             ClampStats();
         }
+
+        public void Add(StatSet statSet)
+        {
+            HP += statSet.HP;
+            Attack += statSet.Attack;
+            Defense += statSet.Defense;
+            SpcAttack += statSet.SpcAttack;
+            SpcDefense += statSet.SpcDefense;
+            Speed += statSet.Speed;
+            
+            ClampStats();
+        }
         
         private void ClampStats()
         {
