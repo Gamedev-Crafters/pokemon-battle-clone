@@ -25,6 +25,7 @@ namespace Pokemon_Battle_Clone.Runtime
             Pokemon pokemon = await Client.GetResourceAsync<Pokemon>(pokemonName);
             Debug.Log(pokemon.Name);
             Debug.Log(string.Join(',', pokemon.Abilities.Select(ability => ability.Ability.Name)));
+            Debug.Log($"Sprite: {pokemon.Sprites.FrontDefault}");
         }
     }
 }
