@@ -3,7 +3,7 @@ using Pokemon_Battle_Clone.Runtime.Moves;
 using UnityEngine;
 using UnityEngine.Assertions;
 
-namespace Pokemon_Battle_Clone.Runtime.Core
+namespace Pokemon_Battle_Clone.Runtime.Core.Domain
 {
     public class StatsData
     {

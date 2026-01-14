@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 
-namespace Pokemon_Battle_Clone.Runtime.Core
+namespace Pokemon_Battle_Clone.Runtime.Core.Domain
 {
     public class StatSet
     {

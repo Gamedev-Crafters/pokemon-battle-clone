@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Pokemon_Battle_Clone.Runtime.Core;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Effects;
 using UnityEngine.Assertions;
 

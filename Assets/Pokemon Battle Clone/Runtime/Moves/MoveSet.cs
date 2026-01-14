@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Pokemon_Battle_Clone.Runtime.Core;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using UnityEngine.Assertions;
 
 namespace Pokemon_Battle_Clone.Runtime.Moves

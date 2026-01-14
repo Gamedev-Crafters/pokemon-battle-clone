@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Pokemon_Battle_Clone.Runtime.Core
+namespace Pokemon_Battle_Clone.Runtime.Core.Domain
 {
     public class Health
     {
