@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Pokemon_Battle_Clone.Runtime.Core;
 using Pokemon_Battle_Clone.Runtime.Moves.Effects;
 using UnityEngine.Assertions;
@@ -23,6 +24,13 @@ namespace Pokemon_Battle_Clone.Runtime.Moves
 
         public Move(string name, ElementalType type, MoveCategory category, int pp, int accuracy, int power)
         {
+            if (pp < 0)
+                throw new ArgumentOutOfRangeException(nameof(pp), "PP must be greater or equal than 0");
+            if (accuracy < 0)
+                throw new ArgumentOutOfRangeException(nameof(accuracy), "Accuracy must be greater or equal than 0");
+            if (power < 0)
+                throw new ArgumentOutOfRangeException(nameof(power), "Power must be greater or equal than 0");
+            
             Name = name;
             Type = type;
             Category = category;
