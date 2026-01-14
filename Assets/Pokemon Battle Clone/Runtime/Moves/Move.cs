@@ -12,6 +12,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves
     
     public class Move
     {
+        public string Name { get; }
         public ElementalType Type { get; }
         public MoveCategory Category { get; }
         public int PP { get; private set; }
@@ -20,13 +21,20 @@ namespace Pokemon_Battle_Clone.Runtime.Moves
 
         private readonly List<IMoveEffect> _effects = new List<IMoveEffect>();
 
-        public Move(ElementalType type, MoveCategory category, int pp, int accuracy, int power)
+        public Move(string name, ElementalType type, MoveCategory category, int pp, int accuracy, int power)
         {
+            Name = name;
             Type = type;
             Category = category;
             PP = pp;
             Accuracy = accuracy;
             Power = power;
+        }
+
+        public void AddEffects(IEnumerable<IMoveEffect> effects)
+        {
+            foreach (var effect in effects)
+                AddEffect(effect);
         }
         
         public void AddEffect(IMoveEffect effect) => _effects.Add(effect);

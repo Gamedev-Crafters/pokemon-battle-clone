@@ -3,5 +3,6 @@
     public static class A
     {
         public static PokemonBuilder Pokemon => new PokemonBuilder();
+        public static MoveBuilder Move => new MoveBuilder();
     }
 }
