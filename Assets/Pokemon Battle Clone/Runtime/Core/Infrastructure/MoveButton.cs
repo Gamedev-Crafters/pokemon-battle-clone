@@ -12,7 +12,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         public void Display(Move move)
         {
             nameText.text = move.Name;
-            ppText.text = move.PP.ToString();
+            ppText.text = $"{move.PP.Value} / {move.PP.Max}";
         }
     }
 }

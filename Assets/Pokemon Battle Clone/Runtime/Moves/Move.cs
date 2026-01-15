@@ -16,7 +16,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves
         public string Name { get; }
         public ElementalType Type { get; }
         public MoveCategory Category { get; }
-        public int PP { get; private set; }
+        public ClampedInt PP { get; private set; }
         public int Accuracy { get; }
         public int Power { get; }
 
@@ -34,7 +34,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves
             Name = name;
             Type = type;
             Category = category;
-            PP = pp;
+            PP = new ClampedInt(pp, 0, pp);
             Accuracy = accuracy;
             Power = power;
         }
@@ -54,7 +54,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves
             foreach (var effect in _effects)
                 effect.Apply(this, user, target);
 
-            PP--;
+            PP.Value--;
         }
     }
 }
