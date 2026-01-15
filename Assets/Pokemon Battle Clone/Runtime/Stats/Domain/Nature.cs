@@ -1,4 +1,4 @@
-﻿namespace Pokemon_Battle_Clone.Runtime.Core.Domain
+﻿namespace Pokemon_Battle_Clone.Runtime.Stats.Domain
 {
     public struct Nature
     {
