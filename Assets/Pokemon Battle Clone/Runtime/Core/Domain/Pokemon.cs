@@ -1,4 +1,4 @@
-﻿using Pokemon_Battle_Clone.Runtime.Moves;
+﻿using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.Stats.Domain;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Domain

@@ -2,7 +2,7 @@
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using UnityEngine.Assertions;
 
-namespace Pokemon_Battle_Clone.Runtime.Moves
+namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
 {
     public class MoveSet
     {

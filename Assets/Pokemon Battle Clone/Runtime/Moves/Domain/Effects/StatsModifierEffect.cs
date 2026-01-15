@@ -1,7 +1,7 @@
 ﻿using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Stats.Domain;
 
-namespace Pokemon_Battle_Clone.Runtime.Moves.Effects
+namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
 {
     public class StatsModifierEffect : IMoveEffect
     {

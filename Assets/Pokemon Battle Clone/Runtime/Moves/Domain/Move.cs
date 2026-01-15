@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
-using Pokemon_Battle_Clone.Runtime.Moves.Effects;
+using Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects;
 using UnityEngine.Assertions;
 
-namespace Pokemon_Battle_Clone.Runtime.Moves
+namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
 {
     public enum MoveCategory
     {
