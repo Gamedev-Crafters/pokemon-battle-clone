@@ -2,7 +2,7 @@
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using UnityEngine;
 
-namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
+namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
 {
     public class MoveSetView : MonoBehaviour
     {
