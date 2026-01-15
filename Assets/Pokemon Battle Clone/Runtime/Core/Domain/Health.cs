@@ -13,6 +13,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
         public Health(int max)
         {
             Max = max;
+            Current = Max;
         }
     }
 }

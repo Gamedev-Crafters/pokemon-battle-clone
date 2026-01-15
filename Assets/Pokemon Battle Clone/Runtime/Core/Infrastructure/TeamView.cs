@@ -10,18 +10,14 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         [SerializeField] private Image pokemonImage;
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI levelText;
-        [SerializeField] private HealthView healthView;
+        public HealthView health;
+        public MoveSetView moveSet;
         
         public void SetStaticData(Sprite sprite, string name, int level)
         {
             pokemonImage.sprite = sprite;
             nameText.text = name;
             levelText.text = $"Lvl {level}";
-        }
-
-        public void SetHealth(int max, int current)
-        {
-            healthView.UpdateBar(max, current);
         }
     }
 }

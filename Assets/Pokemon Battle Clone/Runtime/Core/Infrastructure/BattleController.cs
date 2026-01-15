@@ -23,8 +23,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             var playerTeam = BuildPlayerTeam();
             var rivalTeam = BuildRivalTeam();
 
-            _playerTeamController = new TeamController(playerTeam, playerTeamView, playerDebugSprite);
-            _rivalTeamController = new TeamController(rivalTeam, rivalTeamView, rivalDebugSprite);
+            _playerTeamController = new TeamController(true, playerTeam, playerTeamView, playerDebugSprite);
+            _rivalTeamController = new TeamController(false, rivalTeam, rivalTeamView, rivalDebugSprite);
             
             _playerTeamController.Init();
             _rivalTeamController.Init();
