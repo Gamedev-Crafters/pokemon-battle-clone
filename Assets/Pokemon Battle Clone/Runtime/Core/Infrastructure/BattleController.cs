@@ -1,4 +1,7 @@
-﻿using Pokemon_Battle_Clone.Runtime.Builders;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Pokemon_Battle_Clone.Runtime.Builders;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.Stats.Domain;
@@ -18,6 +21,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         
         private TeamController _playerTeamController;
         private TeamController _rivalTeamController;
+
+        private int _turnCount;
+        private bool _battleFinished;
         
         private void Start()
         {
@@ -26,27 +32,105 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
             _playerTeamController = new TeamController(true, playerTeam, playerTeamView, playerDebugSprite);
             _rivalTeamController = new TeamController(false, rivalTeam, rivalTeamView, rivalDebugSprite);
-            
-            _playerTeamController.Init();
-            _rivalTeamController.Init();
+
+            _ = RunBattleAsync();
         }
 
+        private void Update()
+        {
+            _playerTeamController.Update();
+            _rivalTeamController.Update();
+        }
+
+        private async Task RunBattleAsync()
+        {
+            _playerTeamController.Init();
+            _rivalTeamController.Init();
+            
+            Debug.Log("Battle started!");
+            
+            while (!_battleFinished)
+            {
+                _turnCount++;
+                Debug.Log($"--- TURN {_turnCount} ---");
+
+                await StartTurnAsync();
+                var actions = await SelectActionsAsync();
+                await ExecuteActionsAsync(actions);
+                await EndTurnAsync();
+
+                _battleFinished = await CheckBattleEndAsync();
+            }
+            
+            Debug.Log("Battle finished!");
+        }
+
+        private async Task StartTurnAsync()
+        {
+            Debug.Log("Start turn...");
+            await Task.Delay(500);
+        }
+
+        private async Task<List<int>> SelectActionsAsync()
+        {
+            Debug.Log("Selecting actions...");
+            var playerAction = await _playerTeamController.WaitForAction();
+
+            return new List<int> { playerAction };
+        }
+
+        private async Task ExecuteActionsAsync(List<int> movesIndex)
+        {
+            Debug.Log($"Player uses move {movesIndex[0]}");
+            _playerTeamController.PerformMove(movesIndex[0], _rivalTeamController);
+        }
+
+        private async Task EndTurnAsync()
+        {
+            Debug.Log("End turn...");
+            await Task.Delay(500);
+        }
+
+        private async Task<bool> CheckBattleEndAsync()
+        {
+            await Task.Delay(200);
+
+            if (_turnCount >= 3)
+            {
+                Debug.Log("Battle end condition met!");
+                return true;
+            }
+
+            return false;    
+        }
+
+#region DEBUG
         private Team BuildPlayerTeam()
         {
             var team = new Team();
-            team.Add(A.Pokemon.WithName("Totodile")
+
+            var iceFang = A.Move.WithName("Ice Fang")
+                .WithAccuracy(100)
+                .WithPower(65)
+                .WithPP(16)
+                .WithCategory(MoveCategory.Physical)
+                .WithType(ElementalType.Ice);
+            var waterGun = A.Move.WithName("Water Gun")
+                .WithAccuracy(100)
+                .WithPower(50)
+                .WithPP(16)
+                .WithCategory(MoveCategory.Special)
+                .WithType(ElementalType.Water);
+            var totodile = A.Pokemon.WithName("Totodile")
                 .WithLevel(50)
                 .WithBaseStats(new StatSet(hp: 50, attack: 65, defense: 64, spcAttack: 44, spcDefense: 48, speed: 43))
                 .WithTypes(ElementalType.Water)
                 .WithNature(Nature.Adamant())
                 .WithIVs(new StatSet(31, 31, 31, 31, 31, 31))
                 .WithEVs(new StatSet(hp: 6, attack: 252, defense: 0, spcAttack: 0, spcDefense: 0, speed: 252))
-                .WithMoves(A.Move.WithName("Ice Fang")
-                    .WithAccuracy(100)
-                    .WithPower(65)
-                    .WithPP(16)
-                    .WithCategory(MoveCategory.Physical)
-                    .WithType(ElementalType.Ice)));
+                .WithMoves(iceFang, waterGun);
+            
+            team.Add(totodile);
 
             return team;
         }
@@ -70,5 +154,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
             return team;
         }
+#endregion
     }
 }

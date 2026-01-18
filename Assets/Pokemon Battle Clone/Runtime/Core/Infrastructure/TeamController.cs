@@ -1,4 +1,5 @@
-﻿using Pokemon_Battle_Clone.Runtime.Core.Domain;
+﻿using System.Threading.Tasks;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         private readonly TeamView _view;
         
         private readonly Sprite _debugSprite;
+
+        private TaskCompletionSource<int> _actionTcs;
         
         public TeamController(bool isPlayer, Team team, TeamView view, Sprite debugSprite)
         {
@@ -18,6 +21,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             _team = team;
             _view = view;
             _debugSprite = debugSprite;
+            
+            if (_isPlayer)
+                _view.moveSet.OnMoveSelected += OnMoveSelected;
         }
 
         public void Init()
@@ -28,6 +34,31 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             
             if (_isPlayer)
                 _view.moveSet.Display(pokemon.MoveSet);
+        }
+
+        public void Update()
+        {
+            _view.health.UpdateBar(_team.PokemonList[0].Health.Max, _team.PokemonList[0].Health.Current);
+        }
+
+        public Task<int> WaitForAction()
+        {
+            _actionTcs = new TaskCompletionSource<int>();
+            return _actionTcs.Task;
+        }
+
+        public void PerformMove(int index, TeamController rivalTeam)
+        {
+            var user = _team.PokemonList[0];
+            user.MoveSet.ExecuteMove(index, user, rivalTeam._team.PokemonList[0]);
+        }
+
+        private void OnMoveSelected(int index)
+        {
+            if (_actionTcs == null || _actionTcs.Task.IsCompleted)
+                return;
+            
+            _actionTcs.SetResult(index);
         }
     }
 }
