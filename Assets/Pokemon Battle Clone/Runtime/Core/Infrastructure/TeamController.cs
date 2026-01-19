@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
-using Pokemon_Battle_Clone.Runtime.Moves;
 using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
@@ -47,10 +46,14 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             return _actionTcs.Task;
         }
 
-        public void PerformMove(int index, TeamController rivalTeam)
+        public async Task PerformMove(int index, TeamController rivalTeam)
         {
+            await _view.pokemon.PlayAttackAnimation();
+            
             var user = _team.PokemonList[0];
             user.MoveSet.ExecuteMove(index, user, rivalTeam._team.PokemonList[0]);
+
+            await rivalTeam._view.pokemon.PlayHitAnimation();
         }
 
         private void OnMoveSelected(int index)

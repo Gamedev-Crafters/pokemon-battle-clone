@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Builders;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
@@ -82,7 +81,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         private async Task ExecuteActionsAsync(List<int> movesIndex)
         {
             Debug.Log($"Player uses move {movesIndex[0]}");
-            _playerTeamController.PerformMove(movesIndex[0], _rivalTeamController);
+            await _playerTeamController.PerformMove(movesIndex[0], _rivalTeamController);
         }
 
         private async Task EndTurnAsync()
