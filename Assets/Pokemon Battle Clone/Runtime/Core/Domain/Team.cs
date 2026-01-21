@@ -7,6 +7,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
         private readonly List<Pokemon> _pokemonList = new List<Pokemon>();
         public IReadOnlyList<Pokemon> PokemonList => _pokemonList;
 
+        public Pokemon FirstPokemon => _pokemonList[0];
+        
         public Team(Pokemon pokemon)
         {
             Add(pokemon);
