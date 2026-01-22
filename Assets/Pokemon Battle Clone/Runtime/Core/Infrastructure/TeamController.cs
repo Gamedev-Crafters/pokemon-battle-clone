@@ -13,7 +13,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         
         private readonly Sprite _debugSprite;
 
-        private TaskCompletionSource<int> _actionTcs;
+        private TeamController _opponentTeamController;
+        
+        private TaskCompletionSource<TrainerAction> _actionTcs;
         
         public TeamController(bool isPlayer, Team team, TeamView view, Sprite debugSprite)
         {
@@ -26,8 +28,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
                 _view.moveSet.OnMoveSelected += OnMoveSelected;
         }
 
-        public void Init()
+        public void Init(TeamController opponentTeam)
         {
+            _opponentTeamController = opponentTeam;
+            
             _view.SetStaticData(_debugSprite, _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
             _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
             
@@ -40,18 +44,18 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
         }
 
-        public Task<int> WaitForAction()
+        public Task<TrainerAction> WaitForAction()
         {
-            _actionTcs = new TaskCompletionSource<int>();
+            _actionTcs = new TaskCompletionSource<TrainerAction>();
             return _actionTcs.Task;
         }
 
-        public async Task PerformMove(int index, TeamController opponentTeam)
+        public async Task PerformMove(int index)
         {
             var user = _team.FirstPokemon;
-            var target = opponentTeam._team.FirstPokemon;
+            var target = _opponentTeamController._team.FirstPokemon;
             var userAnimator = _view.pokemon;
-            var targetAnimator = opponentTeam._view.pokemon;
+            var targetAnimator = _opponentTeamController._view.pokemon;
 
             await userAnimator.PlayAttackAnimation();
             user.MoveSet.ExecuteMove(index, user, target);
@@ -67,8 +71,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             if (_actionTcs == null || _actionTcs.Task.IsCompleted)
                 return;
 
-            var action = new MoveAction(_isPlayer ? Side.Player : Side.Rival, index, this, null);
-            _actionTcs.SetResult(index);
+            var action = new MoveAction(_isPlayer ? Side.Player : Side.Rival, index, this);
+            _actionTcs.SetResult(action);
         }
     }
 }

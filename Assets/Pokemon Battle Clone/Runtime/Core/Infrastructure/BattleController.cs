@@ -4,6 +4,7 @@ using Pokemon_Battle_Clone.Runtime.Builders;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.Stats.Domain;
+using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
 using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
@@ -43,8 +44,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         private async Task RunBattleAsync()
         {
-            _playerTeamController.Init();
-            _rivalTeamController.Init();
+            _playerTeamController.Init(_rivalTeamController);
+            _rivalTeamController.Init(_playerTeamController);
             
             Debug.Log("Battle started!");
             
@@ -70,20 +71,20 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             await Task.Delay(500);
         }
 
-        private async Task<List<int>> SelectActionsAsync()
+        private async Task<List<TrainerAction>> SelectActionsAsync()
         {
             Debug.Log("Selecting actions...");
             var playerAction = await _playerTeamController.WaitForAction();
 
             // await Task.WhenAll(playerTask, rivalTask);
             
-            return new List<int> { playerAction };
+            return new List<TrainerAction> { playerAction };
         }
 
-        private async Task ExecuteActionsAsync(List<int> movesIndex)
+        private async Task ExecuteActionsAsync(List<TrainerAction> actions)
         {
-            Debug.Log($"Player uses move {movesIndex[0]}");
-            await _playerTeamController.PerformMove(movesIndex[0], _rivalTeamController);
+            foreach (var action in actions)
+                await action.Execute();
         }
 
         private async Task EndTurnAsync()
