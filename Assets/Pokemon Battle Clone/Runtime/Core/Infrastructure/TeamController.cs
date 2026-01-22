@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
+using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
 using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
@@ -52,14 +53,21 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             var userAnimator = _view.pokemon;
             var targetAnimator = opponentTeam._view.pokemon;
 
-            await user.MoveSet.ExecuteMove(index, user, target, userAnimator, targetAnimator);
+            await userAnimator.PlayAttackAnimation();
+            user.MoveSet.ExecuteMove(index, user, target);
+
+            if (target.Health.Current > 0)
+                await targetAnimator.PlayHitAnimation();
+            else
+                await targetAnimator.PlayFaintAnimation();
         }
 
         private void OnMoveSelected(int index)
         {
             if (_actionTcs == null || _actionTcs.Task.IsCompleted)
                 return;
-            
+
+            var action = new MoveAction(_isPlayer ? Side.Player : Side.Rival, index, this, null);
             _actionTcs.SetResult(index);
         }
     }

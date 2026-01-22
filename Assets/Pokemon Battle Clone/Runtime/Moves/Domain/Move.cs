@@ -48,20 +48,13 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
         
         public void AddEffect(IMoveEffect effect) => _effects.Add(effect);
         
-        public async Task Execute(Pokemon user, Pokemon target, IPokemonAnimator userAnimator, IPokemonAnimator targetAnimator)
+        public void Execute(Pokemon user, Pokemon target)
         {
             Assert.IsTrue(PP > 0);
             PP.Value--;
-
-            await userAnimator.PlayAttackAnimation();
             
             foreach (var effect in _effects)
                 effect.Apply(this, user, target);
-
-            if (target.Health.Current > 0)
-                await targetAnimator.PlayHitAnimation();
-            else
-                await targetAnimator.PlayFaintAnimation();
         }
     }
 }

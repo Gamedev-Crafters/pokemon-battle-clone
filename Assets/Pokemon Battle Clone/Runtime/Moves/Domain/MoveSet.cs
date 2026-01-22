@@ -23,11 +23,11 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
                 Moves.Add(move);
         }
 
-        public async Task ExecuteMove(int index, Pokemon user, Pokemon target, IPokemonAnimator userAnimator, IPokemonAnimator targetAnimator)
+        public void ExecuteMove(int index, Pokemon user, Pokemon target)
         {
             Assert.IsTrue(index >= 0 && index < Moves.Count);
             
-            await Moves[index].Execute(user, target, userAnimator, targetAnimator);
+            Moves[index].Execute(user, target);
         }
     }
 }
