@@ -14,6 +14,7 @@ namespace Pokemon_Battle_Clone.Runtime.Builders
         private int _pp;
         private int _accuracy = 100;
         private int _power;
+        private int _priority;
         private readonly List<IMoveEffect> _effects = new List<IMoveEffect>();
 
         public MoveBuilder WithName(string name)
@@ -54,6 +55,12 @@ namespace Pokemon_Battle_Clone.Runtime.Builders
             return this;
         }
 
+        public MoveBuilder WithPriority(int priority)
+        {
+            _priority = priority;
+            return this;
+        }
+
         public MoveBuilder WithStatsModifier(bool applyToTarget, StatSet statsModifier)
         {
             _effects.Add(new StatsModifierEffect(applyToTarget, statsModifier));
@@ -62,7 +69,7 @@ namespace Pokemon_Battle_Clone.Runtime.Builders
         
         public Move Build()
         {
-            var move = new Move(_name, _type, _category, _pp, _accuracy, _power);
+            var move = new Move(_name, _type, _category, _pp, _accuracy, _power, _priority);
             move.AddEffects(_effects);
             return move;
         }
