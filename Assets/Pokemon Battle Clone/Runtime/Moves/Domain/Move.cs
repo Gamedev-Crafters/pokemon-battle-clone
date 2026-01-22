@@ -24,23 +24,14 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
 
         private readonly List<IMoveEffect> _effects = new List<IMoveEffect>();
 
-        public Move(string name, ElementalType type, MoveCategory category, int pp, int accuracy, int power, int priority)
+        public Move(string name, ElementalType type, MoveCategory category, uint pp, uint accuracy, uint power, int priority)
         {
-            if (pp < 0)
-                throw new ArgumentOutOfRangeException(nameof(pp), "PP must be greater or equal than 0");
-            if (accuracy < 0)
-                throw new ArgumentOutOfRangeException(nameof(accuracy), "Accuracy must be greater or equal than 0");
-            if (power < 0)
-                throw new ArgumentOutOfRangeException(nameof(power), "Power must be greater or equal than 0");
-            if (priority < 0)
-                throw new ArgumentOutOfRangeException(nameof(priority), "Priority must be greater or equal than 0");
-            
             Name = name;
             Type = type;
             Category = category;
-            PP = new ClampedInt(pp, 0, pp);
-            Accuracy = accuracy;
-            Power = power;
+            PP = new ClampedInt((int)pp, 0, (int)pp);
+            Accuracy = (int)accuracy;
+            Power = (int)power;
             Priority = priority;
         }
 

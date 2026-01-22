@@ -11,9 +11,9 @@ namespace Pokemon_Battle_Clone.Runtime.Builders
         private string _name = "???";
         private ElementalType _type = ElementalType.None;
         private MoveCategory _category = MoveCategory.Status;
-        private int _pp;
-        private int _accuracy = 100;
-        private int _power;
+        private uint _pp;
+        private uint _accuracy = 100;
+        private uint _power;
         private int _priority;
         private readonly List<IMoveEffect> _effects = new List<IMoveEffect>();
 
@@ -35,19 +35,19 @@ namespace Pokemon_Battle_Clone.Runtime.Builders
             return this;
         }
 
-        public MoveBuilder WithPP(int pp)
+        public MoveBuilder WithPP(uint pp)
         {
             _pp = pp;
             return this;
         }
 
-        public MoveBuilder WithAccuracy(int accuracy)
+        public MoveBuilder WithAccuracy(uint accuracy)
         {
             _accuracy = accuracy;
             return this;
         }
 
-        public MoveBuilder WithPower(int power)
+        public MoveBuilder WithPower(uint power)
         {
             _power = power;
             if (_power > 0)
