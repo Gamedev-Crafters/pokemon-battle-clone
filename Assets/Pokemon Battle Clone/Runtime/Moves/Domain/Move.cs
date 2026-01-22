@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects;
 using UnityEngine.Assertions;
@@ -47,14 +48,20 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
         
         public void AddEffect(IMoveEffect effect) => _effects.Add(effect);
         
-        public void Execute(Pokemon user, Pokemon target)
+        public async Task Execute(Pokemon user, Pokemon target, IPokemonAnimator userAnimator, IPokemonAnimator targetAnimator)
         {
             Assert.IsTrue(PP > 0);
+            PP.Value--;
+
+            await userAnimator.PlayAttackAnimation();
             
             foreach (var effect in _effects)
                 effect.Apply(this, user, target);
 
-            PP.Value--;
+            if (target.Health.Current > 0)
+                await targetAnimator.PlayHitAnimation();
+            else
+                await targetAnimator.PlayFaintAnimation();
         }
     }
 }

@@ -27,17 +27,16 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         public void Init()
         {
-            var pokemon = _team.PokemonList[0];
-            _view.SetStaticData(_debugSprite, pokemon.Name, pokemon.Stats.Level);
-            _view.health.UpdateBar(pokemon.Health.Max, pokemon.Health.Current);
+            _view.SetStaticData(_debugSprite, _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
+            _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
             
             if (_isPlayer)
-                _view.moveSet.Display(pokemon.MoveSet);
+                _view.moveSet.Display(_team.FirstPokemon.MoveSet);
         }
 
         public void Update()
         {
-            _view.health.UpdateBar(_team.PokemonList[0].Health.Max, _team.PokemonList[0].Health.Current);
+            _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
         }
 
         public Task<int> WaitForAction()
@@ -46,14 +45,14 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             return _actionTcs.Task;
         }
 
-        public async Task PerformMove(int index, TeamController rivalTeam)
+        public async Task PerformMove(int index, TeamController opponentTeam)
         {
-            await _view.pokemon.PlayAttackAnimation();
-            
-            var user = _team.PokemonList[0];
-            user.MoveSet.ExecuteMove(index, user, rivalTeam._team.PokemonList[0]);
+            var user = _team.FirstPokemon;
+            var target = opponentTeam._team.FirstPokemon;
+            var userAnimator = _view.pokemon;
+            var targetAnimator = opponentTeam._view.pokemon;
 
-            await rivalTeam._view.pokemon.PlayHitAnimation();
+            await user.MoveSet.ExecuteMove(index, user, target, userAnimator, targetAnimator);
         }
 
         private void OnMoveSelected(int index)

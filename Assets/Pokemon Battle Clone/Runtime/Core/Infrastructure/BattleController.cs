@@ -75,6 +75,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             Debug.Log("Selecting actions...");
             var playerAction = await _playerTeamController.WaitForAction();
 
+            // await Task.WhenAll(playerTask, rivalTask);
+            
             return new List<int> { playerAction };
         }
 
@@ -100,14 +102,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
                 return true;
             }
 
-            return false;    
+            return false;
         }
 
 #region DEBUG
         private Team BuildPlayerTeam()
         {
-            var team = new Team();
-
             var iceFang = A.Move.WithName("Ice Fang")
                 .WithAccuracy(100)
                 .WithPower(65)
@@ -128,30 +128,28 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
                 .WithIVs(new StatSet(31, 31, 31, 31, 31, 31))
                 .WithEVs(new StatSet(hp: 6, attack: 252, defense: 0, spcAttack: 0, spcDefense: 0, speed: 252))
                 .WithMoves(iceFang, waterGun);
-            
-            team.Add(totodile);
 
-            return team;
+            return new Team(totodile);
         }
 
         private Team BuildRivalTeam()
         {
-            var team = new Team();
-            team.Add(A.Pokemon.WithName("Pidgey")
+            var wingAttack = A.Move.WithName("Wing attack")
+                .WithAccuracy(100)
+                .WithPower(65)
+                .WithPP(16)
+                .WithCategory(MoveCategory.Physical)
+                .WithType(ElementalType.Flying);
+            var pidgey = A.Pokemon.WithName("Pidgey")
                 .WithLevel(50)
                 .WithBaseStats(new StatSet(hp: 40, attack: 45, defense: 40, spcAttack: 35, spcDefense: 35, speed: 56))
                 .WithTypes(ElementalType.Flying, ElementalType.Normal)
                 .WithNature(Nature.Adamant())
                 .WithIVs(new StatSet(31, 31, 31, 31, 31, 31))
                 .WithEVs(new StatSet(hp: 6, attack: 252, defense: 0, spcAttack: 0, spcDefense: 0, speed: 252))
-                .WithMoves(A.Move.WithName("Wing attack")
-                    .WithAccuracy(100)
-                    .WithPower(65)
-                    .WithPP(16)
-                    .WithCategory(MoveCategory.Physical)
-                    .WithType(ElementalType.Flying)));
+                .WithMoves(wingAttack);
 
-            return team;
+            return new Team(pidgey);
         }
 #endregion
     }

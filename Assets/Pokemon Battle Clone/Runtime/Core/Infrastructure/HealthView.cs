@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
@@ -6,10 +7,42 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
     public class HealthView : MonoBehaviour
     {
         [SerializeField] private Image fillImage;
+        [SerializeField] private float barSpeed = 5f;
+        [SerializeField] private Color highHealthColor = Color.green;
+        [SerializeField] private Color middleHealthColor = Color.yellow;
+        [SerializeField] private Color lowHealthColor = Color.red;
 
-        public void UpdateBar(int maxHealth, int currentHealth)
+        private float _target;
+
+        private void Awake()
         {
-            fillImage.fillAmount = (float)currentHealth / maxHealth;
+            fillImage.fillAmount = 1;
+        }
+
+        private void Update()
+        {
+            UpdateBar();
+        }
+
+        public void SetHealth(int maxHealth, int currentHealth)
+        {
+            _target = (float)currentHealth / maxHealth;
+        }
+
+        private void UpdateBar()
+        {
+            fillImage.fillAmount = Mathf.MoveTowards(fillImage.fillAmount, _target, Time.deltaTime * barSpeed);
+            SetColor();
+        }
+
+        private void SetColor()
+        {
+            if (fillImage.fillAmount >= 0.5f)
+                fillImage.color = highHealthColor;
+            else if (fillImage.fillAmount >= 0.2f)
+                fillImage.color = middleHealthColor;
+            else
+                fillImage.color = lowHealthColor;
         }
     }
 }

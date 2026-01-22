@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 {
-    public class PokemonView : MonoBehaviour
+    public class PokemonView : MonoBehaviour, IPokemonAnimator
     {
         [SerializeField] private Image pokemonImage;
         [SerializeField] private Animator animator;

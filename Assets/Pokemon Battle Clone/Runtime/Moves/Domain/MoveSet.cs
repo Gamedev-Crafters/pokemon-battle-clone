@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using UnityEngine.Assertions;
 
@@ -22,11 +23,11 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
                 Moves.Add(move);
         }
 
-        public void ExecuteMove(int index, Pokemon user, Pokemon target)
+        public async Task ExecuteMove(int index, Pokemon user, Pokemon target, IPokemonAnimator userAnimator, IPokemonAnimator targetAnimator)
         {
             Assert.IsTrue(index >= 0 && index < Moves.Count);
             
-            Moves[index].Execute(user, target);
+            await Moves[index].Execute(user, target, userAnimator, targetAnimator);
         }
     }
 }
