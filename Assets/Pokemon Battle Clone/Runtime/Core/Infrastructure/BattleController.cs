@@ -74,11 +74,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         private async Task<List<TrainerAction>> SelectActionsAsync()
         {
             Debug.Log("Selecting actions...");
-            var playerAction = await _playerTeamController.WaitForAction();
+            var playerActionTask = _playerTeamController.SelectActionTask();
+            var rivalActionTask = _rivalTeamController.SelectActionTask();
 
-            // await Task.WhenAll(playerTask, rivalTask);
+            await Task.WhenAll(playerActionTask, rivalActionTask);
             
-            return new List<TrainerAction> { playerAction };
+            return new List<TrainerAction> { playerActionTask.Result, rivalActionTask.Result };
         }
 
         private async Task ExecuteActionsAsync(List<TrainerAction> actions)

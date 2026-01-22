@@ -45,9 +45,13 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
         }
 
-        public Task<TrainerAction> WaitForAction()
+        public Task<TrainerAction> SelectActionTask()
         {
             _actionTcs = new TaskCompletionSource<TrainerAction>();
+            
+            if (!_isPlayer)
+                OnMoveSelected(0);
+            
             return _actionTcs.Task;
         }
 
