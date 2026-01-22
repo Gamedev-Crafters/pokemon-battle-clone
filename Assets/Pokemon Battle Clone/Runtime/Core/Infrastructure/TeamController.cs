@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
+using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
 using UnityEngine;
 
@@ -50,7 +51,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             return _actionTcs.Task;
         }
 
-        public async Task PerformMove(int index)
+        public async Task PerformMove(Move move)
         {
             var user = _team.FirstPokemon;
             var target = _opponentTeamController._team.FirstPokemon;
@@ -58,7 +59,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             var targetAnimator = _opponentTeamController._view.pokemon;
 
             await userAnimator.PlayAttackAnimation();
-            user.MoveSet.ExecuteMove(index, user, target);
+            move.Execute(user, target);
 
             if (target.Health.Current > 0)
                 await targetAnimator.PlayHitAnimation();
@@ -71,7 +72,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             if (_actionTcs == null || _actionTcs.Task.IsCompleted)
                 return;
 
-            var action = new MoveAction(_isPlayer ? Side.Player : Side.Rival, index, this);
+            var move = _team.FirstPokemon.MoveSet.Moves[index];
+            var action = new MoveAction(_isPlayer ? Side.Player : Side.Rival, move, this);
             _actionTcs.SetResult(action);
         }
     }

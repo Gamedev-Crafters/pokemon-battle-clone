@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
+using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 
 namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
 {
@@ -7,18 +8,18 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
     {
         public override int Priority => 0;
         
-        private readonly int _moveIndex;
+        private readonly Move _move;
         private readonly TeamController _userTeamController;
 
-        public MoveAction(Side side, int moveIndex, TeamController userTeamController) : base(side)
+        public MoveAction(Side side, Move move, TeamController userTeamController) : base(side)
         {
-            _moveIndex = moveIndex;
+            _move = move;
             _userTeamController = userTeamController;
         }
         
         public override async Task Execute()
         {
-            await _userTeamController.PerformMove(_moveIndex);
+            await _userTeamController.PerformMove(_move);
         }
     }
 }
