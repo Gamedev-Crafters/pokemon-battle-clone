@@ -117,46 +117,24 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 #region DEBUG
         private Team BuildPlayerTeam()
         {
-            var iceFang = A.Move.WithName("Ice Fang")
-                .WithAccuracy(100)
-                .WithPower(65)
-                .WithPP(16)
-                .WithCategory(MoveCategory.Physical)
-                .WithType(ElementalType.Ice);
-            var waterGun = A.Move.WithName("Water Gun")
-                .WithAccuracy(100)
-                .WithPower(50)
-                .WithPP(16)
-                .WithCategory(MoveCategory.Special)
-                .WithType(ElementalType.Water);
-            var totodile = A.Pokemon.WithName("Totodile")
-                .WithLevel(50)
-                .WithBaseStats(new StatSet(hp: 50, attack: 65, defense: 64, spcAttack: 44, spcDefense: 48, speed: 43))
-                .WithTypes(ElementalType.Water)
-                .WithNature(Nature.Adamant())
-                .WithIVs(new StatSet(31, 31, 31, 31, 31, 31))
-                .WithEVs(new StatSet(hp: 6, attack: 252, defense: 0, spcAttack: 0, spcDefense: 0, speed: 252))
-                .WithMoves(iceFang, waterGun);
+            var totodile = PokemonFactory.Totodile();
+            totodile.MoveSet.AddMoves(new List<Move>
+            {
+                MoveFactory.IceFang(),
+                MoveFactory.WaterGun(),
+                MoveFactory.QuickAttack()
+            });
 
             return new Team(totodile);
         }
 
         private Team BuildRivalTeam()
         {
-            var wingAttack = A.Move.WithName("Wing attack")
-                .WithAccuracy(100)
-                .WithPower(65)
-                .WithPP(16)
-                .WithCategory(MoveCategory.Physical)
-                .WithType(ElementalType.Flying);
-            var pidgey = A.Pokemon.WithName("Pidgey")
-                .WithLevel(50)
-                .WithBaseStats(new StatSet(hp: 40, attack: 45, defense: 40, spcAttack: 35, spcDefense: 35, speed: 56))
-                .WithTypes(ElementalType.Flying, ElementalType.Normal)
-                .WithNature(Nature.Adamant())
-                .WithIVs(new StatSet(31, 31, 31, 31, 31, 31))
-                .WithEVs(new StatSet(hp: 6, attack: 252, defense: 0, spcAttack: 0, spcDefense: 0, speed: 252))
-                .WithMoves(wingAttack);
+            var pidgey = PokemonFactory.Pidgey();
+            pidgey.MoveSet.AddMoves(new List<Move>
+            {
+                MoveFactory.WingAttack()
+            });
 
             return new Team(pidgey);
         }
