@@ -11,7 +11,8 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
         private readonly Move _move;
         private readonly TeamController _userTeamController;
 
-        public MoveAction(Side side, Move move, TeamController userTeamController) : base(side)
+        public MoveAction(Side side, int pokemonInFieldSpeed, Move move, TeamController userTeamController)
+            : base(side, pokemonInFieldSpeed)
         {
             _move = move;
             _userTeamController = userTeamController;

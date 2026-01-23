@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -1315,7 +1315,7 @@ MonoBehaviour:
     m_SkipHidden: 1
     m_SearchArea: 1
     m_Folders:
-    - Assets/Pokemon Battle Clone/Runtime
+    - Assets/Settings
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1333,7 +1333,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: b0620000
     m_LastClickedID: 25264
-    m_ExpandedIDs: 0000000036b400000cb600000eb6000010b6000012b6000014b6000016b6000018b60000
+    m_ExpandedIDs: 0000000042b4000018b600001ab600001cb600001eb6000020b6000022b6000024b60000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1362,7 +1362,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000036b400000cb600000eb6000010b6000012b6000014b6000016b6000018b60000
+    m_ExpandedIDs: 0000000042b4000018b600001ab600001cb600001eb6000020b6000022b6000024b60000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1461,7 +1461,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 0cfbffff
+      m_ExpandedIDs: 4edcffff0cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1600,7 +1600,7 @@ MonoBehaviour:
   m_TestListGUIs:
   - m_Window: {fileID: 23}
     runProgress:
-      RunGuid: 38fe331e-03a7-41ef-a013-2bb290edbe1e
+      RunGuid: 0949d0c5-c57e-4f00-9413-cfb3d5cd9e15
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -1933,7 +1933,7 @@ MonoBehaviour:
     m_SelectedOption: 0
   - m_Window: {fileID: 23}
     runProgress:
-      RunGuid: 38fe331e-03a7-41ef-a013-2bb290edbe1e
+      RunGuid: 0949d0c5-c57e-4f00-9413-cfb3d5cd9e15
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -2027,7 +2027,7 @@ MonoBehaviour:
     m_SelectedOption: 0
   - m_Window: {fileID: 23}
     runProgress:
-      RunGuid: 38fe331e-03a7-41ef-a013-2bb290edbe1e
+      RunGuid: 0949d0c5-c57e-4f00-9413-cfb3d5cd9e15
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0

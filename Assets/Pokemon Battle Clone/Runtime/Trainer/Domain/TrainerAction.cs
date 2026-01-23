@@ -9,12 +9,14 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
     
     public abstract class TrainerAction
     {
-        public abstract int Priority { get; }
         public readonly Side Side;
+        public readonly int PokemonInFieldSpeed;
+        public abstract int Priority { get; }
 
-        protected TrainerAction(Side side)
+        protected TrainerAction(Side side, int pokemonInFieldSpeed)
         {
             Side = side;
+            PokemonInFieldSpeed = pokemonInFieldSpeed;
         }
 
         public abstract Task Execute();

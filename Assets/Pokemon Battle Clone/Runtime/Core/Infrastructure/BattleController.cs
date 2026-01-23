@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Builders;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
@@ -84,7 +85,13 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         private async Task ExecuteActionsAsync(List<TrainerAction> actions)
         {
-            foreach (var action in actions)
+            var random = new System.Random();
+            var orderedActions = actions.OrderByDescending(a => a.Priority)
+                .ThenByDescending(a => a.PokemonInFieldSpeed)
+                .ThenBy(_ => random.Next())
+                .ToList();
+            
+            foreach (var action in orderedActions)
                 await action.Execute();
         }
 
