@@ -20,14 +20,14 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
             }
         }
 
-        public void Display(MoveSet moveSet)
+        public void SetData(MoveSet moveSet)
         {
             for (int i = 0; i < moveButtons.Count; i++)
             {
                 if (moveSet.Moves.Count > i)
                 {
                     moveButtons[i].gameObject.SetActive(true);
-                    moveButtons[i].Display(moveSet.Moves[i]);
+                    moveButtons[i].SetData(moveSet.Moves[i]);
                 }
                 else
                 {

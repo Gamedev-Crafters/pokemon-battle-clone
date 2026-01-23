@@ -40,7 +40,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
             if (_isPlayer)
             {
-                _view.moveSet.Display(_team.FirstPokemon.MoveSet);
+                _view.moveSet.SetData(_team.FirstPokemon.MoveSet);
                 _view.pokemonSelector.SetData(_team);
             }
         }
