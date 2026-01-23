@@ -6,8 +6,8 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
 {
     public class MoveAction : TrainerAction
     {
-        public override int Priority => 0;
-        
+        public override int Priority { get; }
+
         private readonly Move _move;
         private readonly TeamController _userTeamController;
 
@@ -16,6 +16,8 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
         {
             _move = move;
             _userTeamController = userTeamController;
+
+            Priority = move.Priority;
         }
         
         public override async Task Execute()
