@@ -77,7 +77,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
                 return;
 
             var move = _team.FirstPokemon.MoveSet.Moves[index];
-            var action = new MoveAction(_isPlayer ? Side.Player : Side.Rival, _team.FirstPokemon.Stats.Stats.Speed, move, this);
+            var action = new MoveAction(_isPlayer ? Side.Player : Side.Rival, _team.FirstPokemon.Stats.Speed, move, this);
             _actionTcs.SetResult(action);
         }
     }

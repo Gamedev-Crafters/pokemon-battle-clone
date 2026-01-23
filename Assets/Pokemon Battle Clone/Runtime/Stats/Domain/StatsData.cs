@@ -41,6 +41,13 @@ namespace Pokemon_Battle_Clone.Runtime.Stats.Domain
         public Nature Nature { get; }
         public StatsModifier Modifiers { get; }
 
+        public int HP => Stats.HP;
+        public int Attack => Mathf.FloorToInt(Stats.Attack * Modifiers.AttackBoost);
+        public int Defense => Mathf.FloorToInt(Stats.Defense * Modifiers.DefenseBoost);
+        public int SpcAttack => Mathf.FloorToInt(Stats.SpcAttack * Modifiers.SpcAttackBoost);
+        public int SpcDefense => Mathf.FloorToInt(Stats.SpcDefense * Modifiers.SpcDefenseBoost);
+        public int Speed => Mathf.FloorToInt(Stats.Speed * Modifiers.SpeedBoost);
+
         public StatsData(int level, StatSet baseStats, Nature nature)
         {
             Level = level;
@@ -58,8 +65,8 @@ namespace Pokemon_Battle_Clone.Runtime.Stats.Domain
         {
             return category switch
             {
-                MoveCategory.Physical => Mathf.FloorToInt(Stats.Attack * Modifiers.AttackBoost),
-                MoveCategory.Special => Mathf.FloorToInt(Stats.SpcAttack * Modifiers.SpcAttackBoost),
+                MoveCategory.Physical => Attack,
+                MoveCategory.Special => SpcAttack,
                 _ => 0
             };
         }
@@ -68,8 +75,8 @@ namespace Pokemon_Battle_Clone.Runtime.Stats.Domain
         {
             return category switch
             {
-                MoveCategory.Physical => Mathf.FloorToInt(Stats.Defense * Modifiers.DefenseBoost),
-                MoveCategory.Special => Mathf.FloorToInt(Stats.SpcDefense * Modifiers.SpcDefenseBoost),
+                MoveCategory.Physical => Defense,
+                MoveCategory.Special => SpcDefense,
                 _ => 0
             };
         }
