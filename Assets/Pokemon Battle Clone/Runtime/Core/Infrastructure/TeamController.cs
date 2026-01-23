@@ -26,9 +26,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             _team = team;
             _view = view;
             _debugSprite = debugSprite;
-            
+
             if (_isPlayer)
-                _view.moveSet.OnMoveSelected += OnMoveSelected;
+            {
+                _view.actionsHUD.moveSetView.OnMoveSelected += OnMoveSelected;
+                _view.actionsHUD.pokemonSelector.OnPokemonSelected += OnPokemonSelected;
+            }
         }
 
         public void Init(TeamController opponentTeam)
@@ -39,10 +42,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
 
             if (_isPlayer)
-            {
-                _view.moveSet.SetData(_team.FirstPokemon.MoveSet);
-                _view.pokemonSelector.SetData(_team);
-            }
+                _view.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
         }
 
         public void Update()
@@ -76,6 +76,23 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
                 await targetAnimator.PlayFaintAnimation();
         }
 
+        public async Task SwapPokemon(int index)
+        {
+            // await return to pokeball animation
+            
+            _team.SwapPokemon(0, index);
+            
+            _view.SetStaticData(_debugSprite, _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
+            _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
+            if (_isPlayer)
+            {
+                _view.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
+                _view.actionsHUD.HideActions();
+            }
+            
+            // await exit pokeball animation
+        }
+
         private void OnMoveSelected(int index)
         {
             if (_actionTcs == null || _actionTcs.Task.IsCompleted)
@@ -83,6 +100,16 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
             var move = _team.FirstPokemon.MoveSet.Moves[index];
             var action = new MoveAction(_isPlayer ? Side.Player : Side.Rival, _team.FirstPokemon.Stats.Speed, move, this);
+            _actionTcs.SetResult(action);
+        }
+
+        private void OnPokemonSelected(int index)
+        {
+            if (_actionTcs == null || _actionTcs.Task.IsCompleted)
+                return;
+
+            var action = new SwapPokemonAction(_isPlayer ? Side.Player : Side.Rival, _team.FirstPokemon.Stats.Speed,
+                index, this);
             _actionTcs.SetResult(action);
         }
     }

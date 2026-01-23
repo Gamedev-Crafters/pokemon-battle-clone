@@ -309,8 +309,7 @@ MonoBehaviour:
   levelText: {fileID: 180844676}
   pokemon: {fileID: 1784473796}
   health: {fileID: 1950545706}
-  moveSet: {fileID: 1064373096}
-  pokemonSelector: {fileID: 6938420545014314259}
+  actionsHUD: {fileID: 1204642371}
 --- !u!1 &103554101
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,8 +2224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selector: {fileID: 1697461064}
+  pokemonSelector: {fileID: 6938420545014314259}
   moveSetView: {fileID: 1064373096}
-  pokemonSelectorView: {fileID: 6938420545014314259}
 --- !u!1 &1242707932
 GameObject:
   m_ObjectHideFlags: 0
@@ -2539,8 +2538,7 @@ MonoBehaviour:
   levelText: {fileID: 1118149125}
   pokemon: {fileID: 1657632908}
   health: {fileID: 872225061}
-  moveSet: {fileID: 0}
-  pokemonSelector: {fileID: 0}
+  actionsHUD: {fileID: 0}
 --- !u!1 &1522482777
 GameObject:
   m_ObjectHideFlags: 0

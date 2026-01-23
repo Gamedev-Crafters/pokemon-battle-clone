@@ -1,5 +1,4 @@
-﻿using Pokemon_Battle_Clone.Runtime.Moves.Infrastructure;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
@@ -12,8 +11,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         
         public PokemonView pokemon;
         public HealthView health;
-        public MoveSetView moveSet;
-        public PokemonSelectorView pokemonSelector;
+        public ActionsHUD actionsHUD;
         
         public void SetStaticData(Sprite sprite, string name, int level)
         {
