@@ -93,9 +93,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
             foreach (var action in orderedActions)
             {
+                if (CheckPokemonFainted(action.Side))
+                    continue;
                 await action.Execute();
-                if (CheckBattleEnd())
-                    break;
             }
         }
 
@@ -119,6 +119,16 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             }
 
             return false;
+        }
+
+        private bool CheckPokemonFainted(Side side)
+        {
+            return side switch
+            {
+                Side.Player => _playerTeamController.FirstPokemonFainted,
+                Side.Rival => _rivalTeamController.FirstPokemonFainted,
+                _ => false
+            };
         }
 
 #region DEBUG

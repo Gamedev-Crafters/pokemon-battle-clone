@@ -19,6 +19,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         private TaskCompletionSource<TrainerAction> _actionTcs;
 
         public bool Defeated => _team.Defeated;
+        public bool FirstPokemonFainted => _team.FirstPokemon.Health.Current <= 0;
         
         public TeamController(bool isPlayer, Team team, TeamView view, Sprite debugSprite)
         {
