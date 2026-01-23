@@ -60,7 +60,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
                 await ExecuteActionsAsync(actions);
                 await EndTurnAsync();
 
-                _battleFinished = await CheckBattleEndAsync();
+                _battleFinished = CheckBattleEnd();
             }
             
             Debug.Log("Battle finished!");
@@ -90,9 +90,13 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
                 .ThenByDescending(a => a.PokemonInFieldSpeed)
                 .ThenBy(_ => random.Next())
                 .ToList();
-            
+
             foreach (var action in orderedActions)
+            {
                 await action.Execute();
+                if (CheckBattleEnd())
+                    break;
+            }
         }
 
         private async Task EndTurnAsync()
@@ -101,13 +105,16 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             await Task.Delay(500);
         }
 
-        private async Task<bool> CheckBattleEndAsync()
+        private bool CheckBattleEnd()
         {
-            await Task.Delay(200);
-
-            if (_turnCount >= 3)
+            if (_playerTeamController.Defeated)
             {
-                Debug.Log("Battle end condition met!");
+                Debug.Log("The rival has won!");
+                return true;
+            }
+            if (_rivalTeamController.Defeated)
+            {
+                Debug.Log("The player has won!");
                 return true;
             }
 

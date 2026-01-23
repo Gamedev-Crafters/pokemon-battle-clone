@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Domain
 {
@@ -8,6 +9,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
         public IReadOnlyList<Pokemon> PokemonList => _pokemonList;
 
         public Pokemon FirstPokemon => _pokemonList[0];
+        public bool Defeated => _pokemonList.All(pokemon => pokemon.Health.Current <= 0);
         
         public Team(Pokemon pokemon)
         {

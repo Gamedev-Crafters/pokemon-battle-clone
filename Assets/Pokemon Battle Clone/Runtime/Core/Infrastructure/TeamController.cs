@@ -17,6 +17,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         private TeamController _opponentTeamController;
         
         private TaskCompletionSource<TrainerAction> _actionTcs;
+
+        public bool Defeated => _team.Defeated;
         
         public TeamController(bool isPlayer, Team team, TeamView view, Sprite debugSprite)
         {
