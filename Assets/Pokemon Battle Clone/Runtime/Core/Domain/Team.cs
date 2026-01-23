@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Domain
@@ -28,6 +29,17 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
             
             _pokemonList.Add(pokemon);
             return true;
+        }
+
+        public void SwapPokemon(int indexPokemonA, int indexPokemonB)
+        {
+            if (_pokemonList.Count <= 1)
+                throw new InvalidOperationException("Not enough pokemon in the team");
+            if (indexPokemonA > _pokemonList.Count - 1 || indexPokemonB > _pokemonList.Count - 1)
+                throw new InvalidOperationException("Not enough pokemon in the team");
+
+            (_pokemonList[indexPokemonA], _pokemonList[indexPokemonB]) =
+                (_pokemonList[indexPokemonB], _pokemonList[indexPokemonA]);
         }
     }
 }

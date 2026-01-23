@@ -37,9 +37,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             
             _view.SetStaticData(_debugSprite, _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
             _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
-            
+
             if (_isPlayer)
+            {
                 _view.moveSet.Display(_team.FirstPokemon.MoveSet);
+                _view.pokemonSelector.SetData(_team);
+            }
         }
 
         public void Update()

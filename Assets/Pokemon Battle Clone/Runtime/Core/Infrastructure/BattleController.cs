@@ -131,8 +131,18 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
                 MoveFactory.WaterGun(),
                 MoveFactory.QuickAttack()
             });
+            var pidgey = PokemonFactory.Pidgey();
+            pidgey.MoveSet.AddMoves(new List<Move>
+            {
+                MoveFactory.WingAttack(),
+                MoveFactory.QuickAttack()
+            });
 
-            return new Team(totodile);
+            var team = new Team(new List<Pokemon> { totodile, pidgey });
+            
+            Debug.Log($"Player team: {string.Join(',', team.PokemonList.Select(p => p.Name))}");
+            
+            return team;
         }
 
         private Team BuildRivalTeam()

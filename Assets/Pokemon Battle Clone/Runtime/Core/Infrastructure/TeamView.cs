@@ -13,6 +13,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         public PokemonView pokemon;
         public HealthView health;
         public MoveSetView moveSet;
+        public PokemonSelectorView pokemonSelector;
         
         public void SetStaticData(Sprite sprite, string name, int level)
         {

@@ -13,7 +13,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI ppText;
 
-        public int index;
+        [HideInInspector] public int index;
         
         public event Action<int> OnClick = delegate { };
 

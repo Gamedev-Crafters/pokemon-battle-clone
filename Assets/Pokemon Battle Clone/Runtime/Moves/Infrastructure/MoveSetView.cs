@@ -10,8 +10,8 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
         [SerializeField] private List<MoveButton> moveButtons;
 
         public event Action<int> OnMoveSelected = delegate { }; 
-        
-        private void Awake()
+
+        public void Init()
         {
             for (int i = 0; i < moveButtons.Count; i++)
             {
