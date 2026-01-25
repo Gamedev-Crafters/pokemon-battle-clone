@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
@@ -11,6 +12,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         private readonly bool _isPlayer;
         private readonly Team _team;
         private readonly TeamView _view;
+        private readonly Dictionary<uint, Sprite> _sprites;
         
         private readonly Sprite _debugSprite;
 
@@ -21,13 +23,13 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         public bool Defeated => _team.Defeated;
         public bool FirstPokemonFainted => _team.FirstPokemon.Health.Current <= 0;
         
-        public TeamController(bool isPlayer, Team team, TeamView view, Sprite debugSprite)
+        public TeamController(bool isPlayer, Team team, TeamView view, Dictionary<uint, Sprite> sprites)
         {
             _isPlayer = isPlayer;
             _team = team;
             _view = view;
-            _debugSprite = debugSprite;
-
+            _sprites = new Dictionary<uint, Sprite>(sprites);
+            
             if (_isPlayer)
             {
                 _view.actionsHUD.moveSetView.OnMoveSelected += OnMoveSelected;
@@ -39,7 +41,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         {
             _opponentTeamController = opponentTeam;
             
-            _view.SetStaticData(_debugSprite, _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
+            _view.SetStaticData(_sprites[_team.FirstPokemon.ID], _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
             _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
 
             if (_isPlayer)

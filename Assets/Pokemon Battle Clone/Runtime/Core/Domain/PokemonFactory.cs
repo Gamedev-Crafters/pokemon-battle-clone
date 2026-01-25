@@ -7,7 +7,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
     {
         public static Pokemon Totodile()
         {
-            return A.Pokemon.WithName("Totodile")
+            return A.Pokemon.WithID(158)
+                .WithName("Totodile")
                 .WithLevel(50)
                 .WithBaseStats(new StatSet(hp: 50, attack: 65, defense: 64, spcAttack: 44, spcDefense: 48, speed: 43))
                 .WithTypes(ElementalType.Water)
@@ -18,7 +19,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
 
         public static Pokemon Pidgey()
         {
-            return A.Pokemon.WithName("Pidgey")
+            return A.Pokemon.WithID(16)
+                .WithName("Pidgey")
                 .WithLevel(50)
                 .WithBaseStats(new StatSet(hp: 40, attack: 45, defense: 40, spcAttack: 35, spcDefense: 35, speed: 56))
                 .WithTypes(ElementalType.Flying, ElementalType.Normal)

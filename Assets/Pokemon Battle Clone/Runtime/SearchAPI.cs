@@ -23,9 +23,11 @@ namespace Pokemon_Battle_Clone.Runtime
         private async void SearchPokemon()
         {
             Pokemon pokemon = await Client.GetResourceAsync<Pokemon>(pokemonName);
-            Debug.Log(pokemon.Name);
-            Debug.Log(string.Join(',', pokemon.Abilities.Select(ability => ability.Ability.Name)));
-            Debug.Log($"Sprite: {pokemon.Sprites.FrontDefault}");
+            // Debug.Log(string.Join(',', pokemon.Abilities.Select(ability => ability.Ability.Name)));
+            Debug.Log($"{pokemon.Name} --> " +
+                      $"<a href={pokemon.Sprites.FrontDefault}>front sprite</a> | " +
+                      $"<a href={pokemon.Sprites.BackDefault}>back sprite</a> | " +
+                      $"<a href={pokemon.Sprites.Versions.GenerationVIII.Icons.FrontDefault}>icon</a>");
         }
     }
 }

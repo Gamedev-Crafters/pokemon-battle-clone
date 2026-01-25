@@ -28,11 +28,16 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         
         private void Start()
         {
+            var spriteLoader = new SpritesLoader("Assets/Pokemon Battle Clone/Sprites/Pokemon");
+            
             var playerTeam = BuildPlayerTeam();
             var rivalTeam = BuildRivalTeam();
-
-            _playerTeamController = new TeamController(true, playerTeam, playerTeamView, playerDebugSprite);
-            _rivalTeamController = new TeamController(false, rivalTeam, rivalTeamView, rivalDebugSprite);
+            
+            var playerSprites = spriteLoader.LoadAllBack(playerTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
+            _playerTeamController = new TeamController(true, playerTeam, playerTeamView, playerSprites);
+            
+            var rivalSprites = spriteLoader.LoadAllFront(rivalTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
+            _rivalTeamController = new TeamController(false, rivalTeam, rivalTeamView, rivalSprites);
 
             _ = RunBattleAsync();
         }
@@ -70,6 +75,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         {
             Debug.Log("Start turn...");
             await Task.Delay(500);
+            
+            // comprobar si ambos equipos tiene pokemon debilidatos en batalla, si lo tienen, espera a que cambien de pokemon
         }
 
         private async Task<List<TrainerAction>> SelectActionsAsync()

@@ -7,6 +7,7 @@ namespace Pokemon_Battle_Clone.Runtime.Builders
 {
     public class PokemonBuilder : IBuilder<Pokemon>
     {
+        private uint _id;
         private string _name = "???";
         private int _level = 1;
         private StatSet _baseStats = new StatSet(50, 50, 50, 50, 50, 50);
@@ -17,6 +18,12 @@ namespace Pokemon_Battle_Clone.Runtime.Builders
         private ElementalType _type2 = ElementalType.None;
         private List<Move> _moves = new List<Move>();
 
+        public PokemonBuilder WithID(uint id)
+        {
+            _id = id;
+            return this;
+        }
+        
         public PokemonBuilder WithName(string name)
         {
             _name = name;
@@ -74,7 +81,7 @@ namespace Pokemon_Battle_Clone.Runtime.Builders
                 IVs = _IVs
             };
 
-            var pokemon = new Pokemon(_name, stats, _type1, _type2);
+            var pokemon = new Pokemon(_id, _name, stats, _type1, _type2);
             pokemon.MoveSet.AddMoves(_moves);
             
             return pokemon;
