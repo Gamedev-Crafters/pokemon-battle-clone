@@ -1,10 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Pokemon_Battle_Clone.Runtime.Builders;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
-using Pokemon_Battle_Clone.Runtime.Stats.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
 using UnityEngine;
 
@@ -14,11 +12,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
     {
         public TeamView playerTeamView;
         public TeamView rivalTeamView;
-        
-        [Space(10)]
-        
-        public Sprite playerDebugSprite;
-        public Sprite rivalDebugSprite;
         
         private TeamController _playerTeamController;
         private TeamController _rivalTeamController;
@@ -76,7 +69,18 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             Debug.Log("Start turn...");
             await Task.Delay(500);
             
-            // comprobar si ambos equipos tiene pokemon debilidatos en batalla, si lo tienen, espera a que cambien de pokemon
+            var tasks = new List<Task<TrainerAction>>();
+            if (_playerTeamController.FirstPokemonFainted)
+                tasks.Add(_playerTeamController.SelectActionTask());
+            if (_rivalTeamController.FirstPokemonFainted)
+                tasks.Add(_rivalTeamController.SelectActionTask());
+            
+            if (tasks.Count > 0)
+            {
+                await Task.WhenAll(tasks);
+                foreach (var task in tasks)
+                    await task.Result.Execute();
+            }
         }
 
         private async Task<List<TrainerAction>> SelectActionsAsync()

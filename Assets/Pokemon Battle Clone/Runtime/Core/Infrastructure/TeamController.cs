@@ -14,8 +14,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         private readonly TeamView _view;
         private readonly Dictionary<uint, Sprite> _sprites;
         
-        private readonly Sprite _debugSprite;
-
         private TeamController _opponentTeamController;
         
         private TaskCompletionSource<TrainerAction> _actionTcs;
@@ -85,7 +83,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             
             _team.SwapPokemon(0, index);
             
-            _view.SetStaticData(_debugSprite, _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
+            _view.SetStaticData(_sprites[_team.FirstPokemon.ID], _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
             _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
             if (_isPlayer)
             {

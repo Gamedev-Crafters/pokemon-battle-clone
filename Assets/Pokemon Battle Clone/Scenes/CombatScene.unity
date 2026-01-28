@@ -309,7 +309,7 @@ MonoBehaviour:
   levelText: {fileID: 180844676}
   pokemon: {fileID: 1784473796}
   health: {fileID: 1950545706}
-  actionsHUD: {fileID: 1204642371}
+  actionsHUD: {fileID: 1204642374}
 --- !u!1 &103554101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,8 +1884,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTeamView: {fileID: 101632632}
   rivalTeamView: {fileID: 1487896682}
-  playerDebugSprite: {fileID: 21300000, guid: cb9e50b613e9859499f9fe1334558ebd, type: 3}
-  rivalDebugSprite: {fileID: 21300000, guid: 111da1296939446408831f9e57e295d6, type: 3}
 --- !u!4 &913603189
 Transform:
   m_ObjectHideFlags: 0
@@ -2211,7 +2209,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6556949349583900972, guid: 1d6932266e364a24d82e0a54497db4a5, type: 3}
   m_PrefabInstance: {fileID: 6938420545014314255}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1204642371
+--- !u!114 &1204642374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3451,7 +3449,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2961294675824116864, guid: 1d6932266e364a24d82e0a54497db4a5, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1204642371}
+      addedObject: {fileID: 1204642374}
   m_SourcePrefab: {fileID: 100100000, guid: 1d6932266e364a24d82e0a54497db4a5, type: 3}
 --- !u!114 &6938420545014314259 stripped
 MonoBehaviour:
