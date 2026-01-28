@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using PokeApiNet;
+﻿using PokeApiNet;
 using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime
