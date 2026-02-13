@@ -35,11 +35,11 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             }
         }
 
-        public void Init(TeamController opponentTeam)
+        public async Task Init(TeamController opponentTeam)
         {
             _opponentTeamController = opponentTeam;
             
-            _view.SetStaticData(_sprites[_team.FirstPokemon.ID], _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
+            await _view.SetPokemon(_team.FirstPokemon, _sprites[_team.FirstPokemon.ID], true);
             _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
 
             _team.FirstPokemon.Health.OnChanged += OnHealthChanged;
@@ -62,8 +62,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         {
             var user = _team.FirstPokemon;
             var target = _opponentTeamController._team.FirstPokemon;
-            var userAnimator = _view.pokemon;
-            var targetAnimator = _opponentTeamController._view.pokemon;
+            var userAnimator = _view.pokemonView;
+            var targetAnimator = _opponentTeamController._view.pokemonView;
 
             await userAnimator.PlayAttackAnimation();
             move.Execute(user, target);
@@ -76,21 +76,17 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         public async Task SwapPokemon(int index)
         {
-            // await return to pokeball animation
-            
             _team.FirstPokemon.Health.OnChanged -= OnHealthChanged;
             _team.SwapPokemon(0, index);
             _team.FirstPokemon.Health.OnChanged += OnHealthChanged;
             
-            _view.SetStaticData(_sprites[_team.FirstPokemon.ID], _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
+            await _view.SetPokemon(_team.FirstPokemon, _sprites[_team.FirstPokemon.ID], true);
             _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
             if (_isPlayer)
             {
                 _view.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
                 _view.actionsHUD.HideActions();
             }
-            
-            // await exit pokeball animation
         }
 
         private void OnMoveSelected(int index)

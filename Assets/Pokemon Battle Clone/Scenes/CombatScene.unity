@@ -307,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 478185878}
   levelText: {fileID: 180844676}
-  pokemon: {fileID: 1784473796}
+  pokemonView: {fileID: 1784473796}
   health: {fileID: 1950545706}
   actionsHUD: {fileID: 1204642374}
 --- !u!1 &103554101
@@ -2534,7 +2534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameText: {fileID: 66338431}
   levelText: {fileID: 1118149125}
-  pokemon: {fileID: 1657632908}
+  pokemonView: {fileID: 1657632908}
   health: {fileID: 872225061}
   actionsHUD: {fileID: 0}
 --- !u!1 &1522482777

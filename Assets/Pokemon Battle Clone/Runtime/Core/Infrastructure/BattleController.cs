@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
@@ -37,8 +38,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         private async Task RunBattleAsync()
         {
-            _playerTeamController.Init(_rivalTeamController);
-            _rivalTeamController.Init(_playerTeamController);
+            await _playerTeamController.Init(_rivalTeamController);
+            await Task.Delay(TimeSpan.FromSeconds(3));
+            await _rivalTeamController.Init(_playerTeamController);
             
             Debug.Log("Battle started!");
             

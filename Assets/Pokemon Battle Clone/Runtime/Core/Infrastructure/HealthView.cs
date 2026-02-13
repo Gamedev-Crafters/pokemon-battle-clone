@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
@@ -12,7 +11,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         [SerializeField] private Color middleHealthColor = Color.yellow;
         [SerializeField] private Color lowHealthColor = Color.red;
 
-        private float _target;
+        private float _target = 1f;
 
         private void Awake()
         {
@@ -26,6 +25,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         public void SetHealth(int maxHealth, int currentHealth)
         {
+            Debug.Log("Set Pokemon Health");
             _target = (float)currentHealth / maxHealth;
         }
 
