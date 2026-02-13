@@ -40,10 +40,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             _opponentTeamController = opponentTeam;
             
             await _view.SetPokemon(_team.FirstPokemon, _sprites[_team.FirstPokemon.ID], true);
-            _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
-
-            _team.FirstPokemon.Health.OnChanged += OnHealthChanged;
-
+            _view.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
+            
             if (_isPlayer)
                 _view.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
         }
@@ -76,12 +74,11 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         public async Task SwapPokemon(int index)
         {
-            _team.FirstPokemon.Health.OnChanged -= OnHealthChanged;
             _team.SwapPokemon(0, index);
-            _team.FirstPokemon.Health.OnChanged += OnHealthChanged;
             
             await _view.SetPokemon(_team.FirstPokemon, _sprites[_team.FirstPokemon.ID], true);
-            _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
+            _view.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
+            
             if (_isPlayer)
             {
                 _view.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
@@ -111,7 +108,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         private void OnHealthChanged(Health health)
         {
-            _view.health.SetHealth(health.Max, health.Current);
+            _view.healthView.SetHealth(health.Max, health.Current);
         }
     }
 }

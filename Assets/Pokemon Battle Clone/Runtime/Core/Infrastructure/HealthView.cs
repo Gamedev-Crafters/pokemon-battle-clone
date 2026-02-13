@@ -25,7 +25,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         public void SetHealth(int maxHealth, int currentHealth)
         {
-            Debug.Log("Set Pokemon Health");
             _target = (float)currentHealth / maxHealth;
         }
 
