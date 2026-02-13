@@ -35,12 +35,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             _ = RunBattleAsync();
         }
 
-        private void Update()
-        {
-            _playerTeamController.Update();
-            _rivalTeamController.Update();
-        }
-
         private async Task RunBattleAsync()
         {
             _playerTeamController.Init(_rivalTeamController);
@@ -96,10 +90,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         private async Task ExecuteActionsAsync(List<TrainerAction> actions)
         {
-            var random = new System.Random();
             var orderedActions = actions.OrderByDescending(a => a.Priority)
                 .ThenByDescending(a => a.PokemonInFieldSpeed)
-                .ThenBy(_ => random.Next())
+                .ThenBy(_ => RandomProvider.Next())
                 .ToList();
 
             foreach (var action in orderedActions)

@@ -42,13 +42,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             _view.SetStaticData(_sprites[_team.FirstPokemon.ID], _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
             _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
 
+            _team.FirstPokemon.Health.OnChanged += OnHealthChanged;
+
             if (_isPlayer)
                 _view.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
-        }
-
-        public void Update()
-        {
-            _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
         }
 
         public Task<TrainerAction> SelectActionTask()
@@ -81,7 +78,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         {
             // await return to pokeball animation
             
+            _team.FirstPokemon.Health.OnChanged -= OnHealthChanged;
             _team.SwapPokemon(0, index);
+            _team.FirstPokemon.Health.OnChanged += OnHealthChanged;
             
             _view.SetStaticData(_sprites[_team.FirstPokemon.ID], _team.FirstPokemon.Name, _team.FirstPokemon.Stats.Level);
             _view.health.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
@@ -112,6 +111,11 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             var action = new SwapPokemonAction(_isPlayer ? Side.Player : Side.Rival, _team.FirstPokemon.Stats.Speed,
                 index, this);
             _actionTcs.SetResult(action);
+        }
+
+        private void OnHealthChanged(Health health)
+        {
+            _view.health.SetHealth(health.Max, health.Current);
         }
     }
 }
