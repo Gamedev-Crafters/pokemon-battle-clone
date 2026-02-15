@@ -11,20 +11,14 @@
             "id": "0be70d1115bc91a1",
             "type": "leaf",
             "state": {
-              "type": "kanban",
+              "type": "markdown",
               "state": {
-                "file": "Kanban board.md",
-                "kanbanViewState": {
-                  "kanban-plugin": "board",
-                  "list-collapse": [
-                    false,
-                    false,
-                    false
-                  ]
-                }
+                "file": "Main Page.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-trello",
-              "title": "Kanban board"
+              "icon": "lucide-file",
+              "title": "Main Page"
             }
           }
         ]
@@ -192,10 +186,10 @@
   },
   "active": "0be70d1115bc91a1",
   "lastOpenFiles": [
+    "Pokemon/Stats.md",
+    "Pokemon/Damage Calculation.md",
     "Main Page.md",
     "Kanban board.md",
-    "Pokemon/Damage Calculation.md",
-    "Pokemon/Stats.md",
     "Pokemon",
     "Untitled.canvas"
   ]

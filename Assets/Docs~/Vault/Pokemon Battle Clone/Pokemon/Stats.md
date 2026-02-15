@@ -25,3 +25,21 @@ OtherStat =
 	+ 5 \right) \times Nature
 \right\rfloor
 $$
+
+# Stats modifiers
+
+### Documentation
+- [Stats modifiers - Bulbapedia](https://bulbapedia.bulbagarden.net/wiki/Stat_modifier)
+
+### Formulas
+
+```
+numerator = 0
+denominator = 0
+
+if (boostLevel > 0) numerator = boost
+else if (boostLevel < 0) denominator = boost * -1
+
+boost = ( 2 + numerator ) / ( 2 + denominator )
+```
+

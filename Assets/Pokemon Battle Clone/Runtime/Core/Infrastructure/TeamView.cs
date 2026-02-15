@@ -28,7 +28,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         {
             if (_pokemonInField != null)
                 _pokemonInField.Health.OnChanged -= OnHealthChanged;
-            if (animated && _pokemonInField != null)
+            if (animated && _pokemonInField != null && _pokemonInField.Health.Current > 0)
                 await pokemonView.PlayFaintAnimation(); // change to return to pokeball animation
             
             _pokemonInField = pokemon;
@@ -46,6 +46,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             levelText.text = $"Lvl {level}";
         }
         
-        private void OnHealthChanged(Health health) => healthView.SetHealth(health.Max, health.Current);
+        private void OnHealthChanged(Health health)
+        {
+            healthView.SetHealth(health.Max, health.Current);
+        }
     }
 }
