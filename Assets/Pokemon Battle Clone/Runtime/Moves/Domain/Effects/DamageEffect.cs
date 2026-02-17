@@ -14,7 +14,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
         {
             var level = user.Stats.Level;
             var attack = user.Stats.GetAttackByCategory(move.Category);
-            var defense = user.Stats.GetDefenseByCategory(move.Category);
+            var defense = target.Stats.GetDefenseByCategory(move.Category);
             var power = move.Power;
             var targets = 1f;
             var weather = 1f;
