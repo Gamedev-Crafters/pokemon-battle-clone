@@ -93,10 +93,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         private async Task ExecuteActionsAsync(List<TrainerAction> actions)
         {
-            var orderedActions = actions.OrderByDescending(a => a.Priority)
-                .ThenByDescending(a => a.PokemonInFieldSpeed)
-                .ThenBy(_ => RandomProvider.Next())
-                .ToList();
+            var orderedActions = TrainerAction.OrderActions(actions);
 
             foreach (var action in orderedActions)
             {

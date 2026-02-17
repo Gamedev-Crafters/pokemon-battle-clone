@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 
 namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
 {
@@ -20,5 +23,13 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
         }
 
         public abstract Task Execute();
+
+        public static List<TrainerAction> OrderActions(List<TrainerAction> actionsToOrder)
+        {
+            return actionsToOrder.OrderByDescending(a => a.Priority)
+                .ThenByDescending(a => a.PokemonInFieldSpeed)
+                .ThenBy(_ => RandomProvider.Next())
+                .ToList();
+        }
     }
 }
