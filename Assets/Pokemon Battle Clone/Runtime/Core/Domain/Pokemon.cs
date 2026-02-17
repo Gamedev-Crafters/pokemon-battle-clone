@@ -13,6 +13,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
         public MoveSet MoveSet { get; private set; }
         public Health Health { get; }
 
+        public bool Defeated => Health.Current <= 0;
+
         public Pokemon(uint id, string name, StatsData stats, ElementalType type1, ElementalType type2 = ElementalType.None)
         {
             ID = id;

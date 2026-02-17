@@ -28,7 +28,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         {
             if (_pokemonInField != null)
                 _pokemonInField.Health.OnChanged -= OnHealthChanged;
-            if (animated && _pokemonInField != null && _pokemonInField.Health.Current > 0)
+            if (animated && _pokemonInField != null && !_pokemonInField.Defeated)
                 await pokemonView.PlayFaintAnimation(); // change to return to pokeball animation
             
             _pokemonInField = pokemon;

@@ -67,9 +67,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             await Task.Delay(500);
             
             var tasks = new List<Task<TrainerAction>>();
-            if (_playerTeamController.FirstPokemonFainted)
+            if (_playerTeamController.FirstPokemonDefeated)
                 tasks.Add(_playerTeamController.SelectActionTask());
-            if (_rivalTeamController.FirstPokemonFainted)
+            if (_rivalTeamController.FirstPokemonDefeated)
                 tasks.Add(_rivalTeamController.SelectActionTask());
             
             if (tasks.Count > 0)
@@ -132,8 +132,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             return side switch
             {
-                Side.Player => _playerTeamController.FirstPokemonFainted,
-                Side.Rival => _rivalTeamController.FirstPokemonFainted,
+                Side.Player => _playerTeamController.FirstPokemonDefeated,
+                Side.Rival => _rivalTeamController.FirstPokemonDefeated,
                 _ => false
             };
         }

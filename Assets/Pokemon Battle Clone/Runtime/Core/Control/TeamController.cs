@@ -20,7 +20,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private TaskCompletionSource<TrainerAction> _actionTcs;
 
         public bool Defeated => _team.Defeated;
-        public bool FirstPokemonFainted => _team.FirstPokemon.Health.Current <= 0;
+        public bool FirstPokemonDefeated => _team.FirstPokemon.Defeated;
         
         public TeamController(bool isPlayer, Team team, TeamView view, Dictionary<uint, Sprite> sprites)
         {
@@ -67,10 +67,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             await userAnimator.PlayAttackAnimation();
             move.Execute(user, target);
 
-            if (target.Health.Current > 0)
-                await targetAnimator.PlayHitAnimation();
-            else
+            if (target.Defeated)
                 await targetAnimator.PlayFaintAnimation();
+            else
+                await targetAnimator.PlayHitAnimation();
         }
 
         public async Task SwapPokemon(int index)

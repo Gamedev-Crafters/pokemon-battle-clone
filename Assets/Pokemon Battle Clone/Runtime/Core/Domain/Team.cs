@@ -10,7 +10,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
         public IReadOnlyList<Pokemon> PokemonList => _pokemonList;
 
         public Pokemon FirstPokemon => _pokemonList[0];
-        public bool Defeated => _pokemonList.All(pokemon => pokemon.Health.Current <= 0);
+        public bool Defeated => _pokemonList.All(pokemon => pokemon.Defeated);
         
         public Team(Pokemon pokemon)
         {
