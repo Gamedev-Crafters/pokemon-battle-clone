@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
+using Pokemon_Battle_Clone.Runtime.Core.Control;
 
 namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
 {

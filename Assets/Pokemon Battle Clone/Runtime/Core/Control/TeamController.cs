@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
+using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
 using UnityEngine;
 
-namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
+namespace Pokemon_Battle_Clone.Runtime.Core.Control
 {
     public class TeamController
     {
