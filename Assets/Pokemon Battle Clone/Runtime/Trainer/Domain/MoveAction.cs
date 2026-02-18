@@ -26,7 +26,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
             
             _move.Execute(user, target);
 
-            return new MoveResult
+            return new MoveActionResult
             {
                 Side = Side,
                 RivalFainted = target.Defeated,

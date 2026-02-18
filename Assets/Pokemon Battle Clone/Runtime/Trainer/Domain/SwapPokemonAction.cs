@@ -19,7 +19,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
             var team = battle.GetTeam(Side);
             team.SwapPokemon(0, _pokemonIndex);
 
-            return new SwapResult();
+            return new SwapActionResult();
         }
     }
 }

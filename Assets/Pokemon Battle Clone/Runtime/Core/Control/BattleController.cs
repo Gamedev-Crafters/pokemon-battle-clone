@@ -131,16 +131,16 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             switch (result)
             {
-                case MoveResult moveResult:
+                case MoveActionResult moveResult:
                     await HandleMoveVisuals(moveResult);
                     break;
-                case SwapResult swapResult:
+                case SwapActionResult swapResult:
                     await HandleSwapVisuals(swapResult);
                     break;
             }
         }
 
-        private async Task HandleMoveVisuals(MoveResult result)
+        private async Task HandleMoveVisuals(MoveActionResult result)
         {
             var userTeam = GetTeam(result.Side);
             var rivalTeam = GetOpponentTeam(result.Side);
@@ -154,7 +154,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
                 await rivalTeam.View.PlayHitAnimation();
         }
 
-        private async Task HandleSwapVisuals(SwapResult result)
+        private async Task HandleSwapVisuals(SwapActionResult result)
         {
             var userTeam = GetTeam(result.Side);
             await userTeam.SendFirstPokemon();
