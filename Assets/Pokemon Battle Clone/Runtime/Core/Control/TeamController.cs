@@ -20,7 +20,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private TaskCompletionSource<TrainerAction> _actionTcs;
 
         public bool Defeated => _team.Defeated;
-        public bool FirstPokemonDefeated => _team.FirstPokemon.Defeated;
+        public bool IsFirstPokemonDefeated => _team.FirstPokemon.Defeated;
+        
+        private Sprite FirstPokemonSprite => _sprites[_team.FirstPokemon.ID];
         
         public TeamController(bool isPlayer, Team team, TeamView view, Dictionary<uint, Sprite> sprites)
         {
@@ -40,8 +42,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             _opponentTeamController = opponentTeam;
 
-            Sprite sprite = _sprites[_team.FirstPokemon.ID];
-            await _view.SendPokemon(_team.FirstPokemon, sprite);
+            await _view.SendPokemon(_team.FirstPokemon, FirstPokemonSprite);
             _view.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
             
             if (_isPlayer)
@@ -78,8 +79,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             _team.SwapPokemon(0, index);
 
-            Sprite sprite = _sprites[_team.FirstPokemon.ID];
-            await _view.SendPokemon(_team.FirstPokemon, sprite);
+            await _view.SendPokemon(_team.FirstPokemon, FirstPokemonSprite);
             _view.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
             
             if (_isPlayer)

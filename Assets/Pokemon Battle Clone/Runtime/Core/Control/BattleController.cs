@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
@@ -66,9 +65,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             await Task.Delay(500);
             
             var tasks = new List<Task<TrainerAction>>();
-            if (_playerTeamController.FirstPokemonDefeated)
+            if (_playerTeamController.IsFirstPokemonDefeated)
                 tasks.Add(_playerTeamController.SelectActionTask());
-            if (_rivalTeamController.FirstPokemonDefeated)
+            if (_rivalTeamController.IsFirstPokemonDefeated)
                 tasks.Add(_rivalTeamController.SelectActionTask());
             
             if (tasks.Count > 0)
@@ -128,8 +127,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             return side switch
             {
-                Side.Player => _playerTeamController.FirstPokemonDefeated,
-                Side.Rival => _rivalTeamController.FirstPokemonDefeated,
+                Side.Player => _playerTeamController.IsFirstPokemonDefeated,
+                Side.Rival => _rivalTeamController.IsFirstPokemonDefeated,
                 _ => false
             };
         }
