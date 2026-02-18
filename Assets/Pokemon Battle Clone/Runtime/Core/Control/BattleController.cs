@@ -14,9 +14,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         public TeamView playerTeamView;
         public TeamView rivalTeamView;
         
+        private Battle _battle;
         private TeamController _playerTeamController;
         private TeamController _rivalTeamController;
-
+        
         private int _turnCount;
         private bool _battleFinished;
         
@@ -26,6 +27,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             
             var playerTeam = BuildPlayerTeam();
             var rivalTeam = BuildRivalTeam();
+            
+            _battle = new Battle(playerTeam, rivalTeam);
             
             var playerSprites = spriteLoader.LoadAllBack(playerTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
             _playerTeamController = new TeamController(true, playerTeam, playerTeamView, playerSprites);
@@ -74,7 +77,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             {
                 await Task.WhenAll(tasks);
                 foreach (var task in tasks)
-                    await task.Result.Execute();
+                    await task.Result.Execute(_battle);
             }
         }
 
@@ -97,7 +100,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             {
                 if (CheckPokemonFainted(action.Side))
                     continue;
-                await action.Execute();
+                await action.Execute(_battle);
             }
         }
 

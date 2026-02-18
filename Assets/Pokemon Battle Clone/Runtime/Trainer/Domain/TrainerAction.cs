@@ -5,11 +5,6 @@ using Pokemon_Battle_Clone.Runtime.Core.Domain;
 
 namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
 {
-    public enum Side
-    {
-        Player, Rival
-    }
-    
     public abstract class TrainerAction
     {
         public readonly Side Side;
@@ -22,7 +17,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
             PokemonInFieldSpeed = pokemonInFieldSpeed;
         }
 
-        public abstract Task Execute();
+        public abstract Task Execute(Battle battle);
 
         public static List<TrainerAction> OrderActions(List<TrainerAction> actionsToOrder)
         {

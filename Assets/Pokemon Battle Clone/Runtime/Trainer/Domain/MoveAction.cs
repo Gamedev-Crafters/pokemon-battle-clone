@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Control;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 
 namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
@@ -20,9 +21,13 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
             Priority = move.Priority;
         }
         
-        public override async Task Execute()
+        public override async Task Execute(Battle battle)
         {
-            await _userTeamController.PerformMove(_move);
+            // await _userTeamController.PerformMove(_move);
+            var user = battle.GetTeam(Side).FirstPokemon;
+            var target = battle.GetOpponentTeam(Side).FirstPokemon;
+            
+            _move.Execute(user, target);
         }
     }
 }

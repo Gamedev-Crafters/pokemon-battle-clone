@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Control;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 
 namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
 {
@@ -17,7 +18,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
             _userTeamController = userTeamController;
         }
 
-        public override async Task Execute()
+        public override async Task Execute(Battle battle)
         {
             await _userTeamController.SwapPokemon(_pokemonIndex);
         }

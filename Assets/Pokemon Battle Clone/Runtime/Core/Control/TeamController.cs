@@ -106,10 +106,5 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
                 index, this);
             _actionTcs.SetResult(action);
         }
-
-        private void OnHealthChanged(Health health)
-        {
-            _view.healthView.SetHealth(health.Max, health.Current);
-        }
     }
 }
