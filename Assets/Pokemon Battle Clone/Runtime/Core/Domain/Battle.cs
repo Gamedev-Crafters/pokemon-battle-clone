@@ -35,5 +35,15 @@
                 _ => null
             };
         }
+
+        public bool PokemonFainted(Side side)
+        {
+            return side switch
+            {
+                Side.Player => _playerTeam.FirstPokemon.Defeated,
+                Side.Rival => _rivalTeam.FirstPokemon.Defeated,
+                _ => false
+            };
+        }
     }
 }

@@ -98,7 +98,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
             foreach (var action in orderedActions)
             {
-                if (CheckPokemonFainted(action.Side))
+                if (_battle.PokemonFainted(action.Side))
                     continue;
                 var result = action.Execute(_battle);
                 await ResolveVisuals(result);
@@ -180,16 +180,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             };
         }
 
-        private bool CheckPokemonFainted(Side side)
-        {
-            return side switch
-            {
-                Side.Player => _playerTeamController.IsFirstPokemonDefeated,
-                Side.Rival => _rivalTeamController.IsFirstPokemonDefeated,
-                _ => false
-            };
-        }
-#region DEBUG
+        #region DEBUG
         private Team BuildPlayerTeam()
         {
             var totodile = PokemonFactory.Totodile();
