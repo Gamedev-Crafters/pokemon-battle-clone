@@ -77,7 +77,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             {
                 await Task.WhenAll(tasks);
                 foreach (var task in tasks)
-                    await task.Result.Execute(_battle);
+                    task.Result.Execute(_battle);
             }
         }
 
@@ -100,7 +100,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             {
                 if (CheckPokemonFainted(action.Side))
                     continue;
-                await action.Execute(_battle);
+                action.Execute(_battle);
             }
         }
 

@@ -93,7 +93,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
                 return;
 
             var move = _team.FirstPokemon.MoveSet.Moves[index];
-            var action = new MoveAction(_isPlayer ? Side.Player : Side.Rival, _team.FirstPokemon.Stats.Speed, move, this);
+            var action = new MoveAction(_isPlayer ? Side.Player : Side.Rival, _team.FirstPokemon.Stats.Speed, move);
             _actionTcs.SetResult(action);
         }
 
@@ -103,7 +103,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
                 return;
 
             var action = new SwapPokemonAction(_isPlayer ? Side.Player : Side.Rival, _team.FirstPokemon.Stats.Speed,
-                index, this);
+                index);
             _actionTcs.SetResult(action);
         }
     }

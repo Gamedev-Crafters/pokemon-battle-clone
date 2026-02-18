@@ -17,7 +17,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
             PokemonInFieldSpeed = pokemonInFieldSpeed;
         }
 
-        public abstract Task Execute(Battle battle);
+        public abstract void Execute(Battle battle);
 
         public static List<TrainerAction> OrderActions(List<TrainerAction> actionsToOrder)
         {

@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using Pokemon_Battle_Clone.Runtime.Core.Control;
-using Pokemon_Battle_Clone.Runtime.Core.Domain;
+﻿using Pokemon_Battle_Clone.Runtime.Core.Domain;
 
 namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
 {
@@ -9,18 +7,17 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
         public override int Priority => int.MaxValue;
 
         private readonly int _pokemonIndex;
-        private readonly TeamController _userTeamController;
         
-        public SwapPokemonAction(Side side, int pokemonInFieldSpeed, int pokemonIndex, TeamController userTeamController)
+        public SwapPokemonAction(Side side, int pokemonInFieldSpeed, int pokemonIndex)
             : base(side, pokemonInFieldSpeed)
         {
             _pokemonIndex = pokemonIndex;
-            _userTeamController = userTeamController;
         }
 
-        public override async Task Execute(Battle battle)
+        public override void Execute(Battle battle)
         {
-            await _userTeamController.SwapPokemon(_pokemonIndex);
+            var team = battle.GetTeam(Side);
+            team.SwapPokemon(0, _pokemonIndex);
         }
     }
 }
