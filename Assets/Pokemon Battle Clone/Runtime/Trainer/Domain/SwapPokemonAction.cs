@@ -14,10 +14,12 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
             _pokemonIndex = pokemonIndex;
         }
 
-        public override void Execute(Battle battle)
+        public override TrainerActionResult Execute(Battle battle)
         {
             var team = battle.GetTeam(Side);
             team.SwapPokemon(0, _pokemonIndex);
+
+            return new SwapResult();
         }
     }
 }

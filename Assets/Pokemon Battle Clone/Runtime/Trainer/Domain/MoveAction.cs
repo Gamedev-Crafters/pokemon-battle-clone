@@ -17,12 +17,21 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
             Priority = move.Priority;
         }
         
-        public override void Execute(Battle battle)
+        public override TrainerActionResult Execute(Battle battle)
         {
             var user = battle.GetTeam(Side).FirstPokemon;
             var target = battle.GetOpponentTeam(Side).FirstPokemon;
+
+            var targetInitialHealth = target.Health.Current;
             
             _move.Execute(user, target);
+
+            return new MoveResult
+            {
+                Side = Side,
+                RivalFainted = target.Defeated,
+                RivalDamaged = targetInitialHealth > target.Health.Current,
+            };
         }
     }
 }
