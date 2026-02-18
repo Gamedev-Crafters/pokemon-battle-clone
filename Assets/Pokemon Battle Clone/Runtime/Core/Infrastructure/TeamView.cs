@@ -11,7 +11,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private TextMeshProUGUI levelText;
         
-        public PokemonView pokemonView;
+        [SerializeField] private PokemonView pokemonView;
         public HealthView healthView;
         public ActionsHUD actionsHUD;
 
@@ -28,16 +28,22 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             if (_pokemonInField != null)
                 _pokemonInField.Health.OnChanged -= OnHealthChanged;
             if (_pokemonInField != null && !_pokemonInField.Defeated)
-                await pokemonView.PlayFaintAnimation(); // change to return to pokeball animation
+                await PlayFaintAnimation(); // change to return to pokeball animation
             
             _pokemonInField = pokemon;
             _pokemonInField.Health.OnChanged += OnHealthChanged;
             SetStaticData(sprite, pokemon.Name, pokemon.Stats.Level);
 
-            await pokemonView.PlayHitAnimation(); // change to send to field animation
+            await PlayHitAnimation(); // change to send to field animation
         }
 
         public void UpdateHealth(int max, int current) => healthView.SetHealth(max, current);
+
+        public Task PlayAttackAnimation() => pokemonView.PlayAttackAnimation();
+
+        public Task PlayHitAnimation() => pokemonView.PlayHitAnimation();
+
+        public Task PlayFaintAnimation() => pokemonView.PlayFaintAnimation();
 
         private void SetStaticData(Sprite sprite, string name, int level)
         {

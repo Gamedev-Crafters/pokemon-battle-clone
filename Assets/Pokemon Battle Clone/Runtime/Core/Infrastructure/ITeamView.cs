@@ -8,5 +8,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
     {
         Task SendPokemon(Pokemon pokemon, Sprite sprite);
         void UpdateHealth(int max, int current);
+
+        Task PlayAttackAnimation();
+        Task PlayHitAnimation();
+        Task PlayFaintAnimation();
     }
 }

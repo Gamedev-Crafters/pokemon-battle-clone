@@ -63,16 +63,14 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             var user = _team.FirstPokemon;
             var target = _opponentTeamController._team.FirstPokemon;
-            var userAnimator = _view.pokemonView;
-            var targetAnimator = _opponentTeamController._view.pokemonView;
 
-            await userAnimator.PlayAttackAnimation();
+            await _view.PlayAttackAnimation();
             move.Execute(user, target);
 
             if (target.Defeated)
-                await targetAnimator.PlayFaintAnimation();
+                await _opponentTeamController._view.PlayFaintAnimation();
             else
-                await targetAnimator.PlayHitAnimation();
+                await _opponentTeamController._view.PlayHitAnimation();
         }
 
         public async Task SwapPokemon(int index)
