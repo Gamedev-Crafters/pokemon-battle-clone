@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
-using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
 using UnityEngine;
 
@@ -14,8 +13,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private readonly Team _team;
         public TeamView View { get; }
         private readonly Dictionary<uint, Sprite> _sprites;
-        
-        private TeamController _opponentTeamController;
         
         private TaskCompletionSource<TrainerAction> _actionTcs;
 
@@ -38,16 +35,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             }
         }
 
-        public async Task Init(TeamController opponentTeam)
-        {
-            _opponentTeamController = opponentTeam;
-
-            await View.SendPokemon(_team.FirstPokemon, FirstPokemonSprite);
-            View.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
-            
-            if (_isPlayer)
-                View.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
-        }
+        public async Task Init() => await SendFirstPokemon();
 
         public Task<TrainerAction> SelectActionTask()
         {
@@ -59,24 +47,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             return _actionTcs.Task;
         }
 
-        public async Task PerformMove(Move move)
-        {
-            var user = _team.FirstPokemon;
-            var target = _opponentTeamController._team.FirstPokemon;
-
-            await View.PlayAttackAnimation();
-            move.Execute(user, target);
-            
-            if (target.Defeated)
-                await _opponentTeamController.View.PlayFaintAnimation();
-            else
-                await _opponentTeamController.View.PlayHitAnimation();
-        }
-
         public async Task SendFirstPokemon()
         {
             await View.SendPokemon(_team.FirstPokemon, FirstPokemonSprite);
-            View.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
             
             if (_isPlayer)
             {

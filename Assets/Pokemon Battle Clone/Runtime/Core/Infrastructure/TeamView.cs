@@ -16,23 +16,15 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         public ActionsHUD actionsHUD;
 
         private Pokemon _pokemonInField;
-
-        private void OnDestroy()
-        {
-            // if (_pokemonInField != null)
-            //     _pokemonInField.Health.OnChanged -= OnHealthChanged;
-        }
         
         public async Task SendPokemon(Pokemon pokemon, Sprite sprite)
         {
-            // if (_pokemonInField != null)
-            //     _pokemonInField.Health.OnChanged -= OnHealthChanged;
             if (_pokemonInField != null && !_pokemonInField.Defeated)
                 await PlayFaintAnimation(); // change to return to pokeball animation
             
             _pokemonInField = pokemon;
-            // _pokemonInField.Health.OnChanged += OnHealthChanged;
             SetStaticData(sprite, pokemon.Name, pokemon.Stats.Level);
+            UpdateHealth();
 
             await PlayHitAnimation(); // change to send to field animation
         }
