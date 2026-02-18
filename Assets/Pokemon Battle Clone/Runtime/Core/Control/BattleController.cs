@@ -100,7 +100,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             {
                 if (CheckPokemonFainted(action.Side))
                     continue;
-                action.Execute(_battle);
+                var result = action.Execute(_battle);
+                await ResolveVisuals(result);
             }
         }
 
@@ -126,6 +127,59 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             return false;
         }
 
+        private async Task ResolveVisuals(TrainerActionResult result)
+        {
+            switch (result)
+            {
+                case MoveResult moveResult:
+                    await HandleMoveVisuals(moveResult);
+                    break;
+                case SwapResult swapResult:
+                    await HandleSwapVisuals(swapResult);
+                    break;
+            }
+        }
+
+        private async Task HandleMoveVisuals(MoveResult result)
+        {
+            var userTeam = GetTeam(result.Side);
+            var rivalTeam = GetOpponentTeam(result.Side);
+
+            await userTeam.View.PlayAttackAnimation();
+
+            rivalTeam.View.UpdateHealth();
+            if (result.RivalFainted)
+                await rivalTeam.View.PlayFaintAnimation();
+            else
+                await rivalTeam.View.PlayHitAnimation();
+        }
+
+        private async Task HandleSwapVisuals(SwapResult result)
+        {
+            var userTeam = GetTeam(result.Side);
+            await userTeam.SendFirstPokemon();
+        }
+
+        private TeamController GetTeam(Side side)
+        {
+            return side switch
+            {
+                Side.Player => _playerTeamController,
+                Side.Rival => _rivalTeamController,
+                _ => null
+            };
+        }
+        
+        private TeamController GetOpponentTeam(Side side)
+        {
+            return side switch
+            {
+                Side.Player => _rivalTeamController,
+                Side.Rival => _playerTeamController,
+                _ => null
+            };
+        }
+
         private bool CheckPokemonFainted(Side side)
         {
             return side switch
@@ -135,7 +189,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
                 _ => false
             };
         }
-
 #region DEBUG
         private Team BuildPlayerTeam()
         {

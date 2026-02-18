@@ -12,7 +12,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
     {
         private readonly bool _isPlayer;
         private readonly Team _team;
-        private readonly TeamView _view;
+        public TeamView View { get; }
         private readonly Dictionary<uint, Sprite> _sprites;
         
         private TeamController _opponentTeamController;
@@ -28,13 +28,13 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             _isPlayer = isPlayer;
             _team = team;
-            _view = view;
+            View = view;
             _sprites = new Dictionary<uint, Sprite>(sprites);
             
             if (_isPlayer)
             {
-                _view.actionsHUD.moveSetView.OnMoveSelected += OnMoveSelected;
-                _view.actionsHUD.pokemonSelector.OnPokemonSelected += OnPokemonSelected;
+                View.actionsHUD.moveSetView.OnMoveSelected += OnMoveSelected;
+                View.actionsHUD.pokemonSelector.OnPokemonSelected += OnPokemonSelected;
             }
         }
 
@@ -42,11 +42,11 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             _opponentTeamController = opponentTeam;
 
-            await _view.SendPokemon(_team.FirstPokemon, FirstPokemonSprite);
-            _view.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
+            await View.SendPokemon(_team.FirstPokemon, FirstPokemonSprite);
+            View.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
             
             if (_isPlayer)
-                _view.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
+                View.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
         }
 
         public Task<TrainerAction> SelectActionTask()
@@ -64,26 +64,24 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             var user = _team.FirstPokemon;
             var target = _opponentTeamController._team.FirstPokemon;
 
-            await _view.PlayAttackAnimation();
+            await View.PlayAttackAnimation();
             move.Execute(user, target);
-
+            
             if (target.Defeated)
-                await _opponentTeamController._view.PlayFaintAnimation();
+                await _opponentTeamController.View.PlayFaintAnimation();
             else
-                await _opponentTeamController._view.PlayHitAnimation();
+                await _opponentTeamController.View.PlayHitAnimation();
         }
 
-        public async Task SwapPokemon(int index)
+        public async Task SendFirstPokemon()
         {
-            _team.SwapPokemon(0, index);
-
-            await _view.SendPokemon(_team.FirstPokemon, FirstPokemonSprite);
-            _view.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
+            await View.SendPokemon(_team.FirstPokemon, FirstPokemonSprite);
+            View.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
             
             if (_isPlayer)
             {
-                _view.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
-                _view.actionsHUD.HideActions();
+                View.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
+                View.actionsHUD.HideActions();
             }
         }
 

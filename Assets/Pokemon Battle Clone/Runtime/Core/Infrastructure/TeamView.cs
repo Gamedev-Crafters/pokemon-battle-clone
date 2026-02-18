@@ -19,25 +19,25 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         private void OnDestroy()
         {
-            if (_pokemonInField != null)
-                _pokemonInField.Health.OnChanged -= OnHealthChanged;
+            // if (_pokemonInField != null)
+            //     _pokemonInField.Health.OnChanged -= OnHealthChanged;
         }
         
         public async Task SendPokemon(Pokemon pokemon, Sprite sprite)
         {
-            if (_pokemonInField != null)
-                _pokemonInField.Health.OnChanged -= OnHealthChanged;
+            // if (_pokemonInField != null)
+            //     _pokemonInField.Health.OnChanged -= OnHealthChanged;
             if (_pokemonInField != null && !_pokemonInField.Defeated)
                 await PlayFaintAnimation(); // change to return to pokeball animation
             
             _pokemonInField = pokemon;
-            _pokemonInField.Health.OnChanged += OnHealthChanged;
+            // _pokemonInField.Health.OnChanged += OnHealthChanged;
             SetStaticData(sprite, pokemon.Name, pokemon.Stats.Level);
 
             await PlayHitAnimation(); // change to send to field animation
         }
 
-        public void UpdateHealth(int max, int current) => healthView.SetHealth(max, current);
+        public void UpdateHealth() => healthView.SetHealth(_pokemonInField.Health.Max, _pokemonInField.Health.Current);
 
         public Task PlayAttackAnimation() => pokemonView.PlayAttackAnimation();
 
@@ -51,7 +51,5 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             nameText.text = name;
             levelText.text = $"Lvl {level}";
         }
-        
-        private void OnHealthChanged(Health health) => UpdateHealth(health.Max, health.Current);
     }
 }
