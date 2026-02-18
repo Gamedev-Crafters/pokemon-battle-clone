@@ -39,8 +39,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         public async Task Init(TeamController opponentTeam)
         {
             _opponentTeamController = opponentTeam;
-            
-            await _view.SetPokemon(_team.FirstPokemon, _sprites[_team.FirstPokemon.ID], true);
+
+            Sprite sprite = _sprites[_team.FirstPokemon.ID];
+            await _view.SendPokemon(_team.FirstPokemon, sprite);
             _view.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
             
             if (_isPlayer)
@@ -76,8 +77,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         public async Task SwapPokemon(int index)
         {
             _team.SwapPokemon(0, index);
-            
-            await _view.SetPokemon(_team.FirstPokemon, _sprites[_team.FirstPokemon.ID], true);
+
+            Sprite sprite = _sprites[_team.FirstPokemon.ID];
+            await _view.SendPokemon(_team.FirstPokemon, sprite);
             _view.healthView.SetHealth(_team.FirstPokemon.Health.Max, _team.FirstPokemon.Health.Current);
             
             if (_isPlayer)

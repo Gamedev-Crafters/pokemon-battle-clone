@@ -40,7 +40,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private async Task RunBattleAsync()
         {
             await _playerTeamController.Init(_rivalTeamController);
-            await Task.Delay(TimeSpan.FromSeconds(3));
             await _rivalTeamController.Init(_playerTeamController);
             
             Debug.Log("Battle started!");
