@@ -9,12 +9,14 @@ using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control
 {
-    public class BattleController : MonoBehaviour
+    public class BattleController : MonoBehaviour, IBattleContext
     {
         public TeamView playerTeamView;
         public TeamView rivalTeamView;
         
         private Battle _battle;
+        private readonly ActionsResolver _actionsResolver = new ActionsResolver();
+        
         private TeamController _playerTeamController;
         private TeamController _rivalTeamController;
         
@@ -101,7 +103,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
                 if (_battle.PokemonFainted(action.Side))
                     continue;
                 var result = action.Execute(_battle);
-                await ResolveVisuals(result);
+                await _actionsResolver.Resolve(result, this);
             }
         }
 
@@ -127,40 +129,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             return false;
         }
 
-        private async Task ResolveVisuals(TrainerActionResult result)
-        {
-            switch (result)
-            {
-                case MoveActionResult moveResult:
-                    await HandleMoveVisuals(moveResult);
-                    break;
-                case SwapActionResult swapResult:
-                    await HandleSwapVisuals(swapResult);
-                    break;
-            }
-        }
-
-        private async Task HandleMoveVisuals(MoveActionResult result)
-        {
-            var userTeam = GetTeam(result.Side);
-            var rivalTeam = GetOpponentTeam(result.Side);
-
-            await userTeam.View.PlayAttackAnimation();
-
-            rivalTeam.View.UpdateHealth();
-            if (result.TargetFainted)
-                await rivalTeam.View.PlayFaintAnimation();
-            else
-                await rivalTeam.View.PlayHitAnimation();
-        }
-
-        private async Task HandleSwapVisuals(SwapActionResult result)
-        {
-            var userTeam = GetTeam(result.Side);
-            await userTeam.SendFirstPokemon();
-        }
-
-        private TeamController GetTeam(Side side)
+        public TeamController GetTeam(Side side)
         {
             return side switch
             {
@@ -170,7 +139,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             };
         }
         
-        private TeamController GetOpponentTeam(Side side)
+        public TeamController GetOpponentTeam(Side side)
         {
             return side switch
             {
