@@ -2,7 +2,7 @@
 {
     public class MoveActionResult : TrainerActionResult
     {
-        public bool RivalFainted;
-        public bool RivalDamaged;
+        public bool TargetFainted;
+        public bool TargetDamaged;
     }
 }

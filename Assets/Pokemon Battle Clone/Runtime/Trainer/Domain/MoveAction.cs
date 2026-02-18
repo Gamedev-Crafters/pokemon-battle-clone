@@ -29,8 +29,8 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
             return new MoveActionResult
             {
                 Side = Side,
-                RivalFainted = target.Defeated,
-                RivalDamaged = targetInitialHealth > target.Health.Current,
+                TargetFainted = target.Defeated,
+                TargetDamaged = targetInitialHealth > target.Health.Current,
             };
         }
     }

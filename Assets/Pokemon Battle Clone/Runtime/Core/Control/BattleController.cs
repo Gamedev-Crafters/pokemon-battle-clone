@@ -148,7 +148,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             await userTeam.View.PlayAttackAnimation();
 
             rivalTeam.View.UpdateHealth();
-            if (result.RivalFainted)
+            if (result.TargetFainted)
                 await rivalTeam.View.PlayFaintAnimation();
             else
                 await rivalTeam.View.PlayHitAnimation();
