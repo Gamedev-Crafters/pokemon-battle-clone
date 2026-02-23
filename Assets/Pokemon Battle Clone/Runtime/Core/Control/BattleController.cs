@@ -3,9 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
+using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
 using UnityEngine;
+using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control
 {
@@ -47,12 +49,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             await _playerTeamController.Init();
             await _rivalTeamController.Init();
             
-            Debug.Log("Battle started!");
+            LogManager.Log("Battle started!", FeatureType.Battle);
             
             while (!_battleFinished)
             {
                 _turnCount++;
-                Debug.Log($"--- TURN {_turnCount} ---");
+                LogManager.Log($"--- TURN {_turnCount} ---", FeatureType.Battle);
 
                 await StartTurnAsync();
                 var actions = await SelectActionsAsync();
@@ -62,12 +64,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
                 _battleFinished = CheckBattleEnd();
             }
             
-            Debug.Log("Battle finished!");
+            LogManager.Log("Battle finished!", FeatureType.Battle);
         }
 
         private async Task StartTurnAsync()
         {
-            Debug.Log("Start turn...");
+            LogManager.Log("Start turn...", FeatureType.Battle);
             await Task.Delay(500);
             
             var tasks = new List<Task<TrainerAction>>();
@@ -89,7 +91,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         private async Task<List<TrainerAction>> SelectActionsAsync()
         {
-            Debug.Log("Selecting actions...");
+            LogManager.Log("Selecting actions...", FeatureType.Battle);
             var playerActionTask = _playerTeamController.SelectActionTask();
             var rivalActionTask = _rivalTeamController.SelectActionTask();
 
@@ -113,7 +115,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         private async Task EndTurnAsync()
         {
-            Debug.Log("End turn...");
+            LogManager.Log("End turn...", FeatureType.Battle);
             await Task.Delay(500);
         }
 
@@ -121,12 +123,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             if (_playerTeamController.Defeated)
             {
-                Debug.Log("The rival has won!");
+                LogManager.Log("The rival has won!", FeatureType.Battle);
                 return true;
             }
             if (_rivalTeamController.Defeated)
             {
-                Debug.Log("The player has won!");
+                LogManager.Log("The player has won!", FeatureType.Battle);
                 return true;
             }
 

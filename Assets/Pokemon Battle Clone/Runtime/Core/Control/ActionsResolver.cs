@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
+using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
 using UnityEngine;
+using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control
 {
@@ -22,7 +24,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private async Task HandleMoveVisuals(MoveActionResult actionResult, IBattleContext context)
         {
             if (actionResult.Failed)
-                Debug.Log($"{actionResult.UserName} failed to execute {actionResult.MoveName}");
+                LogManager.Log($"{actionResult.UserName} failed to execute {actionResult.MoveName}", FeatureType.Move);
             
             var userTeam = context.GetTeam(actionResult.Side);
             var rivalTeam = context.GetOpponentTeam(actionResult.Side);
