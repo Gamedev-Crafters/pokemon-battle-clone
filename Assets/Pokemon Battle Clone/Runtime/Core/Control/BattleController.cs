@@ -79,7 +79,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             {
                 await Task.WhenAll(tasks);
                 foreach (var task in tasks)
-                    task.Result.Execute(_battle);
+                {
+                    var result = task.Result.Execute(_battle);
+                    await _actionsResolver.Resolve(result, this);
+                }
             }
         }
 
