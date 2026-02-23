@@ -10,7 +10,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
     public abstract class TeamController
     {
         protected readonly Team Team;
-        public TeamView View { get; }
+        public ITeamView View { get; }
         private readonly Dictionary<uint, Sprite> _sprites;
 
         public bool Defeated => Team.Defeated;
@@ -18,7 +18,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         private Sprite FirstPokemonSprite => _sprites[Team.FirstPokemon.ID];
 
-        protected TeamController(Team team, TeamView view, Dictionary<uint, Sprite> sprites)
+        protected TeamController(Team team, ITeamView view, Dictionary<uint, Sprite> sprites)
         {
             Team = team;
             View = view;

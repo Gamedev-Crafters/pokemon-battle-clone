@@ -12,7 +12,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private readonly IActionHUD _actionsHUD;
         private TaskCompletionSource<TrainerAction> _actionTcs;
         
-        public PlayerTeamController(Team team, Dictionary<uint, Sprite> sprites, TeamView view, IActionHUD actionsHUD)
+        public PlayerTeamController(Team team, Dictionary<uint, Sprite> sprites, ITeamView view, IActionHUD actionsHUD)
             : base(team, view, sprites)
         {
             _actionsHUD = actionsHUD;

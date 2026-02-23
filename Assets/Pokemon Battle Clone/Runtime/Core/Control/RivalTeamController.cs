@@ -9,7 +9,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 {
     public class RivalTeamController : TeamController
     {
-        public RivalTeamController(Team team, Dictionary<uint, Sprite> sprites, TeamView view)
+        public RivalTeamController(Team team, Dictionary<uint, Sprite> sprites, ITeamView view)
             : base(team, view, sprites) { }
 
         public override Task<TrainerAction> SelectActionTask()

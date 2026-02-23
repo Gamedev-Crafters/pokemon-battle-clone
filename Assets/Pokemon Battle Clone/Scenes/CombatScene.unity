@@ -310,7 +310,6 @@ MonoBehaviour:
   levelText: {fileID: 180844676}
   pokemonView: {fileID: 1784473796}
   healthView: {fileID: 1950545706}
-  actionsHUD: {fileID: 1204642374}
 --- !u!1 &103554101
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,7 +1886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTeamView: {fileID: 101632632}
   rivalTeamView: {fileID: 1487896682}
-  actionsHUD: {fileID: 0}
+  actionsHUD: {fileID: 1204642374}
 --- !u!4 &913603189
 Transform:
   m_ObjectHideFlags: 0
@@ -2541,7 +2540,6 @@ MonoBehaviour:
   levelText: {fileID: 1118149125}
   pokemonView: {fileID: 1657632908}
   healthView: {fileID: 872225061}
-  actionsHUD: {fileID: 0}
 --- !u!1 &1522482777
 GameObject:
   m_ObjectHideFlags: 0
