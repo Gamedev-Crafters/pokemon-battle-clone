@@ -13,7 +13,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         
         [SerializeField] private PokemonView pokemonView;
         public HealthView healthView;
-        public ActionsHUD actionsHUD;
 
         private Pokemon _pokemonInField;
         

@@ -14,8 +14,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         public override Task<TrainerAction> SelectActionTask()
         {
-            var move = _team.FirstPokemon.MoveSet.Moves[0];
-            var action = new MoveAction(Side.Rival, _team.FirstPokemon.Stats.Speed, move);
+            var move = Team.FirstPokemon.MoveSet.Moves[0];
+            var action = new MoveAction(Side.Rival, Team.FirstPokemon.Stats.Speed, move);
 
             return Task.FromResult<TrainerAction>(action);
         }

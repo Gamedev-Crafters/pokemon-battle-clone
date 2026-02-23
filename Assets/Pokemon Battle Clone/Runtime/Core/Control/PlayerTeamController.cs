@@ -10,6 +10,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
     public class PlayerTeamController : TeamController
     {
         private readonly IActionHUD _actionsHUD;
+        private TaskCompletionSource<TrainerAction> _actionTcs;
         
         public PlayerTeamController(Team team, Dictionary<uint, Sprite> sprites, TeamView view, IActionHUD actionsHUD)
             : base(team, view, sprites)
@@ -30,7 +31,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             await base.SendFirstPokemon();
             
-            _actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
+            _actionsHUD.SetData(Team, Team.FirstPokemon.MoveSet);
             _actionsHUD.HideActions();
         }
 
@@ -39,8 +40,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             if (_actionTcs == null || _actionTcs.Task.IsCompleted)
                 return;
 
-            var move = _team.FirstPokemon.MoveSet.Moves[index];
-            var action = new MoveAction(Side.Player, _team.FirstPokemon.Stats.Speed, move);
+            var move = Team.FirstPokemon.MoveSet.Moves[index];
+            var action = new MoveAction(Side.Player, Team.FirstPokemon.Stats.Speed, move);
             _actionTcs.SetResult(action);
         }
 
@@ -49,7 +50,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             if (_actionTcs == null || _actionTcs.Task.IsCompleted)
                 return;
 
-            var action = new SwapPokemonAction(Side.Player, _team.FirstPokemon.Stats.Speed, index);
+            var action = new SwapPokemonAction(Side.Player, Team.FirstPokemon.Stats.Speed, index);
             _actionTcs.SetResult(action);
         }
     }
