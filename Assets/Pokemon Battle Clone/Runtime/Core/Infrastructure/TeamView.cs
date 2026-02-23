@@ -7,13 +7,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 {
     public class TeamView : MonoBehaviour, ITeamView
     {
-        // just for debugging
-        [SerializeField] private TextMeshProUGUI nameText;
-        [SerializeField] private TextMeshProUGUI levelText;
-        
+        [SerializeField] private PokemonStatusView pokemonStatusView;
         [SerializeField] private PokemonView pokemonView;
-        [SerializeField] private HealthView healthView;
-
+        
         private Pokemon _pokemonInField;
         
         public async Task SendPokemon(Pokemon pokemon, Sprite sprite)
@@ -28,7 +24,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             await PlayHitAnimation(); // change to send to field animation
         }
 
-        public void UpdateHealth(int max, int current, bool animated) => healthView.SetHealth(max, current, animated);
+        public void UpdateHealth(int max, int current, bool animated) => pokemonStatusView.UpdateHealth(max, current, animated);
 
         public Task PlayAttackAnimation() => pokemonView.PlayAttackAnimation();
 
@@ -39,8 +35,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         private void SetStaticData(Sprite sprite, string name, int level)
         {
             pokemonView.SetSprite(sprite);
-            nameText.text = name;
-            levelText.text = $"Lvl {level}";
+            pokemonStatusView.SetInfo(name, level);
         }
     }
 }
