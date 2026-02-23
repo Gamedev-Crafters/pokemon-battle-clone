@@ -33,10 +33,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             _battle = new Battle(playerTeam, rivalTeam);
             
             var playerSprites = spriteLoader.LoadAllBack(playerTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
-            _playerTeamController = new TeamController(true, playerTeam, playerTeamView, playerSprites);
+            _playerTeamController = new PlayerTeamController(playerTeam, playerTeamView, playerSprites);
             
             var rivalSprites = spriteLoader.LoadAllFront(rivalTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
-            _rivalTeamController = new TeamController(false, rivalTeam, rivalTeamView, rivalSprites);
+            _rivalTeamController = new RivalTeamController(rivalTeam, rivalTeamView, rivalSprites);
 
             _ = RunBattleAsync();
         }
