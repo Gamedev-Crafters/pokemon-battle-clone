@@ -23,12 +23,16 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
             var target = battle.GetOpponentTeam(Side).FirstPokemon;
 
             var targetInitialHealth = target.Health.Current;
+            var failed = RandomProvider.Range(0, 101) > _move.Accuracy;
             
-            _move.Execute(user, target);
+            if (!failed) _move.Execute(user, target);
 
             return new MoveActionResult
             {
                 Side = Side,
+                MoveName = _move.Name,
+                UserName = user.Name,
+                Failed = failed,
                 TargetFainted = target.Defeated,
                 TargetDamaged = targetInitialHealth > target.Health.Current,
             };

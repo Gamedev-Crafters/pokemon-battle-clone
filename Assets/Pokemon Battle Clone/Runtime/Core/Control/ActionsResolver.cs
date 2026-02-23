@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
+using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control
 {
@@ -20,6 +21,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         
         private async Task HandleMoveVisuals(MoveActionResult actionResult, IBattleContext context)
         {
+            if (actionResult.Failed)
+                Debug.Log($"{actionResult.UserName} failed to execute {actionResult.MoveName}");
+            
             var userTeam = context.GetTeam(actionResult.Side);
             var rivalTeam = context.GetOpponentTeam(actionResult.Side);
 

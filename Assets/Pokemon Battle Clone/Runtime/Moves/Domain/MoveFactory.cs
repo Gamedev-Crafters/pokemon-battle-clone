@@ -1,5 +1,6 @@
 ﻿using Pokemon_Battle_Clone.Runtime.Builders;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
+using Pokemon_Battle_Clone.Runtime.Stats.Domain;
 
 namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
 {
@@ -18,7 +19,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
         public static Move WaterGun()
         {
             return A.Move.WithName("Water Gun")
-                .WithAccuracy(100)
+                .WithAccuracy(50)
                 .WithPower(40)
                 .WithPP(25)
                 .WithCategory(MoveCategory.Special)
@@ -44,6 +45,16 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
                 .WithPP(35)
                 .WithCategory(MoveCategory.Physical)
                 .WithType(ElementalType.Flying);
+        }
+
+        public static Move Leer()
+        {
+            return A.Move.WithName("Leer")
+                .WithAccuracy(100)
+                .WithStatsModifier(true, new StatSet(0, 0, -1, 0, 0, 0))
+                .WithPP(30)
+                .WithCategory(MoveCategory.Status)
+                .WithType(ElementalType.Normal);
         }
     }
 }
