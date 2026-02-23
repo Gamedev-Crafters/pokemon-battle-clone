@@ -25,7 +25,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
             await userTeam.View.PlayAttackAnimation();
 
-            rivalTeam.UpdatePokemonHealthBar();
+            rivalTeam.UpdatePokemonHealthBar(animated: true);
             if (actionResult.TargetFainted)
                 await rivalTeam.View.PlayFaintAnimation();
             else

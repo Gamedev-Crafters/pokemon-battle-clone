@@ -23,9 +23,11 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             UpdateBar();
         }
 
-        public void SetHealth(int maxHealth, int currentHealth)
+        public void SetHealth(int maxHealth, int currentHealth, bool animated)
         {
             _target = (float)currentHealth / maxHealth;
+            if (!animated)
+                fillImage.fillAmount = _target;
         }
 
         private void UpdateBar()

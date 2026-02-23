@@ -7,7 +7,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
     public interface ITeamView
     {
         Task SendPokemon(Pokemon pokemon, Sprite sprite);
-        void UpdateHealth(int max, int current);
+        void UpdateHealth(int max, int current, bool animated);
 
         Task PlayAttackAnimation();
         Task PlayHitAnimation();

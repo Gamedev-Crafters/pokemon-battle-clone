@@ -23,12 +23,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             
             _pokemonInField = pokemon;
             SetStaticData(sprite, pokemon.Name, pokemon.Stats.Level);
-            UpdateHealth(_pokemonInField.Health.Max, _pokemonInField.Health.Current);
+            UpdateHealth(_pokemonInField.Health.Max, _pokemonInField.Health.Current, animated: false);
 
             await PlayHitAnimation(); // change to send to field animation
         }
 
-        public void UpdateHealth(int max, int current) => healthView.SetHealth(max, current);
+        public void UpdateHealth(int max, int current, bool animated) => healthView.SetHealth(max, current, animated);
 
         public Task PlayAttackAnimation() => pokemonView.PlayAttackAnimation();
 
