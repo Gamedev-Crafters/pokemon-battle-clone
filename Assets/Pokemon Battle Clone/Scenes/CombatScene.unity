@@ -1887,6 +1887,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTeamView: {fileID: 101632632}
   rivalTeamView: {fileID: 1487896682}
+  actionsHUD: {fileID: 0}
 --- !u!4 &913603189
 Transform:
   m_ObjectHideFlags: 0

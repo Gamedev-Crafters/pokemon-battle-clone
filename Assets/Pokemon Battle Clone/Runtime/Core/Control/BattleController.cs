@@ -13,6 +13,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
     {
         public TeamView playerTeamView;
         public TeamView rivalTeamView;
+        public ActionsHUD actionsHUD;
         
         private Battle _battle;
         private readonly ActionsResolver _actionsResolver = new ActionsResolver();
@@ -33,10 +34,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             _battle = new Battle(playerTeam, rivalTeam);
             
             var playerSprites = spriteLoader.LoadAllBack(playerTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
-            _playerTeamController = new PlayerTeamController(playerTeam, playerTeamView, playerSprites);
+            _playerTeamController = new PlayerTeamController(playerTeam, playerSprites, playerTeamView, actionsHUD);
             
             var rivalSprites = spriteLoader.LoadAllFront(rivalTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
-            _rivalTeamController = new RivalTeamController(rivalTeam, rivalTeamView, rivalSprites);
+            _rivalTeamController = new RivalTeamController(rivalTeam, rivalSprites, rivalTeamView);
 
             _ = RunBattleAsync();
         }

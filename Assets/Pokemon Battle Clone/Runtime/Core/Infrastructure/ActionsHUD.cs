@@ -1,11 +1,12 @@
-﻿using Pokemon_Battle_Clone.Runtime.Core.Domain;
+﻿using System;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Infrastructure;
 using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 {
-    public class ActionsHUD : MonoBehaviour
+    public class ActionsHUD : MonoBehaviour, IActionHUD
     {
         public GameObject selector;
         public PokemonSelectorView pokemonSelector;
@@ -31,5 +32,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             pokemonSelector.SetData(team);
             moveSetView.SetData(moveSet);
         }
+
+        public void RegisterMoveSelectedListener(Action<int> listener) => moveSetView.OnMoveSelected += listener;
+        public void RegisterPokemonSelectedListener(Action<int> listener) => pokemonSelector.OnPokemonSelected += listener;
     }
 }

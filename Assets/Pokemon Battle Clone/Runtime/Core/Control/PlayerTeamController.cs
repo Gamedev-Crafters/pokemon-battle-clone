@@ -9,11 +9,15 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 {
     public class PlayerTeamController : TeamController
     {
-        public PlayerTeamController(Team team, TeamView view, Dictionary<uint, Sprite> sprites)
+        private readonly IActionHUD _actionsHUD;
+        
+        public PlayerTeamController(Team team, Dictionary<uint, Sprite> sprites, TeamView view, IActionHUD actionsHUD)
             : base(team, view, sprites)
         {
-            View.actionsHUD.moveSetView.OnMoveSelected += OnMoveSelected;
-            View.actionsHUD.pokemonSelector.OnPokemonSelected += OnPokemonSelected;
+            _actionsHUD = actionsHUD;
+            
+            _actionsHUD.RegisterMoveSelectedListener(OnMoveSelected);
+            _actionsHUD.RegisterPokemonSelectedListener(OnPokemonSelected);
         }
 
         public override Task<TrainerAction> SelectActionTask()
@@ -26,8 +30,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             await base.SendFirstPokemon();
             
-            View.actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
-            View.actionsHUD.HideActions();
+            _actionsHUD.SetData(_team, _team.FirstPokemon.MoveSet);
+            _actionsHUD.HideActions();
         }
 
         private void OnMoveSelected(int index)
