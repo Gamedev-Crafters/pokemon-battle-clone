@@ -14,13 +14,13 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         private void Awake()
         {
-            HideActions();
+            Hide();
             
             moveSetView.Init();
             pokemonSelector.Init();
         }
 
-        public void HideActions()
+        public void Hide()
         {
             selector.SetActive(true);
             moveSetView.gameObject.SetActive(false);

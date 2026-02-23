@@ -32,7 +32,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             await base.SendFirstPokemon();
             
             _actionsHUD.SetData(Team, Team.FirstPokemon.MoveSet);
-            _actionsHUD.HideActions();
+            _actionsHUD.Hide();
         }
 
         private void OnMoveSelected(int index)
@@ -40,6 +40,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             if (_actionTcs == null || _actionTcs.Task.IsCompleted)
                 return;
 
+            _actionsHUD.Hide();
+            
             var move = Team.FirstPokemon.MoveSet.Moves[index];
             var action = new MoveAction(Side.Player, Team.FirstPokemon.Stats.Speed, move);
             _actionTcs.SetResult(action);
@@ -50,6 +52,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             if (_actionTcs == null || _actionTcs.Task.IsCompleted)
                 return;
 
+            _actionsHUD.Hide();
+            
             var action = new SwapPokemonAction(Side.Player, Team.FirstPokemon.Stats.Speed, index);
             _actionTcs.SetResult(action);
         }
