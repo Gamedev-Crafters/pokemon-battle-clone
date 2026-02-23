@@ -12,7 +12,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         [SerializeField] private TextMeshProUGUI levelText;
         
         [SerializeField] private PokemonView pokemonView;
-        public HealthView healthView;
+        [SerializeField] private HealthView healthView;
 
         private Pokemon _pokemonInField;
         
@@ -23,12 +23,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             
             _pokemonInField = pokemon;
             SetStaticData(sprite, pokemon.Name, pokemon.Stats.Level);
-            UpdateHealth();
+            UpdateHealth(_pokemonInField.Health.Max, _pokemonInField.Health.Current);
 
             await PlayHitAnimation(); // change to send to field animation
         }
 
-        public void UpdateHealth() => healthView.SetHealth(_pokemonInField.Health.Max, _pokemonInField.Health.Current);
+        public void UpdateHealth(int max, int current) => healthView.SetHealth(max, current);
 
         public Task PlayAttackAnimation() => pokemonView.PlayAttackAnimation();
 
