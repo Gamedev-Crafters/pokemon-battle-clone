@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 
-namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
+namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions
 {
     public abstract class TrainerAction
     {

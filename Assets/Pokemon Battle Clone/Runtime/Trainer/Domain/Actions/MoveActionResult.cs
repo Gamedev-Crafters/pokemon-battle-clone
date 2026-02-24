@@ -1,4 +1,4 @@
-﻿namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
+﻿namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions
 {
     public class MoveActionResult : TrainerActionResult
     {

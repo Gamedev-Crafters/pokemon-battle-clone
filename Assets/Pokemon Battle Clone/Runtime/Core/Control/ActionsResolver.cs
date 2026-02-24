@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
-using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
+using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
 using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control

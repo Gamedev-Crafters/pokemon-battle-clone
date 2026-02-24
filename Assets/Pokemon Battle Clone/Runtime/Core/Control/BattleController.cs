@@ -5,7 +5,7 @@ using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
-using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
+using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
 using UnityEngine;
 using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 

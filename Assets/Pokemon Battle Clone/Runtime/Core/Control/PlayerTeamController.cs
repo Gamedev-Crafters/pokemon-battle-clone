@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
-using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
+using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
 using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control
