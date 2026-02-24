@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
-using UnityEngine;
 using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control
@@ -32,6 +31,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             await userTeam.View.PlayAttackAnimation();
 
             rivalTeam.UpdatePokemonHealthBar(animated: true);
+            rivalTeam.SetStatsModifier();
             if (actionResult.TargetFainted)
                 await rivalTeam.View.PlayFaintAnimation();
             else

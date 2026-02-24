@@ -39,5 +39,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             var health = Team.FirstPokemon.Health;
             View.UpdateHealth(health.Max, health.Current, animated);
         }
+
+        public void SetStatsModifier() => View.SetStatModifier(Team.FirstPokemon.Stats.Modifiers);
     }
 }

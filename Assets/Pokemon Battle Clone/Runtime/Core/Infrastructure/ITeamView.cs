@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
+using Pokemon_Battle_Clone.Runtime.Stats.Domain;
 using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
@@ -8,6 +9,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
     {
         Task SendPokemon(Pokemon pokemon, Sprite sprite);
         void UpdateHealth(int max, int current, bool animated);
+        void SetStatModifier(StatsModifier modifier);
 
         Task PlayAttackAnimation();
         Task PlayHitAnimation();

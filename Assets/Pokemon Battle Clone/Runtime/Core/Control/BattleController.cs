@@ -163,7 +163,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             {
                 MoveFactory.IceFang(),
                 MoveFactory.WaterGun(),
-                MoveFactory.QuickAttack()
+                MoveFactory.QuickAttack(),
+                MoveFactory.Leer()
             });
             var pidgey = PokemonFactory.Pidgey();
             pidgey.MoveSet.AddMoves(new List<Move>

@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
+using Pokemon_Battle_Clone.Runtime.Stats.Domain;
+using Pokemon_Battle_Clone.Runtime.Stats.Infrastructure;
 using TMPro;
 using UnityEngine;
 
@@ -9,6 +11,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
     {
         [SerializeField] private PokemonStatusView pokemonStatusView;
         [SerializeField] private PokemonView pokemonView;
+        [SerializeField] private StatsModifiersView statsModifiersView;
         
         private Pokemon _pokemonInField;
         
@@ -25,6 +28,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         }
 
         public void UpdateHealth(int max, int current, bool animated) => pokemonStatusView.UpdateHealth(max, current, animated);
+        public void SetStatModifier(StatsModifier modifier) => statsModifiersView.Set(modifier);
 
         public Task PlayAttackAnimation() => pokemonView.PlayAttackAnimation();
 
