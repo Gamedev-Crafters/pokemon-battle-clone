@@ -23,22 +23,22 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         public void Hide()
         {
             selector.SetActive(true);
-            moveSetView.gameObject.SetActive(false);
-            pokemonSelector.gameObject.SetActive(false);
+            moveSetView.Hide();
+            pokemonSelector.Hide();
         }
 
         public void ShowMoveSelector(bool forceSelection)
         {
             selector.SetActive(false);
-            moveSetView.gameObject.SetActive(true);
-            pokemonSelector.gameObject.SetActive(false);
+            moveSetView.Show(forceSelection);
+            pokemonSelector.Hide();
         }
 
         public void ShowPokemonSelector(bool forceSelection)
         {
             selector.SetActive(false);
-            moveSetView.gameObject.SetActive(false);
-            pokemonSelector.gameObject.SetActive(true);
+            moveSetView.Hide();
+            pokemonSelector.Show(forceSelection);
         }
 
         public void SetData(Team team, MoveSet moveSet)

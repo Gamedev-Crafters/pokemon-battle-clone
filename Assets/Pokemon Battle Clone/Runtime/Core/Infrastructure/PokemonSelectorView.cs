@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 {
-    public class PokemonSelectorView : MonoBehaviour
+    public class PokemonSelectorView : MonoBehaviour, ISelectorView
     {
         [SerializeField] private List<PokemonSelectorButton> pokemonButtons;
+        [SerializeField] private Button backButton;
 
         public event Action<int> OnPokemonSelected = delegate { };
 
@@ -35,6 +37,18 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
                     pokemonButtons[i].gameObject.SetActive(false);
                 }
             }
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+            backButton.enabled = true;
+        }
+
+        public void Show(bool forceSelection)
+        {
+            gameObject.SetActive(true);
+            backButton.enabled = !forceSelection;
         }
     }
 }
