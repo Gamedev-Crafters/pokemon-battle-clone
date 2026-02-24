@@ -13,7 +13,6 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
             : base(side, pokemonInFieldSpeed)
         {
             _move = move;
-
             Priority = move.Priority;
         }
         

@@ -19,5 +19,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
             return Task.FromResult<TrainerAction>(action);
         }
+
+        public override Task<T> SelectActionOfType<T>(bool forceSelection)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -29,6 +29,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         public abstract Task<TrainerAction> SelectActionTask();
 
+        public abstract Task<T> SelectActionOfType<T>(bool forceSelection) where T : TrainerAction;
+
         public virtual async Task SendFirstPokemon()
         {
             await View.SendPokemon(Team.FirstPokemon, FirstPokemonSprite);

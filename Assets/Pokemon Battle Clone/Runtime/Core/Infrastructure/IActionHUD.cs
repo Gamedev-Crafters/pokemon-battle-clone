@@ -7,6 +7,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
     public interface IActionHUD
     {
         void Hide();
+        void ShowMoveSelector(bool forceSelection);
+        void ShowPokemonSelector(bool forceSelection);
         void SetData(Team team, MoveSet moveSet);
 
         void RegisterMoveSelectedListener(Action<int> listener);

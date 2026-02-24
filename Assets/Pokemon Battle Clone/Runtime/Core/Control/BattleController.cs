@@ -72,11 +72,11 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             LogManager.Log("Start turn...", FeatureType.Battle);
             await Task.Delay(500);
             
-            var tasks = new List<Task<TrainerAction>>();
+            var tasks = new List<Task<SwapPokemonAction>>();
             if (_playerTeamController.IsFirstPokemonDefeated)
-                tasks.Add(_playerTeamController.SelectActionTask());
+                tasks.Add(_playerTeamController.SelectActionOfType<SwapPokemonAction>(forceSelection: true));
             if (_rivalTeamController.IsFirstPokemonDefeated)
-                tasks.Add(_rivalTeamController.SelectActionTask());
+                tasks.Add(_rivalTeamController.SelectActionOfType<SwapPokemonAction>(forceSelection: true));
             
             if (tasks.Count > 0)
             {

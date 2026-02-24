@@ -27,6 +27,20 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             pokemonSelector.gameObject.SetActive(false);
         }
 
+        public void ShowMoveSelector(bool forceSelection)
+        {
+            selector.SetActive(false);
+            moveSetView.gameObject.SetActive(true);
+            pokemonSelector.gameObject.SetActive(false);
+        }
+
+        public void ShowPokemonSelector(bool forceSelection)
+        {
+            selector.SetActive(false);
+            moveSetView.gameObject.SetActive(false);
+            pokemonSelector.gameObject.SetActive(true);
+        }
+
         public void SetData(Team team, MoveSet moveSet)
         {
             pokemonSelector.SetData(team);

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
@@ -11,11 +12,18 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
     {
         private readonly IActionHUD _actionsHUD;
         private TaskCompletionSource<TrainerAction> _actionTcs;
+
+        private readonly Dictionary<Type, Action<bool>> _selectorMap;
         
         public PlayerTeamController(Team team, Dictionary<uint, Sprite> sprites, ITeamView view, IActionHUD actionsHUD)
             : base(team, view, sprites)
         {
             _actionsHUD = actionsHUD;
+            _selectorMap = new Dictionary<Type, Action<bool>>
+            {
+                { typeof(MoveAction), force => _actionsHUD.ShowMoveSelector(force) },
+                { typeof(SwapPokemonAction), force => _actionsHUD.ShowPokemonSelector(force) }
+            };
             
             _actionsHUD.RegisterMoveSelectedListener(OnMoveSelected);
             _actionsHUD.RegisterPokemonSelectedListener(OnPokemonSelected);
@@ -25,6 +33,16 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             _actionTcs = new TaskCompletionSource<TrainerAction>();
             return _actionTcs.Task;
+        }
+
+        public override Task<T> SelectActionOfType<T>(bool forceSelection)
+        {
+            _actionTcs = new TaskCompletionSource<TrainerAction>();
+
+            if (_selectorMap.TryGetValue(typeof(T), out var showSelector))
+                showSelector(forceSelection);
+            
+            return _actionTcs.Task.ContinueWith(t => (T)t.Result);
         }
 
         public override async Task SendFirstPokemon()
