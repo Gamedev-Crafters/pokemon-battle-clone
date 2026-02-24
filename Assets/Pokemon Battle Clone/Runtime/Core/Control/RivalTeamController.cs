@@ -1,28 +1,42 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
+using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Strategies;
 using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control
 {
     public class RivalTeamController : TeamController
     {
-        public RivalTeamController(Team team, Dictionary<uint, Sprite> sprites, ITeamView view)
-            : base(team, view, sprites) { }
+        private readonly ITrainerStrategy _trainerStrategy;
+
+        public RivalTeamController(Team team, ITrainerStrategy strategy, Dictionary<uint, Sprite> sprites,
+            ITeamView view)
+            : base(team, view, sprites)
+        {
+            _trainerStrategy = strategy;
+        }
 
         public override Task<TrainerAction> SelectActionTask()
         {
-            var move = Team.FirstPokemon.MoveSet.Moves[0];
-            var action = new MoveAction(Side.Rival, Team.FirstPokemon.Stats.Speed, move);
-
+            var action = _trainerStrategy.SelectMove(Team);
+            
             return Task.FromResult<TrainerAction>(action);
         }
 
         public override Task<T> SelectActionOfType<T>(bool forceSelection)
         {
-            throw new System.NotImplementedException();
+            TrainerAction action = typeof(T) switch
+            {
+                var t when t == typeof(MoveAction) => _trainerStrategy.SelectMove(Team),
+                var t when t == typeof(SwapPokemonAction) => _trainerStrategy.SelectPokemon(Team),
+                _ => throw new InvalidOperationException($"Unsupported action type {typeof(T)}")
+            };
+
+            return Task.FromResult((T)action);
         }
     }
 }

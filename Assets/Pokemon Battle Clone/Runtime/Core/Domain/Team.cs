@@ -41,5 +41,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
             (_pokemonList[indexPokemonA], _pokemonList[indexPokemonB]) =
                 (_pokemonList[indexPokemonB], _pokemonList[indexPokemonA]);
         }
+
+        public override string ToString()
+        {
+            return string.Join(", ", PokemonList.Select(pokemon => pokemon.Name));
+        }
     }
 }

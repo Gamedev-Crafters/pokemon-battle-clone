@@ -72,7 +72,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
             _actionsHUD.Hide();
             
-            var action = new SwapPokemonAction(Side.Player, Team.FirstPokemon.Stats.Speed, index);
+            var action = new SwapPokemonAction(Side.Player, index);
             _actionTcs.SetResult(action);
         }
     }

@@ -19,7 +19,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
         public static Move WaterGun()
         {
             return A.Move.WithName("Water Gun")
-                .WithAccuracy(50)
+                .WithAccuracy(100)
                 .WithPower(40)
                 .WithPP(25)
                 .WithCategory(MoveCategory.Special)

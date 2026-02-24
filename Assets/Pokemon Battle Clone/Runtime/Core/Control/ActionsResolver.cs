@@ -40,6 +40,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         private async Task HandleSwapVisuals(SwapActionResult actionResult, IBattleContext context)
         {
+            LogManager.Log($"Sending pokemon from side {actionResult.Side}", FeatureType.Pokemon);
             var userTeam = context.GetTeam(actionResult.Side);
             await userTeam.SendFirstPokemon();
         }

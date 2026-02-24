@@ -8,8 +8,8 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions
 
         private readonly int _pokemonIndex;
         
-        public SwapPokemonAction(Side side, int pokemonInFieldSpeed, int pokemonIndex)
-            : base(side, pokemonInFieldSpeed)
+        public SwapPokemonAction(Side side, int pokemonIndex)
+            : base(side, pokemonInFieldSpeed: int.MaxValue)
         {
             _pokemonIndex = pokemonIndex;
         }
@@ -19,7 +19,10 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions
             var team = battle.GetTeam(Side);
             team.SwapPokemon(0, _pokemonIndex);
 
-            return new SwapActionResult();
+            return new SwapActionResult
+            {
+                Side = Side,
+            };
         }
     }
 }

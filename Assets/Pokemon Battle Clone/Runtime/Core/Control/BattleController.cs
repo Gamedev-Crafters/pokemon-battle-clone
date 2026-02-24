@@ -6,6 +6,7 @@ using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
+using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Strategies;
 using UnityEngine;
 using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 
@@ -39,7 +40,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             _playerTeamController = new PlayerTeamController(playerTeam, playerSprites, playerTeamView, actionsHUD);
             
             var rivalSprites = spriteLoader.LoadAllFront(rivalTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
-            _rivalTeamController = new RivalTeamController(rivalTeam, rivalSprites, rivalTeamView);
+            var strategy = new BasicTrainerStrategy();
+            _rivalTeamController = new RivalTeamController(rivalTeam, strategy, rivalSprites, rivalTeamView);
 
             _ = RunBattleAsync();
         }
@@ -174,8 +176,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             });
 
             var team = new Team(new List<Pokemon> { totodile, pidgey });
-            
-            Debug.Log($"Player team: {string.Join(',', team.PokemonList.Select(p => p.Name))}");
+            LogManager.Log($"Player team: {team}", FeatureType.Pokemon);
             
             return team;
         }
@@ -187,8 +188,16 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             {
                 MoveFactory.WingAttack()
             });
+            var totodile = PokemonFactory.Totodile();
+            pidgey.MoveSet.AddMoves(new List<Move>
+            {
+                MoveFactory.WingAttack()
+            });
 
-            return new Team(pidgey);
+            var team = new Team(new List<Pokemon> { pidgey, totodile });
+            LogManager.Log($"Rival team: {team}", FeatureType.Pokemon);
+
+            return team;
         }
 #endregion
     }
