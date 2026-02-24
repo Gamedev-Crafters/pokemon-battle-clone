@@ -10,6 +10,15 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
         public IReadOnlyList<Pokemon> PokemonList => _pokemonList;
 
         public Pokemon FirstPokemon => _pokemonList[0];
+
+        public IEnumerable<Pokemon> Bench
+        {
+            get
+            {
+                for (int i = 1; i < _pokemonList.Count; i++)
+                    yield return _pokemonList[i];
+            }
+        }
         public bool Defeated => _pokemonList.All(pokemon => pokemon.Defeated);
         
         public Team(Pokemon pokemon)
@@ -31,7 +40,15 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
             return true;
         }
 
-        public void SwapPokemon(int indexPokemonA, int indexPokemonB)
+        public void SwapActivePokemon(int pokemonIndex)
+        {
+            if (pokemonIndex <= 0 || pokemonIndex >= _pokemonList.Count)
+                throw new InvalidOperationException("Invalid pokemon to change");
+            
+            SwapPokemon(0, pokemonIndex);
+        }
+
+        private void SwapPokemon(int indexPokemonA, int indexPokemonB)
         {
             if (_pokemonList.Count <= 1)
                 throw new InvalidOperationException("Not enough pokemon in the team");

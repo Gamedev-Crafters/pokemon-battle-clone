@@ -17,7 +17,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions
         public override TrainerActionResult Execute(Battle battle)
         {
             var team = battle.GetTeam(Side);
-            team.SwapPokemon(0, _pokemonIndex);
+            team.SwapActivePokemon(_pokemonIndex);
 
             return new SwapActionResult
             {
