@@ -34,5 +34,14 @@ namespace Pokemon_Battle_Clone.Tests
 
             Assert.That(statsData.Stats, Is.EqualTo(new StatSet(178, 152, 99, 72, 100, 151)));
         }
+
+        [Test]
+        public void StatsModifier_EmptyCase()
+        {
+            var statsModifier = new StatsModifier();
+            
+            Assert.That(statsModifier.AttackBoost, Is.EqualTo(1f));
+            Assert.That(statsModifier.AttackLevel, Is.EqualTo(0));
+        }
     }
 }

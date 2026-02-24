@@ -23,6 +23,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             _pokemonInField = pokemon;
             SetStaticData(sprite, pokemon.Name, pokemon.Stats.Level);
             UpdateHealth(_pokemonInField.Health.Max, _pokemonInField.Health.Current, animated: false);
+            SetStatModifier(_pokemonInField.Stats.Modifiers);
 
             await PlayHitAnimation(); // change to send to field animation
         }

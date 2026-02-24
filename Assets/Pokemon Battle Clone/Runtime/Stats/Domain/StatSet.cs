@@ -72,6 +72,19 @@ namespace Pokemon_Battle_Clone.Runtime.Stats.Domain
             ClampStats();
         }
 
+        /// <summary>
+        /// Set all values to 0.
+        /// </summary>
+        public void Clear()
+        {
+            HP = 0;
+            Attack = 0;
+            Defense = 0;
+            SpcAttack = 0;
+            SpcDefense = 0;
+            Speed = 0;
+        }
+
         public void Add(StatSet statSet)
         {
             HP += statSet.HP;

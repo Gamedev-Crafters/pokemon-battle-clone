@@ -7,6 +7,10 @@ namespace Pokemon_Battle_Clone.Runtime.Stats.Infrastructure
     {
         [SerializeField] private TextMeshProUGUI text;
 
-        public void SetInfo(string statName, float value) => text.text = $"{statName} x{value:0.###}";
+        public void SetInfo(string statName, float value)
+        {
+            text.text = $"{statName} x{value:0.###}";
+            gameObject.SetActive(value != 1f);
+        }
     }
 }

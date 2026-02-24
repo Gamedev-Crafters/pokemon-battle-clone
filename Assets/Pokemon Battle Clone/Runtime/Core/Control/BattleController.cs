@@ -186,6 +186,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             var pidgey = PokemonFactory.Pidgey();
             pidgey.MoveSet.AddMoves(new List<Move>
             {
+                MoveFactory.MegaNerf(),
                 MoveFactory.WingAttack()
             });
             var totodile = PokemonFactory.Totodile();

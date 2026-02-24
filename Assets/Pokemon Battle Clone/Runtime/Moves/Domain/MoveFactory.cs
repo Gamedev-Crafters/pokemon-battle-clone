@@ -56,5 +56,15 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
                 .WithCategory(MoveCategory.Status)
                 .WithType(ElementalType.Normal);
         }
+        
+        public static Move MegaNerf()
+        {
+            return A.Move.WithName("Mega Nerf")
+                .WithAccuracy(100)
+                .WithStatsModifier(true, new StatSet(0, -1, -1, -1, -1, -1))
+                .WithPP(30)
+                .WithCategory(MoveCategory.Status)
+                .WithType(ElementalType.Normal);
+        }
     }
 }

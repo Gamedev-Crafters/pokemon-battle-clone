@@ -8,41 +8,55 @@ namespace Pokemon_Battle_Clone.Runtime.Stats.Infrastructure
     {
         [SerializeField] private StatModifierTag statModifierTagPrefab;
         
-        private Dictionary<string, StatModifierTag> statModifierTags = new Dictionary<string, StatModifierTag>();
+        private readonly Dictionary<string, StatModifierTag> _statModifierTags = new();
 
-        struct ModifierDTO
+        private struct ModifierDTO
         {
-            public string name;
-            public float value;
+            public string Name;
+            public float Value;
         }
-        
+
+        private void Start()
+        {
+            InitTags();
+        }
+
         public void Set(StatsModifier modifiers)
         {
             foreach (var modifier in GetModifiers(modifiers))
             {
-                if (!statModifierTags.TryGetValue(modifier.name, out StatModifierTag modifierTag))
-                {
-                    modifierTag = Instantiate(statModifierTagPrefab, transform);
-                    statModifierTags.Add(modifier.name, modifierTag);
-                }
-                modifierTag.SetInfo(modifier.name, modifier.value);
+                if (_statModifierTags.TryGetValue(modifier.Name, out StatModifierTag modifierTag))
+                    modifierTag.SetInfo(modifier.Name, modifier.Value);
             }
+        }
+
+        private void InitTags()
+        {
+            var statsModifier = new StatsModifier();
+            foreach (var modifier in GetModifiers(statsModifier))
+            {
+                var modifierTag = CreateTag(modifier);
+                modifierTag.SetInfo(modifier.Name, modifier.Value);
+            }
+        }
+
+        private StatModifierTag CreateTag(ModifierDTO dto)
+        {
+            var modifierTag = Instantiate(statModifierTagPrefab, transform);
+            _statModifierTags.Add(dto.Name, modifierTag);
+            return modifierTag;
         }
 
         private List<ModifierDTO> GetModifiers(StatsModifier modifier)
         {
-            var modifiers = new List<ModifierDTO>();
-            
-            if (modifier.AttackBoost != 1f)
-                modifiers.Add(new ModifierDTO { name = "Atk.", value = modifier.AttackBoost});
-            if (modifier.DefenseBoost != 1f)
-                modifiers.Add(new ModifierDTO { name = "Def.", value = modifier.DefenseBoost});
-            if (modifier.SpcAttackBoost != 1f)
-                modifiers.Add(new ModifierDTO { name = "S.Atk", value = modifier.SpcAttackBoost});
-            if (modifier.SpcDefenseBoost != 1f)
-                modifiers.Add(new ModifierDTO { name = "S.Def", value = modifier.SpcDefenseBoost});
-            if (modifier.SpeedBoost != 1f)
-                modifiers.Add(new ModifierDTO { name = "Speed", value = modifier.SpeedBoost});
+            var modifiers = new List<ModifierDTO>
+            {
+                new() { Name = "Atk.", Value = modifier.AttackBoost },
+                new() { Name = "Def.", Value = modifier.DefenseBoost },
+                new() { Name = "S.Atk", Value = modifier.SpcAttackBoost },
+                new() { Name = "S.Def", Value = modifier.SpcDefenseBoost },
+                new() { Name = "Speed", Value = modifier.SpeedBoost }
+            };
             
             return modifiers;
         }

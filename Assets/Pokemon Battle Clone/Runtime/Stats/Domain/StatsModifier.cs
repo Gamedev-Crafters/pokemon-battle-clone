@@ -26,6 +26,8 @@ namespace Pokemon_Battle_Clone.Runtime.Stats.Domain
 
         public void Apply(StatSet boost) => _modifiers.Add(boost);
 
+        public void Clear() => _modifiers.Clear();
+
         private float GetBoost(int boostLevel)
         {
             var numerator = 0;

@@ -55,6 +55,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
             if (indexPokemonA > _pokemonList.Count - 1 || indexPokemonB > _pokemonList.Count - 1)
                 throw new InvalidOperationException("Not enough pokemon in the team");
 
+            var pokemonA = _pokemonList[indexPokemonA];
+            pokemonA.Stats.Modifiers.Clear();
+            
             (_pokemonList[indexPokemonA], _pokemonList[indexPokemonB]) =
                 (_pokemonList[indexPokemonB], _pokemonList[indexPokemonA]);
         }
