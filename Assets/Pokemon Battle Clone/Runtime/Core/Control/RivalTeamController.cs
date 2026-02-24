@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
+using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Strategies;
 using UnityEngine;
@@ -22,6 +23,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         public override Task<TrainerAction> SelectActionTask()
         {
+            LogManager.Log("Rival - select action task", FeatureType.Rival);
             var action = _trainerStrategy.SelectMove(Team);
             
             return Task.FromResult<TrainerAction>(action);

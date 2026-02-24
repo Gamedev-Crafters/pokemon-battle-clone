@@ -23,7 +23,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private async Task HandleMoveVisuals(MoveActionResult actionResult, IBattleContext context)
         {
             if (actionResult.Failed)
-                LogManager.Log($"{actionResult.UserName} failed to execute {actionResult.MoveName}", FeatureType.Move);
+                LogManager.Log($"{actionResult.UserName} failed to execute {actionResult.MoveName}", FeatureType.Action);
             
             var userTeam = context.GetTeam(actionResult.Side);
             var rivalTeam = context.GetOpponentTeam(actionResult.Side);
@@ -40,7 +40,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         private async Task HandleSwapVisuals(SwapActionResult actionResult, IBattleContext context)
         {
-            LogManager.Log($"Sending pokemon from side {actionResult.Side}", FeatureType.Pokemon);
+            LogManager.Log($"Sending pokemon from side {actionResult.Side}", FeatureType.Action);
             var userTeam = context.GetTeam(actionResult.Side);
             await userTeam.SendFirstPokemon();
         }

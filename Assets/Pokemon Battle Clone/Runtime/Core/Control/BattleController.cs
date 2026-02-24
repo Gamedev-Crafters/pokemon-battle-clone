@@ -176,7 +176,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             });
 
             var team = new Team(new List<Pokemon> { totodile, pidgey });
-            LogManager.Log($"Player team: {team}", FeatureType.Pokemon);
+            LogManager.Log($"Player team: {team}", FeatureType.Action);
             
             return team;
         }
@@ -189,13 +189,13 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
                 MoveFactory.WingAttack()
             });
             var totodile = PokemonFactory.Totodile();
-            pidgey.MoveSet.AddMoves(new List<Move>
+            totodile.MoveSet.AddMoves(new List<Move>
             {
                 MoveFactory.WingAttack()
             });
 
             var team = new Team(new List<Pokemon> { pidgey, totodile });
-            LogManager.Log($"Rival team: {team}", FeatureType.Pokemon);
+            LogManager.Log($"Rival team: {team}", FeatureType.Action);
 
             return team;
         }

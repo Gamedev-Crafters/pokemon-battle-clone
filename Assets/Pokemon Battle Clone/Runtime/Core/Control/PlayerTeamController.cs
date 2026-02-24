@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
+using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
 using UnityEngine;
 
@@ -63,6 +64,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             var move = Team.FirstPokemon.MoveSet.Moves[index];
             var action = new MoveAction(Side.Player, Team.FirstPokemon.Stats.Speed, move);
             _actionTcs.SetResult(action);
+            
+            LogManager.Log("Move selected", FeatureType.Player);
         }
 
         private void OnPokemonSelected(int index)
@@ -74,6 +77,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             
             var action = new SwapPokemonAction(Side.Player, index);
             _actionTcs.SetResult(action);
+            
+            LogManager.Log("Pokemon selected", FeatureType.Player);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Pokemon_Battle_Clone.Runtime.CustomLogs
 {
     public enum FeatureType
     {
-        Undefined, Battle, Pokemon, Move
+        Undefined, Battle, Action, Player, Rival
     }
     
     [System.Serializable]
