@@ -8,46 +8,49 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 {
     public class ActionsHUD : MonoBehaviour, IActionHUD
     {
-        public GameObject selector;
+        public ActionSelector selector;
         public PokemonSelectorView pokemonSelector;
         public MoveSetView moveSetView;
-
+        
         private void Awake()
         {
-            Hide();
+            HideSelectors();
             
             moveSetView.Init();
             pokemonSelector.Init();
         }
 
-        public void Hide()
+        public void HideSelectors()
         {
-            selector.SetActive(true);
+            selector.Show();
             moveSetView.Hide();
             pokemonSelector.Hide();
         }
 
-        public void ShowMoveSelector(bool forceSelection)
+        public void ShowMoveSelector(bool forceSelection, MoveSetDTO moveSet)
         {
-            selector.SetActive(false);
-            moveSetView.Show(forceSelection);
+            selector.Hide();
+            moveSetView.Show(forceSelection, moveSet);
             pokemonSelector.Hide();
         }
 
-        public void ShowPokemonSelector(bool forceSelection)
+        public void ShowPokemonSelector(bool forceSelection, Team team)
         {
-            selector.SetActive(false);
+            selector.Hide();
             moveSetView.Hide();
-            pokemonSelector.Show(forceSelection);
+            pokemonSelector.Show(forceSelection, team);
         }
 
         public void SetData(Team team, MoveSet moveSet)
         {
-            pokemonSelector.SetData(team);
-            moveSetView.SetData(moveSet);
+            // pokemonSelector.SetData(team);
+            // moveSetView.SetData(moveSet);
         }
 
         public void RegisterMoveSelectedListener(Action<int> listener) => moveSetView.OnMoveSelected += listener;
+        public void RegisterMoveButtonPressedListener(Action listener) => selector.OnMoveButtonPressed += listener;
+
         public void RegisterPokemonSelectedListener(Action<int> listener) => pokemonSelector.OnPokemonSelected += listener;
+        public void RegisterPokemonButtonPressedListener(Action listener) => selector.OnPokemonButtonPressed += listener;
     }
 }

@@ -22,10 +22,10 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
             GetComponent<Button>().onClick.AddListener(() => OnClick.Invoke(index));
         }
         
-        public void SetData(Move move)
+        public void SetData(MoveDTO move)
         {
             nameText.text = move.Name;
-            ppText.text = $"{move.PP.Value} / {move.PP.Max}";
+            ppText.text = $"{move.CurrentPP} / {move.MaxPP}";
         }
     }
 }

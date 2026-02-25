@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 {
-    public class PokemonSelectorView : MonoBehaviour, ISelectorView
+    public class PokemonSelectorView : MonoBehaviour, ISelectorView<Team>
     {
         [SerializeField] private List<PokemonSelectorButton> pokemonButtons;
         [SerializeField] private Button backButton;
@@ -22,7 +22,20 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             }
         }
 
-        public void SetData(Team team)
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+            backButton.interactable = true;
+        }
+
+        public void Show(bool forceSelection, Team team)
+        {
+            gameObject.SetActive(true);
+            backButton.interactable = !forceSelection;
+            SetData(team);
+        }
+
+        private void SetData(Team team)
         {
             for (int i = 0; i < pokemonButtons.Count; i++)
             {
@@ -37,18 +50,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
                     pokemonButtons[i].gameObject.SetActive(false);
                 }
             }
-        }
-
-        public void Hide()
-        {
-            gameObject.SetActive(false);
-            backButton.interactable = true;
-        }
-
-        public void Show(bool forceSelection)
-        {
-            gameObject.SetActive(true);
-            backButton.interactable = !forceSelection;
         }
     }
 }

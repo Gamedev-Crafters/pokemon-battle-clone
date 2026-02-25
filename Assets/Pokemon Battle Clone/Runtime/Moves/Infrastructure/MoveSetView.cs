@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
 {
-    public class MoveSetView : MonoBehaviour, ISelectorView
+    public class MoveSetView : MonoBehaviour, ISelectorView<MoveSetDTO>
     {
         [SerializeField] private List<MoveButton> moveButtons;
         [SerializeField] private Button backButton;
@@ -23,7 +23,36 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
             }
         }
 
-        public void SetData(MoveSet moveSet)
+        // public void SetData(MoveSet moveSet)
+        // {
+        //     for (int i = 0; i < moveButtons.Count; i++)
+        //     {
+        //         if (moveSet.Moves.Count > i)
+        //         {
+        //             moveButtons[i].gameObject.SetActive(true);
+        //             moveButtons[i].SetData(moveSet.Moves[i]);
+        //         }
+        //         else
+        //         {
+        //             moveButtons[i].gameObject.SetActive(false);
+        //         }
+        //     }
+        // }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+            backButton.interactable = true;
+        }
+
+        public void Show(bool forceSelection, MoveSetDTO moveSet)
+        {
+            gameObject.SetActive(true);
+            backButton.interactable = !forceSelection;
+            SetData(moveSet);
+        }
+        
+        private void SetData(MoveSetDTO moveSet)
         {
             for (int i = 0; i < moveButtons.Count; i++)
             {
@@ -37,18 +66,6 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
                     moveButtons[i].gameObject.SetActive(false);
                 }
             }
-        }
-
-        public void Hide()
-        {
-            gameObject.SetActive(false);
-            backButton.interactable = true;
-        }
-
-        public void Show(bool forceSelection)
-        {
-            gameObject.SetActive(true);
-            backButton.interactable = !forceSelection;
         }
     }
 }

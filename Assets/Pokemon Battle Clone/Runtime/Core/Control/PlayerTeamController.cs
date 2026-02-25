@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
+using Pokemon_Battle_Clone.Runtime.Moves.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
 using UnityEngine;
 
@@ -22,12 +23,15 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             _actionsHUD = actionsHUD;
             _selectorMap = new Dictionary<Type, Action<bool>>
             {
-                { typeof(MoveAction), force => _actionsHUD.ShowMoveSelector(force) },
-                { typeof(SwapPokemonAction), force => _actionsHUD.ShowPokemonSelector(force) }
+                { typeof(MoveAction), ShowMoveSelector },
+                { typeof(SwapPokemonAction), ShowPokemonSelector }
             };
             
             _actionsHUD.RegisterMoveSelectedListener(OnMoveSelected);
+            _actionsHUD.RegisterMoveButtonPressedListener(() => ShowMoveSelector(false));
+            
             _actionsHUD.RegisterPokemonSelectedListener(OnPokemonSelected);
+            _actionsHUD.RegisterPokemonButtonPressedListener(() => ShowPokemonSelector(false));
         }
 
         public override Task<TrainerAction> SelectActionTask()
@@ -39,10 +43,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         public override Task<T> SelectActionOfType<T>(bool forceSelection)
         {
             _actionTcs = new TaskCompletionSource<TrainerAction>();
-
-            if (_selectorMap.TryGetValue(typeof(T), out var showSelector))
-                showSelector(forceSelection);
-            
             return _actionTcs.Task.ContinueWith(t => (T)t.Result);
         }
 
@@ -51,7 +51,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             await base.SendFirstPokemon();
             
             _actionsHUD.SetData(Team, Team.FirstPokemon.MoveSet);
-            _actionsHUD.Hide();
+            _actionsHUD.HideSelectors();
         }
 
         private void OnMoveSelected(int index)
@@ -59,7 +59,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             if (_actionTcs == null || _actionTcs.Task.IsCompleted)
                 return;
 
-            _actionsHUD.Hide();
+            _actionsHUD.HideSelectors();
             
             var move = Team.FirstPokemon.MoveSet.Moves[index];
             var action = new MoveAction(Side.Player, Team.FirstPokemon.Stats.Speed, move);
@@ -68,17 +68,28 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             LogManager.Log("Move selected", FeatureType.Player);
         }
 
+        private void ShowMoveSelector(bool forceSelection)
+        {
+            var moveSet = MoveSetDTO.Get(Team.FirstPokemon.MoveSet);
+            _actionsHUD.ShowMoveSelector(forceSelection, moveSet);
+        }
+
         private void OnPokemonSelected(int index)
         {
             if (_actionTcs == null || _actionTcs.Task.IsCompleted)
                 return;
 
-            _actionsHUD.Hide();
+            _actionsHUD.HideSelectors();
             
             var action = new SwapPokemonAction(Side.Player, index);
             _actionTcs.SetResult(action);
             
             LogManager.Log("Pokemon selected", FeatureType.Player);
+        }
+
+        private void ShowPokemonSelector(bool forceSelection)
+        {
+            _actionsHUD.ShowPokemonSelector(forceSelection, Team);
         }
     }
 }

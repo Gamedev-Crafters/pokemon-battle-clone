@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Console
+  m_Title: Game
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 11340
+  controlID: 9865
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 11341
+  controlID: 9866
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 11342
+  controlID: 9867
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 11367
+  controlID: 9793
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -1719,14 +1719,6 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 50154
-    - m_Data: 50156
-    - m_Data: 50158
-    - m_Data: 50160
-    - m_Data: 50162
-    - m_Data: 50164
-    - m_Data: 50166
-    - m_Data: 50168
     - m_Data: 50170
     - m_Data: 50172
     - m_Data: 50174
@@ -1741,6 +1733,24 @@ MonoBehaviour:
     - m_Data: 50192
     - m_Data: 50194
     - m_Data: 50196
+    - m_Data: 50198
+    - m_Data: 50200
+    - m_Data: 50202
+    - m_Data: 50204
+    - m_Data: 50206
+    - m_Data: 50208
+    - m_Data: 50210
+    - m_Data: 50212
+    - m_Data: 50214
+    - m_Data: 50216
+    - m_Data: 50218
+    - m_Data: 50220
+    - m_Data: 50222
+    - m_Data: 50224
+    - m_Data: 50226
+    - m_Data: 50228
+    - m_Data: 50230
+    - m_Data: 50232
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1768,19 +1778,12 @@ MonoBehaviour:
       m_ResourceFile: 
   m_AssetTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: []
+    m_SelectedIDs:
+    - m_Data: 45658
     m_LastClickedID:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
-    - m_Data: 50154
-    - m_Data: 50156
-    - m_Data: 50158
-    - m_Data: 50160
-    - m_Data: 50162
-    - m_Data: 50164
-    - m_Data: 50166
-    - m_Data: 50168
     - m_Data: 50170
     - m_Data: 50172
     - m_Data: 50174
@@ -1795,6 +1798,24 @@ MonoBehaviour:
     - m_Data: 50192
     - m_Data: 50194
     - m_Data: 50196
+    - m_Data: 50198
+    - m_Data: 50200
+    - m_Data: 50202
+    - m_Data: 50204
+    - m_Data: 50206
+    - m_Data: 50208
+    - m_Data: 50210
+    - m_Data: 50212
+    - m_Data: 50214
+    - m_Data: 50216
+    - m_Data: 50218
+    - m_Data: 50220
+    - m_Data: 50222
+    - m_Data: 50224
+    - m_Data: 50226
+    - m_Data: 50228
+    - m_Data: 50230
+    - m_Data: 50232
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1812,7 +1833,7 @@ MonoBehaviour:
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
-      m_ClientGUIView: {fileID: 14}
+      m_ClientGUIView: {fileID: 12}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -1821,8 +1842,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs:
+    - m_Data: 45658
+    m_LastClickedInstanceID: 45658
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -1900,18 +1922,30 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -36286
-      - m_Data: -30646
-      - m_Data: -1686
-      - m_Data: -1318
+      - m_Data: -46658
+      - m_Data: -46638
+      - m_Data: -46618
+      - m_Data: -46598
+      - m_Data: -46578
+      - m_Data: -44676
+      - m_Data: -44472
+      - m_Data: -41684
+      - m_Data: -1530
+      - m_Data: -1362
       - m_Data: -1316
-      - m_Data: 49090
-      - m_Data: 49120
-      - m_Data: 49144
-      - m_Data: 49172
-      - m_Data: 49200
-      - m_Data: 49264
-      - m_Data: 49304
+      - m_Data: -12
+      - m_Data: 49184
+      - m_Data: 49322
+      - m_Data: 79556
+      - m_Data: 79614
+      - m_Data: 79670
+      - m_Data: 79742
+      - m_Data: 79826
+      - m_Data: 80634
+      - m_Data: 80692
+      - m_Data: 80748
+      - m_Data: 80820
+      - m_Data: 80904
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -2055,7 +2089,7 @@ MonoBehaviour:
   m_TestListGUIs:
   - m_Window: {fileID: 25}
     runProgress:
-      RunGuid: 4aa11626-8017-4565-be65-0c7fd090f961
+      RunGuid: 65c40313-0101-412c-8fc6-c0d859219f3d
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -2068,16 +2102,7 @@ MonoBehaviour:
         filters:
         - testMode: 1
           testNames:
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.NeutralAgainstMoveType
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.WeakAgainstMoveType
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.ResistanceAgainstMoveType
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.NeutralizeMoveEffectiveness
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.IncreaseMoveEffectiveness
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.ImmuniseMoveEffectiveness
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel50Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel1Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel100Stats
-          - Pokemon_Battle_Clone.Tests.DamageTests.AttackDamage
+          - Pokemon_Battle_Clone.Tests.StatsTests.StatsModifier_EmptyCase
           groupNames: []
           categoryNames: []
           assemblyNames:
@@ -2093,7 +2118,7 @@ MonoBehaviour:
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
       HasFinished: 1
-      Progress: 1
+      Progress: 0.9999999
       CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList:
@@ -2388,7 +2413,7 @@ MonoBehaviour:
     m_SelectedOption: 0
   - m_Window: {fileID: 25}
     runProgress:
-      RunGuid: 4aa11626-8017-4565-be65-0c7fd090f961
+      RunGuid: 65c40313-0101-412c-8fc6-c0d859219f3d
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -2401,16 +2426,7 @@ MonoBehaviour:
         filters:
         - testMode: 1
           testNames:
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.NeutralAgainstMoveType
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.WeakAgainstMoveType
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.ResistanceAgainstMoveType
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.NeutralizeMoveEffectiveness
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.IncreaseMoveEffectiveness
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.ImmuniseMoveEffectiveness
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel50Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel1Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel100Stats
-          - Pokemon_Battle_Clone.Tests.DamageTests.AttackDamage
+          - Pokemon_Battle_Clone.Tests.StatsTests.StatsModifier_EmptyCase
           groupNames: []
           categoryNames: []
           assemblyNames:
@@ -2426,7 +2442,7 @@ MonoBehaviour:
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
       HasFinished: 1
-      Progress: 1
+      Progress: 0.9999999
       CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList:
@@ -2482,7 +2498,7 @@ MonoBehaviour:
     m_SelectedOption: 0
   - m_Window: {fileID: 25}
     runProgress:
-      RunGuid: 4aa11626-8017-4565-be65-0c7fd090f961
+      RunGuid: 65c40313-0101-412c-8fc6-c0d859219f3d
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -2495,16 +2511,7 @@ MonoBehaviour:
         filters:
         - testMode: 1
           testNames:
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.NeutralAgainstMoveType
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.WeakAgainstMoveType
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.ResistanceAgainstMoveType
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.NeutralizeMoveEffectiveness
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.IncreaseMoveEffectiveness
-          - Pokemon_Battle_Clone.Tests.ElementalTypeTests.ImmuniseMoveEffectiveness
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel50Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel1Stats
-          - Pokemon_Battle_Clone.Tests.StatsTests.CalculateLevel100Stats
-          - Pokemon_Battle_Clone.Tests.DamageTests.AttackDamage
+          - Pokemon_Battle_Clone.Tests.StatsTests.StatsModifier_EmptyCase
           groupNames: []
           categoryNames: []
           assemblyNames:
@@ -2520,7 +2527,7 @@ MonoBehaviour:
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
       HasFinished: 1
-      Progress: 1
+      Progress: 0.9999999
       CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList:
