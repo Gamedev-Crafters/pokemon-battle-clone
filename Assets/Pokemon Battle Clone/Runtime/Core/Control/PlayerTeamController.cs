@@ -6,6 +6,7 @@ using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Moves.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
+using Pokemon_Battle_Clone.Runtime.Trainer.Infrastructure.Actions;
 using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control

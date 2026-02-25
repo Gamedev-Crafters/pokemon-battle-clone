@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
+using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
+namespace Pokemon_Battle_Clone.Runtime.Trainer.Infrastructure.Actions
 {
     public class PokemonSelectorView : MonoBehaviour, ISelectorView<Team>
     {

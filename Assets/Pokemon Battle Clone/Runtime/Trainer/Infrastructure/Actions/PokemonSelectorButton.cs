@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
+namespace Pokemon_Battle_Clone.Runtime.Trainer.Infrastructure.Actions
 {
     [RequireComponent(typeof(Button))]
     public class PokemonSelectorButton : MonoBehaviour
