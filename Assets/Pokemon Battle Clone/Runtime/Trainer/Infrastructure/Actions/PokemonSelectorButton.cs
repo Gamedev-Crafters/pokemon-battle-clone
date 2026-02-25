@@ -1,4 +1,5 @@
 ﻿using System;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,18 +11,22 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Infrastructure.Actions
     {
         [SerializeField] private TextMeshProUGUI pokemonNameText;
         
-         public int index;
+        [HideInInspector] public int index;
+        
+        private Button _button;
         
         public event Action<int> OnClick = delegate { };
 
         private void Awake()
         {
-            GetComponent<Button>().onClick.AddListener(() => OnClick.Invoke(index));
+            _button = GetComponent<Button>();
+            _button.onClick.AddListener(() => OnClick.Invoke(index));
         }
 
-        public void SetData(string pokemonName)
+        public void SetData(Pokemon pokemon)
         {
-            pokemonNameText.text = pokemonName;
+            pokemonNameText.text = pokemon.Name;
+            _button.interactable = !pokemon.Defeated;
         }
     }
 }

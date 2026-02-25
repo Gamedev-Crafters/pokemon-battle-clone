@@ -44,6 +44,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         public override Task<T> SelectActionOfType<T>(bool forceSelection)
         {
             _actionTcs = new TaskCompletionSource<TrainerAction>();
+            
+            if (_selectorMap.TryGetValue(typeof(T), out var showSelector))
+                showSelector(forceSelection);
+            
             return _actionTcs.Task.ContinueWith(t => (T)t.Result);
         }
 

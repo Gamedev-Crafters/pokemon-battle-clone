@@ -158,7 +158,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             };
         }
 
-        #region DEBUG
+#region DEBUG
         private Team BuildPlayerTeam()
         {
             var totodile = PokemonFactory.Totodile();
@@ -187,8 +187,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             var pidgey = PokemonFactory.Pidgey();
             pidgey.MoveSet.AddMoves(new List<Move>
             {
+                MoveFactory.WingAttack(),
                 MoveFactory.MegaNerf(),
-                MoveFactory.WingAttack()
             });
             var totodile = PokemonFactory.Totodile();
             totodile.MoveSet.AddMoves(new List<Move>

@@ -44,7 +44,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Infrastructure.Actions
                 if (team.PokemonList.Count > pokemonIndex)
                 {
                     pokemonButtons[i].gameObject.SetActive(true);
-                    pokemonButtons[i].SetData(team.PokemonList[pokemonIndex].Name);
+                    pokemonButtons[i].SetData(team.PokemonList[pokemonIndex]);
                 }
                 else
                 {

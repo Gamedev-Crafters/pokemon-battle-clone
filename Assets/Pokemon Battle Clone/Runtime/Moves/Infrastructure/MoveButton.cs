@@ -15,17 +15,22 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
 
         [HideInInspector] public int index;
         
+        private Button _button;
+        
         public event Action<int> OnClick = delegate { };
 
         private void Awake()
         {
-            GetComponent<Button>().onClick.AddListener(() => OnClick.Invoke(index));
+            _button = GetComponent<Button>();
+            _button.onClick.AddListener(() => OnClick.Invoke(index));
         }
         
         public void SetData(MoveDTO move)
         {
             nameText.text = move.Name;
             ppText.text = $"{move.CurrentPP} / {move.MaxPP}";
+
+            _button.interactable = move.CurrentPP > 0;
         }
     }
 }
