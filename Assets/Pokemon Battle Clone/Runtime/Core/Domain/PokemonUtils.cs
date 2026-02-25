@@ -1,4 +1,5 @@
 ﻿using System;
+using Pokemon_Battle_Clone.Runtime.RNG;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Domain
 {
@@ -10,6 +11,6 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
             return Math.Max(1, (int)damage);
         }
 
-        public static float RandomDamageFactor() => RandomProvider.Range(85, 101) / 100f;
+        public static float RandomDamageFactor(IRandom random) => random.Range(85, 101) / 100f;
     }
 }

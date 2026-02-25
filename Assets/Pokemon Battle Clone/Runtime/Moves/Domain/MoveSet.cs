@@ -22,12 +22,5 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
             if (Moves.Count < 4)
                 Moves.Add(move);
         }
-
-        public void ExecuteMove(int index, Pokemon user, Pokemon target)
-        {
-            Assert.IsTrue(index >= 0 && index < Moves.Count);
-            
-            Moves[index].Execute(user, target);
-        }
     }
 }

@@ -21,7 +21,6 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
 
             foreach (var move in moveSet.Moves)
             {
-                Debug.Log($"Adding move {move.Name} to DTO");
                 dto.Moves.Add(new MoveDTO
                 {
                     MaxPP = move.PP.Max,

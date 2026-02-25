@@ -1,4 +1,9 @@
-﻿namespace Pokemon_Battle_Clone.Runtime.Core.Domain
+﻿using System.Collections.Generic;
+using System.Linq;
+using Pokemon_Battle_Clone.Runtime.RNG;
+using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
+
+namespace Pokemon_Battle_Clone.Runtime.Core.Domain
 {
     public enum Side
     {
@@ -9,11 +14,14 @@
     {
         private readonly Team _playerTeam;
         private readonly Team _rivalTeam;
+        
+        public IRandom Random { get; }
 
-        public Battle(Team playerTeam, Team rivalTeam)
+        public Battle(Team playerTeam, Team rivalTeam, IRandom random)
         {
             _playerTeam = playerTeam;
             _rivalTeam = rivalTeam;
+            Random = random;
         }
 
         public Team GetTeam(Side side)
@@ -44,6 +52,14 @@
                 Side.Rival => _rivalTeam.FirstPokemon.Defeated,
                 _ => false
             };
+        }
+        
+        public List<TrainerAction> OrderActions(List<TrainerAction> actionsToOrder)
+        {
+            return actionsToOrder.OrderByDescending(a => a.Priority)
+                .ThenByDescending(a => a.PokemonInFieldSpeed)
+                .ThenBy(_ => Random.Next())
+                .ToList();
         }
     }
 }

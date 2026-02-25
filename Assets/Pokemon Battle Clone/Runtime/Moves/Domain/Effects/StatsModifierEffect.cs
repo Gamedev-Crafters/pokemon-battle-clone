@@ -1,4 +1,5 @@
 ﻿using Pokemon_Battle_Clone.Runtime.Core.Domain;
+using Pokemon_Battle_Clone.Runtime.RNG;
 using Pokemon_Battle_Clone.Runtime.Stats.Domain;
 
 namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
@@ -14,7 +15,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
             _statsModifier = statsModifier;
         }
         
-        public void Apply(Move move, Pokemon user, Pokemon target)
+        public void Apply(Move move, Pokemon user, Pokemon target, IRandom random)
         {
             if (_applyToTarget)
                 target.Stats.Modifiers.Apply(_statsModifier);

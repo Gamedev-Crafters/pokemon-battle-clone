@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
+using Pokemon_Battle_Clone.Runtime.RNG;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Strategies;
 using Pokemon_Battle_Clone.Runtime.Trainer.Infrastructure.Actions;
@@ -35,7 +37,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             var playerTeam = BuildPlayerTeam();
             var rivalTeam = BuildRivalTeam();
             
-            _battle = new Battle(playerTeam, rivalTeam);
+            _battle = new Battle(playerTeam, rivalTeam, new DefaultRandom(seed: DateTime.Now.GetHashCode()));
             
             var playerSprites = spriteLoader.LoadAllBack(playerTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
             _playerTeamController = new PlayerTeamController(playerTeam, playerSprites, playerTeamView, actionsHUD);
@@ -105,7 +107,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         private async Task ExecuteActionsAsync(List<TrainerAction> actions)
         {
-            var orderedActions = TrainerAction.OrderActions(actions);
+            var orderedActions = _battle.OrderActions(actions);
 
             foreach (var action in orderedActions)
             {

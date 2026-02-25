@@ -1,5 +1,6 @@
 ﻿using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
+using Pokemon_Battle_Clone.Runtime.RNG;
 
 namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions
 {
@@ -22,16 +23,16 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions
             var target = battle.GetOpponentTeam(Side).FirstPokemon;
 
             var targetInitialHealth = target.Health.Current;
-            var failed = RandomProvider.Range(0, 101) > _move.Accuracy;
+            var hit = battle.Random.Roll(_move.Accuracy);
             
-            if (!failed) _move.Execute(user, target);
+            if (hit) _move.Execute(user, target, battle.Random);
 
             return new MoveActionResult
             {
                 Side = Side,
                 MoveName = _move.Name,
                 UserName = user.Name,
-                Failed = failed,
+                Failed = hit,
                 TargetFainted = target.Defeated,
                 TargetDamaged = targetInitialHealth > target.Health.Current,
             };

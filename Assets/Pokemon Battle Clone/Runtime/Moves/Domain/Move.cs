@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects;
+using Pokemon_Battle_Clone.Runtime.RNG;
 using UnityEngine.Assertions;
 
 namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
@@ -43,13 +42,13 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
         
         public void AddEffect(IMoveEffect effect) => _effects.Add(effect);
         
-        public void Execute(Pokemon user, Pokemon target)
+        public void Execute(Pokemon user, Pokemon target, IRandom random)
         {
             Assert.IsTrue(PP > 0);
             PP.Value--;
             
             foreach (var effect in _effects)
-                effect.Apply(this, user, target);
+                effect.Apply(this, user, target, random);
         }
     }
 }
