@@ -10,6 +10,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
     public abstract class TeamController
     {
         protected readonly Team Team;
+        // Esto idealmente tendría que ser privado, los agentes externos no deberían poder acceder a la TeamView mediante este controlador
         public ITeamView View { get; }
         private readonly Dictionary<uint, Sprite> _sprites;
 
