@@ -163,6 +163,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             };
         }
 
+// ¿Qué significa esta region? ¿Qué es algo provisional?
 #region DEBUG
         private Team BuildPlayerTeam()
         {
