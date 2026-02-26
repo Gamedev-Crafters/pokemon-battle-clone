@@ -2,6 +2,7 @@
 
 namespace Pokemon_Battle_Clone.Runtime.CustomLogs
 {
+    // Sería muy interesante comentar el propósito de esta clase, así como por qué es estática. Se puede ver durante una sesión.
     public static class LogManager
     {
         private const string LOGS_PATH = "Assets/Pokemon Battle Clone/Log Data.asset";
