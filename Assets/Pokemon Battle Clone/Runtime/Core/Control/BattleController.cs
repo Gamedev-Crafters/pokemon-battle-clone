@@ -47,6 +47,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             var strategy = new BasicTrainerStrategy();
             _rivalTeamController = new RivalTeamController(rivalTeam, strategy, rivalSprites, rivalTeamView);
 
+            // Para mencionar en sesión de asincronía: Este método debería ser esperado con await, ya que descartarla hará que no detectemos excepciones por ejemplo.
+            // Start puede ser una Task, también se puede async void.
             _ = RunBattleAsync();
         }
 
