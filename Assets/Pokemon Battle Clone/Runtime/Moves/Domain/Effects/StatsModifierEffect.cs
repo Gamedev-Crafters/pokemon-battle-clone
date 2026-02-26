@@ -15,12 +15,18 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
             _statsModifier = statsModifier;
         }
         
-        public void Apply(Move move, Pokemon user, Pokemon target, IRandom random)
+        public void Apply(Move move, Battle battle, Side side)
         {
             if (_applyToTarget)
+            {
+                var target = battle.GetOpponentFirstPokemon(side);
                 target.Stats.Modifiers.Apply(_statsModifier);
+            }
             else
+            {
+                var user = battle.GetFirstPokemon(side);
                 user.Stats.Modifiers.Apply(_statsModifier);
+            }
         }
     }
 }

@@ -5,6 +5,6 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
 {
     public interface IMoveEffect
     {
-        void Apply(Move move, Pokemon user, Pokemon target, IRandom random);
+        void Apply(Move move, Battle battle, Side side);
     }
 }

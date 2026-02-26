@@ -25,14 +25,14 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions
             var targetInitialHealth = target.Health.Current;
             var hit = battle.Random.Roll(_move.Accuracy);
             
-            if (hit) _move.Execute(user, target, battle.Random);
+            if (hit) _move.Execute(battle, Side);
 
             return new MoveActionResult
             {
                 Side = Side,
                 MoveName = _move.Name,
                 UserName = user.Name,
-                Failed = hit,
+                Failed = !hit,
                 TargetFainted = target.Defeated,
                 TargetDamaged = targetInitialHealth > target.Health.Current,
             };

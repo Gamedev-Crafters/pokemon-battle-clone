@@ -42,13 +42,13 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
         
         public void AddEffect(IMoveEffect effect) => _effects.Add(effect);
         
-        public void Execute(Pokemon user, Pokemon target, IRandom random)
+        public void Execute(Battle  battle, Side side)
         {
             Assert.IsTrue(PP > 0);
             PP.Value--;
             
             foreach (var effect in _effects)
-                effect.Apply(this, user, target, random);
+                effect.Apply(move: this, battle, side);
         }
     }
 }

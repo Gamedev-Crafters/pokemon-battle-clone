@@ -5,14 +5,19 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
 {
     public class DamageEffect : IMoveEffect
     {
-        public void Apply(Move move, Pokemon user, Pokemon target, IRandom random)
+        public void Apply(Move move, Battle battle, Side side)
         {
-            var damage = GetDamage(move, user, target, random);
+            var damage = GetDamage(move, battle, side);
+            
+            var target = battle.GetOpponentFirstPokemon(side);
             target.Health.Damage(damage);
         }
 
-        private int GetDamage(Move move, Pokemon user, Pokemon target, IRandom random)
+        private int GetDamage(Move move, Battle battle, Side side)
         {
+            var user = battle.GetFirstPokemon(side);
+            var target = battle.GetOpponentFirstPokemon(side);
+            
             var level = user.Stats.Level;
             var attack = user.Stats.GetAttackByCategory(move.Category);
             var defense = target.Stats.GetDefenseByCategory(move.Category);
@@ -20,7 +25,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
             var targets = 1f;
             var weather = 1f;
             var critical = 1f;
-            var randomFactor = PokemonUtils.RandomDamageFactor(random);
+            var randomFactor = PokemonUtils.RandomDamageFactor(battle.Random);
             var stab = user.STAB(move.Type);
             var effectiveness = move.Type.EffectivenessAgainst(target.Type1, target.Type2);
             var burn = 1f;
