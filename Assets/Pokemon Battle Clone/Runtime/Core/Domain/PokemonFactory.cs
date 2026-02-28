@@ -3,6 +3,8 @@ using Pokemon_Battle_Clone.Runtime.Stats.Domain;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Domain
 {
+    //¿Cuál es el objetivo de esta clase? Nos gustaría que nos comentaras con que intención la creaste, para que la usas
+    //Luego esta clase, ¿cómo la utilizarías en prodrucción?
     public static class PokemonFactory
     {
         public static Pokemon Totodile()
