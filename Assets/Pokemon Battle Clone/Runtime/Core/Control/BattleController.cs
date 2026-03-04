@@ -23,7 +23,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         public ActionsHUD actionsHUD;
         
         private Battle _battle;
-        private readonly ActionsResolver _actionsResolver = new ActionsResolver();
+        private ActionsResolver _actionsResolver;
         
         private TeamController _playerTeamController;
         private TeamController _rivalTeamController;
@@ -33,6 +33,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         
         private void Start()
         {
+            _actionsResolver = new ActionsResolver(this);
+            
             var spriteLoader = new SpritesLoader("Assets/Pokemon Battle Clone/Sprites/Pokemon");
             
             var playerTeam = BuildPlayerTeam();
@@ -90,7 +92,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
                 foreach (var task in tasks)
                 {
                     var eventSequence = task.Result.Execute(_battle);
-                    await _actionsResolver.Resolve(new Queue<IBattleEvent>(eventSequence), this);
+                    await _actionsResolver.Resolve(new Queue<IBattleEvent>(eventSequence));
                 }
             }
         }
@@ -115,7 +117,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
                 if (_battle.PokemonFainted(action.Side))
                     continue;
                 var eventSequence = action.Execute(_battle);
-                await _actionsResolver.Resolve(new Queue<IBattleEvent>(eventSequence), this);
+                await _actionsResolver.Resolve(new Queue<IBattleEvent>(eventSequence));
             }
         }
 
