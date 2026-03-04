@@ -57,7 +57,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private async Task HandleStatsModifierEvent(StatsModifierEvent statsEvent)
         {
             var rivalTeam = _battleContext.GetOpponentTeam(statsEvent.ActionSide);
-            rivalTeam.SetStatsModifier();
+            rivalTeam.View.SetStatModifier(statsEvent.Modifier);
         }
 
         private async Task HandleSendPokemonEvent(SendPokemonEvent sendEvent)

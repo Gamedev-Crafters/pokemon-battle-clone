@@ -35,13 +35,5 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         {
             await View.SendPokemon(Team.FirstPokemon, FirstPokemonSprite);
         }
-
-        public void UpdatePokemonHealthBar(bool animated)
-        {
-            var health = Team.FirstPokemon.Health;
-            View.UpdateHealth(health.Max, health.Current, animated);
-        }
-
-        public void SetStatsModifier() => View.SetStatModifier(Team.FirstPokemon.Stats.Modifiers);
     }
 }
