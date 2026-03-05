@@ -35,43 +35,43 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         private async Task HandleExecuteMoveEvent(ExecuteMoveEvent moveEvent)
         {
-            var userTeam = _battleContext.GetTeam(moveEvent.ActionSide);
+            var view = _battleContext.GetTeamView(moveEvent.ActionSide);
             
             LogManager.Log($"{moveEvent.PokemonName} used the move {moveEvent.MoveName}", FeatureType.Action);
-            await userTeam.View.PlayAttackAnimation();
+            await view.PlayAttackAnimation();
             
             // add move animation here
         }
 
         private async Task HandleDamage(DamageEvent damageEvent)
         {
-            var rivalTeam = _battleContext.GetOpponentTeam(damageEvent.ActionSide);
+            var view = _battleContext.GetOpponentTeamView(damageEvent.ActionSide);
             
-            rivalTeam.View.UpdateHealth(max: damageEvent.TargetHealth.Max, current: damageEvent.TargetHealth.Current, animated: true);
+            view.UpdateHealth(max: damageEvent.TargetHealth.Max, current: damageEvent.TargetHealth.Current, animated: true);
             if (damageEvent.TargetHealth.Current == 0)
-                await rivalTeam.View.PlayFaintAnimation();
+                await view.PlayFaintAnimation();
             else
-                await rivalTeam.View.PlayHitAnimation();
+                await view.PlayHitAnimation();
         }
 
         private async Task HandleStatsModifierEvent(StatsModifierEvent statsEvent)
         {
-            var rivalTeam = _battleContext.GetOpponentTeam(statsEvent.ActionSide);
-            rivalTeam.View.SetStatModifier(statsEvent.Modifier);
+            var view = _battleContext.GetOpponentTeamView(statsEvent.ActionSide);
+            view.SetStatModifier(statsEvent.Modifier);
         }
 
         private async Task HandleSendPokemonEvent(SendPokemonEvent sendEvent)
         {
-            LogManager.Log($"Sending {sendEvent.Pokemon} from side {sendEvent.ActionSide}", FeatureType.Action);
-            var team = _battleContext.GetTeam(sendEvent.ActionSide);
-            await team.View.SendPokemon(sendEvent.Pokemon);
+            LogManager.Log($"Sending {sendEvent.Pokemon.Name} from side {sendEvent.ActionSide}", FeatureType.Action);
+            var view = _battleContext.GetTeamView(sendEvent.ActionSide);
+            await view.SendPokemon(sendEvent.Pokemon);
         }
 
         private async Task HandleWithdrawPokemonEvent(WithdrawPokemon withdraw)
         {
             LogManager.Log($"Withdrawing {withdraw.PokemonName} from side {withdraw.ActionSide}", FeatureType.Action);
-            var team = _battleContext.GetTeam(withdraw.ActionSide);
-            await team.View.PlayWithdrawAnimation();
+            var view = _battleContext.GetTeamView(withdraw.ActionSide);
+            await view.PlayWithdrawAnimation();
         }
     }
 }

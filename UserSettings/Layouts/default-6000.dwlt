@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Console
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 17
+  controlID: 27
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 18
+  controlID: 28
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 19
+  controlID: 29
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 59
+  controlID: 53
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -1695,7 +1695,8 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 1
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/Pokemon Battle Clone
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1718,6 +1719,12 @@ MonoBehaviour:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
+    - m_Data: 50216
+    - m_Data: 50218
+    - m_Data: 50220
+    - m_Data: 50222
+    - m_Data: 50224
+    - m_Data: 50226
     - m_Data: 50228
     - m_Data: 50230
     - m_Data: 50232
@@ -1761,8 +1768,6 @@ MonoBehaviour:
     - m_Data: 50308
     - m_Data: 50310
     - m_Data: 50312
-    - m_Data: 50314
-    - m_Data: 50316
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1790,12 +1795,17 @@ MonoBehaviour:
       m_ResourceFile: 
   m_AssetTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs:
-    - m_Data: 45658
+    m_SelectedIDs: []
     m_LastClickedID:
       m_Data: 0
     m_ExpandedIDs:
     - m_Data: 0
+    - m_Data: 50216
+    - m_Data: 50218
+    - m_Data: 50220
+    - m_Data: 50222
+    - m_Data: 50224
+    - m_Data: 50226
     - m_Data: 50228
     - m_Data: 50230
     - m_Data: 50232
@@ -1839,8 +1849,6 @@ MonoBehaviour:
     - m_Data: 50308
     - m_Data: 50310
     - m_Data: 50312
-    - m_Data: 50314
-    - m_Data: 50316
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1867,9 +1875,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs:
-    - m_Data: 45658
-    m_LastClickedInstanceID: 45658
+    m_SelectedInstanceIDs: []
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:

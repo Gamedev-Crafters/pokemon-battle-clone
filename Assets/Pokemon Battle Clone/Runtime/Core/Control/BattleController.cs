@@ -56,8 +56,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         private async Task RunBattleAsync()
         {
-            await _playerTeamController.Init();
-            await _rivalTeamController.Init();
+            var playerEvents = _playerTeamController.Init();
+            await _actionsResolver.Resolve(new Queue<IBattleEvent>(playerEvents));
+            var rivalEvents = _rivalTeamController.Init();
+            await _actionsResolver.Resolve(new Queue<IBattleEvent>(rivalEvents));
             
             LogManager.Log("Battle started!", FeatureType.Battle);
             
@@ -145,22 +147,22 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             return false;
         }
 
-        public TeamController GetTeam(Side side)
+        public ITeamView GetTeamView(Side side)
         {
             return side switch
             {
-                Side.Player => _playerTeamController,
-                Side.Rival => _rivalTeamController,
+                Side.Player => playerTeamView,
+                Side.Rival => rivalTeamView,
                 _ => null
             };
         }
         
-        public TeamController GetOpponentTeam(Side side)
+        public ITeamView GetOpponentTeamView(Side side)
         {
             return side switch
             {
-                Side.Player => _rivalTeamController,
-                Side.Rival => _playerTeamController,
+                Side.Player => rivalTeamView,
+                Side.Rival => playerTeamView,
                 _ => null
             };
         }

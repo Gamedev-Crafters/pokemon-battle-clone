@@ -11,9 +11,11 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
     public class RivalTeamController : TeamController
     {
         private readonly ITrainerStrategy _trainerStrategy;
+        
+        public override Side Side => Side.Rival;
 
         public RivalTeamController(Team team, ITrainerStrategy strategy, ITeamView view)
-            : base(team, view)
+            : base(team)
         {
             _trainerStrategy = strategy;
         }

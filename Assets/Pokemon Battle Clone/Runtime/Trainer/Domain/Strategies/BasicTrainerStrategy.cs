@@ -23,8 +23,6 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain.Strategies
                 .Select((pokemon, index) => (pokemon: pokemon, index: index + 1))
                 .First(p => !p.pokemon.Defeated);
             
-            LogManager.Log("Pokemon selected", FeatureType.Rival);
-            
             return new SwapPokemonAction(Side.Rival, firstAlive.index);
         }
     }

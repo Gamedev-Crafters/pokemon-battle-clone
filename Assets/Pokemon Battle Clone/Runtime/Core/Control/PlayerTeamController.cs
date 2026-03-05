@@ -6,6 +6,7 @@ using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Moves.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
+using Pokemon_Battle_Clone.Runtime.Trainer.Domain.BattleEvents;
 using Pokemon_Battle_Clone.Runtime.Trainer.Infrastructure.Actions;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control
@@ -16,9 +17,11 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private TaskCompletionSource<TrainerAction> _actionTcs;
 
         private readonly Dictionary<Type, Action<bool>> _selectorMap;
-        
+
+        public override Side Side => Side.Player;
+
         public PlayerTeamController(Team team, ITeamView view, IActionHUD actionsHUD)
-            : base(team, view)
+            : base(team)
         {
             _actionsHUD = actionsHUD;
             _selectorMap = new Dictionary<Type, Action<bool>>
@@ -49,13 +52,13 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             
             return _actionTcs.Task.ContinueWith(t => (T)t.Result);
         }
-
-        public override async Task SendFirstPokemon()
+        
+        protected override IEnumerable<IBattleEvent> SendFirstPokemon()
         {
-            await base.SendFirstPokemon();
-            
             _actionsHUD.SetData(Team, Team.FirstPokemon.MoveSet);
             _actionsHUD.HideSelectors();
+            
+            return base.SendFirstPokemon();
         }
 
         private void OnMoveSelected(int index)
