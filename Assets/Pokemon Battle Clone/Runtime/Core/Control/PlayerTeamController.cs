@@ -88,7 +88,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
             _actionsHUD.HideSelectors();
             
-            var action = new SwapPokemonAction(Side.Player, index);
+            var action = new SwapPokemonAction(Side.Player, index, withdrawFirstPokemon: !Team.FirstPokemon.Defeated);
             _actionTcs.SetResult(action);
             
             LogManager.Log("Pokemon selected", FeatureType.Player);

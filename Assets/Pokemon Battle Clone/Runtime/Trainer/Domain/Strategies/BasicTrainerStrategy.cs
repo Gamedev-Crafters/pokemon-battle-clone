@@ -23,7 +23,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain.Strategies
                 .Select((pokemon, index) => (pokemon: pokemon, index: index + 1))
                 .First(p => !p.pokemon.Defeated);
             
-            return new SwapPokemonAction(Side.Rival, firstAlive.index);
+            return new SwapPokemonAction(Side.Rival, firstAlive.index, withdrawFirstPokemon: !team.FirstPokemon.Defeated);
         }
     }
 }
