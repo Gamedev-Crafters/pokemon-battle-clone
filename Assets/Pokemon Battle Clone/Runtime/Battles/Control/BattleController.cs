@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain;
+using Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
@@ -21,6 +22,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         public TeamView playerTeamView;
         public TeamView rivalTeamView;
         public ActionsHUD actionsHUD;
+        public DialogDisplayer dialogDisplayer;
         
         private Battle _battle;
         private Turn _turn;
@@ -39,7 +41,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             var rivalTeam = BuildRivalTeam();
             
             _battle = new Battle(playerTeam, rivalTeam, new DefaultRandom(seed: DateTime.Now.GetHashCode()));
-            _turn = new Turn(this);
+            _turn = new Turn(new ActionsResolver(this, dialogDisplayer));
             
             var playerSprites = spriteLoader.LoadAllBack(playerTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
             _playerTrainer = new PlayerTrainer(playerTeam, actionsHUD);

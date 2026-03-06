@@ -13,9 +13,9 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         private readonly ActionsResolver _actionsResolver;
         private int _count;
 
-        public Turn(IBattleContext battleContext)
+        public Turn(ActionsResolver actionsResolver)
         {
-            _actionsResolver = new ActionsResolver(battleContext);
+            _actionsResolver = actionsResolver;
         }
 
         public async Task Init(Battle battle, Trainer player, Trainer rival) // not entirely convinced by this approach

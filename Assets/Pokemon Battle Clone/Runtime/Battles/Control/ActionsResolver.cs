@@ -1,19 +1,20 @@
 ﻿using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
-using Pokemon_Battle_Clone.Runtime.CustomLogs;
+using Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
-using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 
 namespace Pokemon_Battle_Clone.Runtime.Battles.Control
 {
     public class ActionsResolver
     {
         private readonly IBattleContext _battleContext;
+        private readonly IDialogDisplay _dialogDisplayer;
 
-        public ActionsResolver(IBattleContext battleContext)
+        public ActionsResolver(IBattleContext battleContext, IDialogDisplay dialogDisplayer)
         {
             _battleContext = battleContext;
+            _dialogDisplayer = dialogDisplayer;
         }
         
         public async Task Resolve(Battle battle, TrainerAction action)
@@ -37,8 +38,9 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         {
             var view = _battleContext.GetTeamView(moveEvent.ActionSide);
             
-            LogManager.Log($"{moveEvent.PokemonName} used the move {moveEvent.MoveName}", FeatureType.Action);
+            _dialogDisplayer.Display($"{moveEvent.PokemonName} used {moveEvent.MoveName}!");
             await view.PlayAttackAnimation();
+            _dialogDisplayer.Close();
             
             // add move animation here
         }
@@ -52,6 +54,11 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
                 await view.PlayFaintAnimation();
             else
                 await view.PlayHitAnimation();
+            
+            if (damageEvent.Effectiveness > 1f)
+                await _dialogDisplayer.DisplayAsync("It was super effective!");
+            else if (damageEvent.Effectiveness < 1f)
+                await _dialogDisplayer.DisplayAsync("It was not very effective...");
         }
 
         private async Task HandleStatsModifierEvent(StatsModifierEvent statsEvent)
@@ -62,14 +69,18 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
 
         private async Task HandleSendPokemonEvent(SendPokemonEvent sendEvent)
         {
-            LogManager.Log($"Sending {sendEvent.Pokemon.Name} from side {sendEvent.ActionSide}", FeatureType.Action);
+            if (sendEvent.ActionSide == Side.Player)
+                await _dialogDisplayer.DisplayAsync($"Go ahead, {sendEvent.Pokemon.Name}!");
+            else if (sendEvent.ActionSide == Side.Rival)
+                await _dialogDisplayer.DisplayAsync($"The opponent brings out {sendEvent.Pokemon.Name}!");
+            
             var view = _battleContext.GetTeamView(sendEvent.ActionSide);
             await view.SendPokemon(sendEvent.Pokemon);
         }
 
         private async Task HandleWithdrawPokemonEvent(WithdrawPokemonEvent withdraw)
         {
-            LogManager.Log($"Withdrawing {withdraw.PokemonName} from side {withdraw.ActionSide}", FeatureType.Action);
+            await _dialogDisplayer.DisplayAsync($"Withdrawing {withdraw.PokemonName} from side {withdraw.ActionSide}");
             var view = _battleContext.GetTeamView(withdraw.ActionSide);
             await view.PlayWithdrawAnimation();
         }
