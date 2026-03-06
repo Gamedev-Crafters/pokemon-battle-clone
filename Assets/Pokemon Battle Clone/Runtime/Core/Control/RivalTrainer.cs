@@ -1,21 +1,19 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
-using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Strategies;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control
 {
-    public class RivalTeamController : TeamController
+    public class RivalTrainer : Trainer
     {
         private readonly ITrainerStrategy _trainerStrategy;
         
         public override Side Side => Side.Rival;
 
-        public RivalTeamController(Team team, ITrainerStrategy strategy, ITeamView view)
-            : base(team)
+        public RivalTrainer(Team team, ITrainerStrategy strategy) : base(team)
         {
             _trainerStrategy = strategy;
         }

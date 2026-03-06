@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
-using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Moves.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
@@ -11,7 +10,7 @@ using Pokemon_Battle_Clone.Runtime.Trainer.Infrastructure.Actions;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control
 {
-    public class PlayerTeamController : TeamController
+    public class PlayerTrainer : Trainer
     {
         private readonly IActionHUD _actionsHUD;
         private TaskCompletionSource<TrainerAction> _actionTcs;
@@ -20,8 +19,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         public override Side Side => Side.Player;
 
-        public PlayerTeamController(Team team, ITeamView view, IActionHUD actionsHUD)
-            : base(team)
+        public PlayerTrainer(Team team, IActionHUD actionsHUD) : base(team)
         {
             _actionsHUD = actionsHUD;
             _selectorMap = new Dictionary<Type, Action<bool>>
@@ -69,7 +67,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             _actionsHUD.HideSelectors();
             
             var move = Team.FirstPokemon.MoveSet.Moves[index];
-            var action = new MoveAction(Side.Player, Team.FirstPokemon.Stats.Speed, move);
+            var action = new MoveAction(Side, Team.FirstPokemon.Stats.Speed, move);
             _actionTcs.SetResult(action);
             
             LogManager.Log("Move selected", FeatureType.Player);
@@ -88,7 +86,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
             _actionsHUD.HideSelectors();
             
-            var action = new SwapPokemonAction(Side.Player, index, withdrawFirstPokemon: !Team.FirstPokemon.Defeated);
+            var action = new SwapPokemonAction(Side, index, withdrawFirstPokemon: !Team.FirstPokemon.Defeated);
             _actionTcs.SetResult(action);
             
             LogManager.Log("Pokemon selected", FeatureType.Player);

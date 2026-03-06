@@ -25,8 +25,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private Battle _battle;
         private ActionsResolver _actionsResolver;
         
-        private TeamController _playerTeamController;
-        private TeamController _rivalTeamController;
+        private Trainer _playerTrainer;
+        private Trainer _rivalTrainer;
         
         private int _turnCount;
         private bool _battleFinished;
@@ -43,12 +43,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             _battle = new Battle(playerTeam, rivalTeam, new DefaultRandom(seed: DateTime.Now.GetHashCode()));
             
             var playerSprites = spriteLoader.LoadAllBack(playerTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
-            _playerTeamController = new PlayerTeamController(playerTeam, playerTeamView, actionsHUD);
+            _playerTrainer = new PlayerTrainer(playerTeam, actionsHUD);
             playerTeamView.Init(playerSprites);
             
             var rivalSprites = spriteLoader.LoadAllFront(rivalTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
             var strategy = new BasicTrainerStrategy();
-            _rivalTeamController = new RivalTeamController(rivalTeam, strategy, rivalTeamView);
+            _rivalTrainer = new RivalTrainer(rivalTeam, strategy);
             rivalTeamView.Init(rivalSprites);
 
             _ = RunBattleAsync();
@@ -56,9 +56,9 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         private async Task RunBattleAsync()
         {
-            var playerEvents = _playerTeamController.Init();
+            var playerEvents = _playerTrainer.Init();
             await _actionsResolver.Resolve(new Queue<IBattleEvent>(playerEvents));
-            var rivalEvents = _rivalTeamController.Init();
+            var rivalEvents = _rivalTrainer.Init();
             await _actionsResolver.Resolve(new Queue<IBattleEvent>(rivalEvents));
             
             LogManager.Log("Battle started!", FeatureType.Battle);
@@ -85,10 +85,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
             await Task.Delay(500);
             
             var tasks = new List<Task<SwapPokemonAction>>();
-            if (_playerTeamController.IsFirstPokemonDefeated)
-                tasks.Add(_playerTeamController.SelectActionOfType<SwapPokemonAction>(forceSelection: true));
-            if (_rivalTeamController.IsFirstPokemonDefeated)
-                tasks.Add(_rivalTeamController.SelectActionOfType<SwapPokemonAction>(forceSelection: true));
+            if (_playerTrainer.IsFirstPokemonDefeated)
+                tasks.Add(_playerTrainer.SelectActionOfType<SwapPokemonAction>(forceSelection: true));
+            if (_rivalTrainer.IsFirstPokemonDefeated)
+                tasks.Add(_rivalTrainer.SelectActionOfType<SwapPokemonAction>(forceSelection: true));
             
             if (tasks.Count > 0)
             {
@@ -104,8 +104,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private async Task<List<TrainerAction>> SelectActionsAsync()
         {
             LogManager.Log("Selecting actions...", FeatureType.Battle);
-            var playerActionTask = _playerTeamController.SelectActionTask();
-            var rivalActionTask = _rivalTeamController.SelectActionTask();
+            var playerActionTask = _playerTrainer.SelectActionTask();
+            var rivalActionTask = _rivalTrainer.SelectActionTask();
 
             await Task.WhenAll(playerActionTask, rivalActionTask);
             
@@ -133,12 +133,12 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
 
         private bool CheckBattleEnd()
         {
-            if (_playerTeamController.Defeated)
+            if (_playerTrainer.Defeated)
             {
                 LogManager.Log("The rival has won!", FeatureType.Battle);
                 return true;
             }
-            if (_rivalTeamController.Defeated)
+            if (_rivalTrainer.Defeated)
             {
                 LogManager.Log("The player has won!", FeatureType.Battle);
                 return true;

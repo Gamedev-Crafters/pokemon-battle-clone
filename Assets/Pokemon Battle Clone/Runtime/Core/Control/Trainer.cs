@@ -6,7 +6,7 @@ using Pokemon_Battle_Clone.Runtime.Trainer.Domain.BattleEvents;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Control
 {
-    public abstract class TeamController
+    public abstract class Trainer
     {
         protected readonly Team Team;
 
@@ -14,7 +14,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         public bool IsFirstPokemonDefeated => Team.FirstPokemon.Defeated;
         public abstract Side Side { get; }
 
-        protected TeamController(Team team)
+        protected Trainer(Team team)
         {
             Team = team;
         }
