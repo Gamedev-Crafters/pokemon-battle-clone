@@ -59,10 +59,8 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
 
         private async Task RunBattleAsync()
         {
-            var playerEvents = _playerTrainer.Init();
-            await _actionsResolver.Resolve(new Queue<IBattleEvent>(playerEvents));
-            var rivalEvents = _rivalTrainer.Init();
-            await _actionsResolver.Resolve(new Queue<IBattleEvent>(rivalEvents));
+            await _actionsResolver.Resolve(_battle, _playerTrainer.Init());
+            await _actionsResolver.Resolve(_battle, _rivalTrainer.Init());
             
             LogManager.Log("Battle started!", FeatureType.Battle);
             

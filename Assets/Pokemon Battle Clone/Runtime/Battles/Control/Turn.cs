@@ -43,10 +43,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             {
                 await Task.WhenAll(tasks);
                 foreach (var task in tasks)
-                {
-                    var eventSequence = task.Result.Execute(battle);
-                    await _actionsResolver.Resolve(new Queue<IBattleEvent>(eventSequence));
-                }
+                    await _actionsResolver.Resolve(battle, task.Result);
             }
         }
         
@@ -69,8 +66,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             {
                 if (battle.PokemonFainted(action.Side))
                     continue;
-                var eventSequence = action.Execute(battle);
-                await _actionsResolver.Resolve(new Queue<IBattleEvent>(eventSequence));
+                await _actionsResolver.Resolve(battle, action);
             }
         }
 

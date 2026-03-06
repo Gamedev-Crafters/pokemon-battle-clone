@@ -52,7 +52,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             return _actionTcs.Task.ContinueWith(t => (T)t.Result);
         }
         
-        protected override IEnumerable<IBattleEvent> SendFirstPokemon()
+        protected override TrainerAction SendFirstPokemon()
         {
             _actionsHUD.SetData(Team, Team.FirstPokemon.MoveSet);
             _actionsHUD.HideSelectors();

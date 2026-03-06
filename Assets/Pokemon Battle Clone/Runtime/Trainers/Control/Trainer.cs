@@ -20,16 +20,12 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             Team = team;
         }
 
-        public IEnumerable<IBattleEvent> Init() => SendFirstPokemon();
+        public TrainerAction Init() => SendFirstPokemon();
 
         public abstract Task<TrainerAction> SelectActionTask();
 
         public abstract Task<T> SelectActionOfType<T>(bool forceSelection) where T : TrainerAction;
 
-        protected virtual IEnumerable<IBattleEvent> SendFirstPokemon()
-        {
-            var sendPokemonEvent = new SendPokemonEvent(Side, Team.FirstPokemon);
-            return new List<IBattleEvent> { sendPokemonEvent };
-        }
+        protected virtual TrainerAction SendFirstPokemon() => new SendPokemonAction(Side);
     }
 }

@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
+using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
 using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 
 namespace Pokemon_Battle_Clone.Runtime.Battles.Control
@@ -15,19 +16,18 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             _battleContext = battleContext;
         }
         
-        public async Task Resolve(Queue<IBattleEvent> events)
+        public async Task Resolve(Battle battle, TrainerAction action)
         {
-            while (events.Count > 0)
+            var events = action.Execute(battle);
+            foreach (var battleEvent in events)
             {
-                var battleEvent = events.Dequeue();
-
                 await (battleEvent switch
                 {
                     ExecuteMoveEvent moveEvent => HandleExecuteMoveEvent(moveEvent),
                     DamageEvent damageEvent => HandleDamage(damageEvent),
                     StatsModifierEvent statsEvent => HandleStatsModifierEvent(statsEvent),
                     SendPokemonEvent sendEvent => HandleSendPokemonEvent(sendEvent),
-                    WithdrawPokemon withdrawEvent => HandleWithdrawPokemonEvent(withdrawEvent),
+                    WithdrawPokemonEvent withdrawEvent => HandleWithdrawPokemonEvent(withdrawEvent),
                     _ => Task.CompletedTask
                 });
             }
@@ -67,7 +67,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             await view.SendPokemon(sendEvent.Pokemon);
         }
 
-        private async Task HandleWithdrawPokemonEvent(WithdrawPokemon withdraw)
+        private async Task HandleWithdrawPokemonEvent(WithdrawPokemonEvent withdraw)
         {
             LogManager.Log($"Withdrawing {withdraw.PokemonName} from side {withdraw.ActionSide}", FeatureType.Action);
             var view = _battleContext.GetTeamView(withdraw.ActionSide);

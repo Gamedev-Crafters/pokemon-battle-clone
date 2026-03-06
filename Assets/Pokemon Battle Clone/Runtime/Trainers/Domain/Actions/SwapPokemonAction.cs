@@ -25,7 +25,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions
             var events = new List<IBattleEvent>();
             
             if (_withdrawFirstPokemon)
-                events.Add(new WithdrawPokemon(Side, team.FirstPokemon.Name));
+                events.Add(new WithdrawPokemonEvent(Side, team.FirstPokemon.Name));
             team.SwapActivePokemon(_pokemonIndex);
             events.Add(new SendPokemonEvent(Side, team.FirstPokemon));
 
