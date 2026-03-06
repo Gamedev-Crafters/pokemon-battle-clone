@@ -6,7 +6,7 @@ using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Strategies;
 
-namespace Pokemon_Battle_Clone.Runtime.Trainers.Domain
+namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
 {
     public class RivalTrainer : Trainer
     {

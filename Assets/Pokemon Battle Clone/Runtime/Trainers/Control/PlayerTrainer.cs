@@ -9,7 +9,7 @@ using Pokemon_Battle_Clone.Runtime.Moves.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
 using Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions;
 
-namespace Pokemon_Battle_Clone.Runtime.Trainers.Domain
+namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
 {
     public class PlayerTrainer : Trainer
     {
