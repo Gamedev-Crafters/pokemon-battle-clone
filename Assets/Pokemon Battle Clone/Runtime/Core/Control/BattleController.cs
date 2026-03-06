@@ -7,6 +7,7 @@ using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.RNG;
+using Pokemon_Battle_Clone.Runtime.Trainer.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.BattleEvents;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Strategies;
@@ -25,8 +26,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Control
         private Battle _battle;
         private ActionsResolver _actionsResolver;
         
-        private Trainer _playerTrainer;
-        private Trainer _rivalTrainer;
+        private Trainer.Domain.Trainer _playerTrainer;
+        private Trainer.Domain.Trainer _rivalTrainer;
         
         private int _turnCount;
         private bool _battleFinished;

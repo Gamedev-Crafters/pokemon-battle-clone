@@ -8,7 +8,7 @@ using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.BattleEvents;
 using Pokemon_Battle_Clone.Runtime.Trainer.Infrastructure.Actions;
 
-namespace Pokemon_Battle_Clone.Runtime.Core.Control
+namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
 {
     public class PlayerTrainer : Trainer
     {

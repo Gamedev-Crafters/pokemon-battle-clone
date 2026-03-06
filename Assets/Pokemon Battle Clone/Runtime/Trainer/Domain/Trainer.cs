@@ -4,7 +4,7 @@ using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.Actions;
 using Pokemon_Battle_Clone.Runtime.Trainer.Domain.BattleEvents;
 
-namespace Pokemon_Battle_Clone.Runtime.Core.Control
+namespace Pokemon_Battle_Clone.Runtime.Trainer.Domain
 {
     public abstract class Trainer
     {
