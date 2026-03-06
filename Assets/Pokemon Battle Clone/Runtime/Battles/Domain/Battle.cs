@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.RNG;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
 
-namespace Pokemon_Battle_Clone.Runtime.Core.Domain
+namespace Pokemon_Battle_Clone.Runtime.Battles.Domain
 {
     public enum Side
     {

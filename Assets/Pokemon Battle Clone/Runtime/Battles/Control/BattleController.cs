@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
+using Pokemon_Battle_Clone.Runtime.Core.Control;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
@@ -9,13 +12,12 @@ using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.RNG;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
-using Pokemon_Battle_Clone.Runtime.Trainers.Domain.BattleEvents;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Strategies;
 using Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions;
 using UnityEngine;
 using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 
-namespace Pokemon_Battle_Clone.Runtime.Core.Control
+namespace Pokemon_Battle_Clone.Runtime.Battles.Control
 {
     public class BattleController : MonoBehaviour, IBattleContext
     {
