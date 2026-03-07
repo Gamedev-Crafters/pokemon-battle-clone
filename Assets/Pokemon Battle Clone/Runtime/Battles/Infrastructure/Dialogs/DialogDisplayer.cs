@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 
@@ -8,10 +9,13 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs
     {
         [SerializeField] private TextMeshProUGUI displayText;
         [SerializeField] private float timeToClear = 2f;
+        [SerializeField] private float typingSpeed = 5f;
         
         private TaskCompletionSource<bool> _textTCS;
+        
+        private Coroutine _typingCoroutine;
+        
         private bool _textDisplayed;
-
         private float _textTimer;
 
         private void Start()
@@ -31,9 +35,8 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs
 
         public async Task DisplayAsync(string text)
         {
-            _textDisplayed = true;
-            displayText.text = text;
             _textTimer = 0f;
+            StartTypingText(text);
             
             _textTCS = new TaskCompletionSource<bool>();
             await _textTCS.Task;
@@ -41,7 +44,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs
 
         public void Display(string text)
         {
-            displayText.text = text;
+            StartTypingText(text);
         }
 
         public void Close() => Clear();
@@ -56,6 +59,27 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs
         {
             _textDisplayed = false;
             displayText.text = "";
+        }
+
+        private void StartTypingText(string text)
+        {
+            if (_typingCoroutine != null)
+                StopCoroutine(_typingCoroutine);
+            _typingCoroutine = StartCoroutine(TypeText(text));
+        }
+
+        private IEnumerator TypeText(string text)
+        {
+            _textDisplayed = false;
+            displayText.text = text;
+            displayText.maxVisibleCharacters = 0;
+            
+            foreach (var _ in text.ToCharArray())
+            {
+                displayText.maxVisibleCharacters++;
+                yield return new WaitForSeconds(1f / typingSpeed);
+            }
+            _textDisplayed = true;
         }
     }
 }

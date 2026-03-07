@@ -1080,6 +1080,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: PokemonBattleClone.Runtime::Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs.DialogDisplayer
   displayText: {fileID: 320013991}
   timeToClear: 2
+  typingSpeed: 100
 --- !u!1 &436995798
 GameObject:
   m_ObjectHideFlags: 0
