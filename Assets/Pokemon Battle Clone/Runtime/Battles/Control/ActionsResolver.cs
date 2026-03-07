@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs;
@@ -39,10 +40,12 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             var view = _battleContext.GetTeamView(moveEvent.ActionSide);
             
             _dialogDisplayer.Display($"{moveEvent.PokemonName} used {moveEvent.MoveName}!");
-            await view.PlayAttackAnimation();
-            _dialogDisplayer.Close();
             
+            await view.PlayAttackAnimation();
             // add move animation here
+            await Task.Delay(TimeSpan.FromSeconds(1));
+            
+            _dialogDisplayer.Close();
         }
 
         private async Task HandleDamage(DamageEvent damageEvent)

@@ -35,8 +35,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs
 
         public async Task DisplayAsync(string text)
         {
-            _textTimer = 0f;
-            StartTypingText(text);
+            Display(text);
             
             _textTCS = new TaskCompletionSource<bool>();
             await _textTCS.Task;
@@ -71,6 +70,8 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs
         private IEnumerator TypeText(string text)
         {
             _textDisplayed = false;
+            _textTimer = 0f;
+            
             displayText.text = text;
             displayText.maxVisibleCharacters = 0;
             
