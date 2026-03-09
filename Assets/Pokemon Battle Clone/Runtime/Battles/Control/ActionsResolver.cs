@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs;
+using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
+using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 
 namespace Pokemon_Battle_Clone.Runtime.Battles.Control
 {
@@ -26,11 +28,12 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
                 await (battleEvent switch
                 {
                     ExecuteMoveEvent moveEvent => HandleExecuteMoveEvent(moveEvent),
-                    DamageEvent damageEvent => HandleDamage(damageEvent),
+                    FailedMoveEvent failedMoveEvent => HandleFailedMoveEvent(failedMoveEvent),
+                    DamageEvent damageEvent => HandleDamageEvent(damageEvent),
                     StatsModifierEvent statsEvent => HandleStatsModifierEvent(statsEvent),
                     SendPokemonEvent sendEvent => HandleSendPokemonEvent(sendEvent),
                     WithdrawPokemonEvent withdrawEvent => HandleWithdrawPokemonEvent(withdrawEvent),
-                    _ => Task.CompletedTask
+                    _ => HandleUnsupportedEvent(battleEvent)
                 });
             }
         }
@@ -48,7 +51,12 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             _dialogDisplayer.Close();
         }
 
-        private async Task HandleDamage(DamageEvent damageEvent)
+        private async Task HandleFailedMoveEvent(FailedMoveEvent failedMoveEvent)
+        {
+            await _dialogDisplayer.DisplayAsync($"{failedMoveEvent.PokemonName} failed to use {failedMoveEvent.MoveName}!");
+        }
+
+        private async Task HandleDamageEvent(DamageEvent damageEvent)
         {
             var view = _battleContext.GetOpponentTeamView(damageEvent.ActionSide);
             
@@ -86,6 +94,12 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             await _dialogDisplayer.DisplayAsync($"Withdrawing {withdraw.PokemonName} from side {withdraw.ActionSide}");
             var view = _battleContext.GetTeamView(withdraw.ActionSide);
             await view.PlayWithdrawAnimation();
+        }
+
+        private async Task HandleUnsupportedEvent(IBattleEvent battleEvent)
+        {
+            LogManager.LogError($"Unsupported battle event of type {battleEvent.GetType().Name}", FeatureType.Action);
+            await Task.CompletedTask;
         }
     }
 }

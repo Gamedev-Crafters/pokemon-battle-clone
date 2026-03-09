@@ -3,6 +3,7 @@ using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
+using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions
 {
@@ -26,7 +27,9 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions
             var hit = battle.Random.Roll(_move.Accuracy);
             if (!hit)
             {
-                events.Add(new FailedMoveEvent());
+                Debug.Log("ha fallado el movimiento");
+                var pokemon = battle.GetFirstPokemon(Side);
+                events.Add(new FailedMoveEvent(pokemon.Name, _move.Name));
                 return events;
             }
             
