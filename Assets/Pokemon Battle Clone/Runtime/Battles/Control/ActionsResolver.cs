@@ -27,6 +27,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             {
                 await (battleEvent switch
                 {
+                    EmptyEvent _ => Task.CompletedTask,
                     ExecuteMoveEvent moveEvent => HandleExecuteMoveEvent(moveEvent),
                     FailedMoveEvent failedMoveEvent => HandleFailedMoveEvent(failedMoveEvent),
                     DamageEvent damageEvent => HandleDamageEvent(damageEvent),

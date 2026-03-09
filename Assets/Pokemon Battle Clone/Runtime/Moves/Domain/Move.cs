@@ -55,9 +55,12 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
             
             var effectEvent = _mainEffect.Apply(move: this, battle, side);
             events.Add(effectEvent);
-            
+
             foreach (var effect in _additionalEffects)
-                effect.TryApply(move: this, battle, side); // needs to handle events from additional effects
+            {
+                var additionalEvent = effect.TryApply(move: this, battle, side);
+                events.Add(additionalEvent);
+            }
 
             return events;
         }
