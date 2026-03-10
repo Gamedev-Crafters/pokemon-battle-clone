@@ -14,7 +14,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         public void SetInfo(string name, int level)
         {
             nameText.text = name;
-            levelText.text = $"Lvl {level}";
+            levelText.text = $"Lv. {level}";
         }
     }
 }

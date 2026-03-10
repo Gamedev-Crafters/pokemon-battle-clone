@@ -41,7 +41,11 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
             typeIcon.sprite = elementalTypesConfig.GetIcon(move.Type);
             background.color = elementalTypesConfig.GetColor(move.Type);
         }
-
+        
+        private void OnDisable()
+        {
+            border.SetActive(false);
+        }
 
         public void OnPointerEnter(PointerEventData eventData)
         {

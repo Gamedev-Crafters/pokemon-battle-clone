@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions
 {
     public class PokemonSelectorView : MonoBehaviour, ISelectorView<Team>
     {
         [SerializeField] private List<PokemonSelectorButton> pokemonButtons;
-        [SerializeField] private Button backButton;
+        [SerializeField] private HUDButton backButton;
 
         public event Action<int> OnPokemonSelected = delegate { };
 
@@ -26,13 +25,13 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions
         public void Hide()
         {
             gameObject.SetActive(false);
-            backButton.interactable = true;
+            backButton.SetInteraction(true);
         }
 
         public void Show(bool forceSelection, Team team)
         {
             gameObject.SetActive(true);
-            backButton.interactable = !forceSelection;
+            backButton.SetInteraction(!forceSelection);
             SetData(team);
         }
 

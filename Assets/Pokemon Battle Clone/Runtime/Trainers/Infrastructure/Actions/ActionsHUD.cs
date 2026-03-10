@@ -12,7 +12,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions
         public PokemonSelectorView pokemonSelector;
         public MoveSetView moveSetView;
         
-        private void Awake()
+        private void Start()
         {
             HideSelectors();
             

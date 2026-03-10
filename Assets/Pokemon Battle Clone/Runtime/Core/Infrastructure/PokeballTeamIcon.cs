@@ -5,9 +5,10 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 {
     public class PokeballTeamIcon : MonoBehaviour
     {
-        [SerializeField] private Color defeatedColor;
-        [SerializeField] private Color aliveColor;
-        [SerializeField] private Color disableColor;
+        [SerializeField] private Image disableImage;
+        [SerializeField] private Image iconImage;
+        [SerializeField] private Sprite activePokeball;
+        [SerializeField] private Sprite defeatedPokeball;
         
         private Image _pokeballIcon;
         
@@ -24,8 +25,26 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             SetAsAlive();
         }
 
-        public void SetAsDefeated() => _pokeballIcon.color = defeatedColor;
-        public void SetAsAlive() => _pokeballIcon.color = aliveColor;
-        public void SetAsDisabled() => _pokeballIcon.color = disableColor;
+        public void SetAsDefeated()
+        {
+            disableImage.gameObject.SetActive(false);
+            iconImage.gameObject.SetActive(true);
+            
+            iconImage.sprite = defeatedPokeball;
+        }
+
+        public void SetAsAlive()
+        {
+            disableImage.gameObject.SetActive(false);
+            iconImage.gameObject.SetActive(true);
+            
+            iconImage.sprite = activePokeball;
+        }
+
+        public void SetAsDisabled()
+        {
+            disableImage.gameObject.SetActive(true);
+            iconImage.gameObject.SetActive(false);
+        }
     }
 }

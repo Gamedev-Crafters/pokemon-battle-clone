@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
@@ -6,6 +7,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
     public class HealthView : MonoBehaviour
     {
         [SerializeField] private Image fillImage;
+        [SerializeField] private TextMeshProUGUI healthText;
+        [Space(10)]
         [SerializeField] private float barSpeed = 5f;
         [SerializeField] private Color highHealthColor = Color.green;
         [SerializeField] private Color middleHealthColor = Color.yellow;
@@ -28,6 +31,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             _target = (float)currentHealth / maxHealth;
             if (!animated)
                 fillImage.fillAmount = _target;
+            healthText.text = $"{currentHealth}/{maxHealth}";
         }
 
         private void UpdateBar()
