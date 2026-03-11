@@ -41,7 +41,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             var rivalTeam = BuildRivalTeam();
             
             _battle = new Battle(playerTeam, rivalTeam, new DefaultRandom(seed: DateTime.Now.GetHashCode()));
-            _turn = new Turn(new ActionsResolver(this, dialogDisplayer));
+            _turn = new Turn(new ActionsResolver(this, dialogDisplayer), actionsHUD);
             
             var playerSprites = spriteLoader.LoadAllBack(playerTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
             _playerTrainer = new PlayerTrainer(playerTeam, actionsHUD);

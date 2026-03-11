@@ -20,6 +20,17 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions
             pokemonSelector.Init();
         }
 
+        public void Show()
+        {
+            HideSelectors();
+            gameObject.SetActive(true);
+        }
+
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
+
         public void HideSelectors()
         {
             selector.Show();

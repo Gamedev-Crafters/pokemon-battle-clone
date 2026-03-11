@@ -7,6 +7,9 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions
 {
     public interface IActionHUD
     {
+
+        void Show();
+        void Hide();
         void HideSelectors();
         void ShowMoveSelector(bool forceSelection, MoveSetDTO moveSet);
         void ShowPokemonSelector(bool forceSelection, Team team);

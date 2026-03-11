@@ -5,21 +5,26 @@ using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Trainers.Control;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
+using Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions;
 
 namespace Pokemon_Battle_Clone.Runtime.Battles.Control
 {
     public class Turn
     {
         private readonly ActionsResolver _actionsResolver;
+        private readonly IActionHUD _actionsHUD;
         private int _count;
 
-        public Turn(ActionsResolver actionsResolver)
+        public Turn(ActionsResolver actionsResolver, IActionHUD actionsHUD)
         {
             _actionsResolver = actionsResolver;
+            _actionsHUD = actionsHUD;
         }
 
         public async Task Init(Battle battle, Trainer player, Trainer rival) // not entirely convinced by this approach
         {
+            _actionsHUD.Hide();
+            
             await _actionsResolver.Resolve(battle, rival.Init());
             await _actionsResolver.Resolve(battle, player.Init());
         }
@@ -56,10 +61,14 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         private async Task<List<TrainerAction>> SelectActionsAsync(Trainer player, Trainer rival)
         {
             LogManager.Log("Selecting actions...", FeatureType.Battle);
+            
+            _actionsHUD.Show();
+            
             var playerActionTask = player.SelectActionTask();
             var rivalActionTask = rival.SelectActionTask();
-
             await Task.WhenAll(playerActionTask, rivalActionTask);
+            
+            _actionsHUD.Hide();
             
             return new List<TrainerAction> { playerActionTask.Result, rivalActionTask.Result };
         }
