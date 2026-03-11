@@ -1,16 +1,18 @@
 ﻿using System;
 using NUnit.Framework;
+using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Stats.Domain
 {
+    [System.Serializable]
     public class StatSet
     {
-        public int HP { get; private set; }
-        public int Attack { get; private set; }
-        public int Defense { get; private set; }
-        public int SpcAttack { get; private set; }
-        public int SpcDefense { get; private set; }
-        public int Speed { get; private set; }
+        [field: SerializeField] public int HP { get; private set; }
+        [field: SerializeField] public int Attack { get; private set; }
+        [field: SerializeField] public int Defense { get; private set; }
+        [field: SerializeField] public int SpcAttack { get; private set; }
+        [field: SerializeField] public int SpcDefense { get; private set; }
+        [field: SerializeField] public int Speed { get; private set; }
 
         public int Sum => HP + Attack + Defense + SpcAttack + SpcDefense + Speed;
         
