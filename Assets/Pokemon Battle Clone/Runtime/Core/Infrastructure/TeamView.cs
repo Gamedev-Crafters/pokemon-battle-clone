@@ -27,6 +27,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
             SetStaticData(sprite, pokemon.Name, pokemon.Stats.Level);
             UpdateHealth(pokemon.Health.Max, pokemon.Health.Current, animated: false);
             SetStatModifier(pokemon.Stats.Modifiers);
+            statusView.Show();
 
             await PlaySendAnimation();
         }
@@ -37,9 +38,18 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
 
         public Task PlayAttackAnimation() => pokemonView.PlayAttackAnimation();
         public Task PlayHitAnimation() => pokemonView.PlayHitAnimation();
-        public Task PlayFaintAnimation() => pokemonView.PlayFaintAnimation();
+        public Task PlayFaintAnimation()
+        {
+            statusView.Hide();
+            return pokemonView.PlayFaintAnimation();
+        }
+
         public Task PlaySendAnimation() => pokemonView.PlaySendAnimation();
-        public Task PlayWithdrawAnimation() => pokemonView.PlayWithdrawAnimation();
+        public Task PlayWithdrawAnimation()
+        {
+            statusView.Hide();
+            return pokemonView.PlayWithdrawAnimation();
+        }
 
         private void SetStaticData(Sprite sprite, string name, int level)
         {

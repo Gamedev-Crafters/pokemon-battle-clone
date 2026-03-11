@@ -46,13 +46,17 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             
             var tasks = new List<Task<SwapPokemonAction>>();
             if (player.IsFirstPokemonDefeated)
+            {
+                _actionsHUD.Show();
                 tasks.Add(player.SelectActionOfType<SwapPokemonAction>(forceSelection: true));
+            }
             if (rival.IsFirstPokemonDefeated)
                 tasks.Add(rival.SelectActionOfType<SwapPokemonAction>(forceSelection: true));
             
             if (tasks.Count > 0)
             {
                 await Task.WhenAll(tasks);
+                _actionsHUD.Hide();
                 foreach (var task in tasks)
                     await _actionsResolver.Resolve(battle, task.Result);
             }
