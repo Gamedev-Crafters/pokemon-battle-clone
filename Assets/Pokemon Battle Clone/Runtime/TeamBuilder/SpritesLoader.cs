@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,6 +22,22 @@ namespace Pokemon_Battle_Clone.Runtime.TeamBuilder
             _basePath = basePath;
         }
 
+        /*
+         * LoadSprites(string name, string id)
+         *      if (string.IsNull(id))
+         *          LoadByName(name, type)
+         *      else
+         *          LoadByID(id, type)
+         * 
+         * Load(string id, SpriteType type)
+         *      if (string.IsNull(id)) // no está registrado el pokemon en el proyecto
+         *          buscar por nombre en la api y descargamos sprites
+         *      else
+         *          buscamos sprite por id
+         *          if (sprite == null)
+         *              descargamos sprites
+         */
+        
         public Dictionary<uint, Sprite> LoadAllFront(IList<uint> ids) => LoadAllOfType(ids, SpriteType.Front);
         public Dictionary<uint, Sprite> LoadAllBack(IList<uint> ids) => LoadAllOfType(ids, SpriteType.Back);
         public Dictionary<uint, Sprite> LoadAllIcon(IList<uint> ids) => LoadAllOfType(ids, SpriteType.Icon);

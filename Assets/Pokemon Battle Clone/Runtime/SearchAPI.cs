@@ -38,6 +38,12 @@ namespace Pokemon_Battle_Clone.Runtime
             {
                 Debug.Log($"{pokemonStat.Stat.Name} = {pokemonStat.BaseStat}");
             }
+
+            var t = pokemon.Types;
+            var type1 = t[0].Type.Name;
+            var type2 = t[1].Type.Name;
+            Debug.Log($"Type 1: {type1}");
+            Debug.Log($"Type 2: {type2}");
         }
 
         [ContextMenu("Download Pokemon Sprites")]
