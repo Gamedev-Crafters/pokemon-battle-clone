@@ -12,19 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2965e16bdcdc4a20b856c67c00413299, type: 3}
   m_Name: Lucario
   m_EditorClassIdentifier: PokemonBattleClone.Runtime::Pokemon_Battle_Clone.Runtime.Core.Infrastructure.PokemonConfig
-  ID: 0
-  name: 
+  ID: 448
+  name: Lucario
   level: 100
   baseStats:
-    <HP>k__BackingField: 0
-    <Attack>k__BackingField: 0
-    <Defense>k__BackingField: 0
-    <SpcAttack>k__BackingField: 0
-    <SpcDefense>k__BackingField: 0
-    <Speed>k__BackingField: 0
-  type1: 0
-  type2: 0
-  nature: 0
+    <HP>k__BackingField: 70
+    <Attack>k__BackingField: 110
+    <Defense>k__BackingField: 70
+    <SpcAttack>k__BackingField: 115
+    <SpcDefense>k__BackingField: 70
+    <Speed>k__BackingField: 90
+  type1: 6
+  type2: 17
+  nature: 11
   ivs:
     <HP>k__BackingField: 31
     <Attack>k__BackingField: 31
@@ -34,8 +34,8 @@ MonoBehaviour:
     <Speed>k__BackingField: 31
   evs:
     <HP>k__BackingField: 0
-    <Attack>k__BackingField: 0
+    <Attack>k__BackingField: 4
     <Defense>k__BackingField: 0
-    <SpcAttack>k__BackingField: 0
+    <SpcAttack>k__BackingField: 252
     <SpcDefense>k__BackingField: 0
-    <Speed>k__BackingField: 0
+    <Speed>k__BackingField: 252

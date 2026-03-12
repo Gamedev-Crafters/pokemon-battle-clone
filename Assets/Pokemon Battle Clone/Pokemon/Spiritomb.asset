@@ -24,7 +24,7 @@ MonoBehaviour:
     <Speed>k__BackingField: 35
   type1: 9
   type2: 2
-  nature: 0
+  nature: 15
   ivs:
     <HP>k__BackingField: 31
     <Attack>k__BackingField: 31

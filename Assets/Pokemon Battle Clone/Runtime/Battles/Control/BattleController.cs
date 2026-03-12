@@ -9,6 +9,7 @@ using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using Pokemon_Battle_Clone.Runtime.RNG;
+using Pokemon_Battle_Clone.Runtime.TeamBuilder;
 using Pokemon_Battle_Clone.Runtime.Trainers.Control;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Strategies;
 using Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions;
@@ -23,6 +24,9 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         public TeamView rivalTeamView;
         public ActionsHUD actionsHUD;
         public DialogDisplayer dialogDisplayer;
+
+        public List<PokemonConfig> playerPokemon;
+        public List<PokemonConfig> rivalPokemon;
         
         private Battle _battle;
         private Turn _turn;
@@ -112,22 +116,21 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
 #region DEBUG
         private Team BuildPlayerTeam()
         {
-            var totodile = PokemonFactory.Totodile();
-            totodile.MoveSet.AddMoves(new List<Move>
+            var list = new List<Pokemon>();
+            foreach (var pokemonConfig in playerPokemon)
             {
-                MoveFactory.IceFang(),
-                MoveFactory.ShadowBall(),
-                MoveFactory.QuickAttack(),
-                MoveFactory.Leer()
-            });
-            var pidgey = PokemonFactory.Pidgey();
-            pidgey.MoveSet.AddMoves(new List<Move>
-            {
-                MoveFactory.WingAttack(),
-                MoveFactory.QuickAttack()
-            });
+                var pokemon = pokemonConfig.Build();
+                pokemon.MoveSet.AddMoves(new List<Move>
+                {
+                    MoveFactory.IceFang(),
+                    MoveFactory.ShadowBall(),
+                    MoveFactory.QuickAttack(),
+                    MoveFactory.Leer()
+                });
+                list.Add(pokemon);
+            }
 
-            var team = new Team(new List<Pokemon> { totodile, pidgey });
+            var team = new Team(list);
             LogManager.Log($"Player team: {team}", FeatureType.Action);
             
             return team;
@@ -135,21 +138,21 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
 
         private Team BuildRivalTeam()
         {
-            var pidgey = PokemonFactory.Pidgey();
-            pidgey.MoveSet.AddMoves(new List<Move>
+            var list = new List<Pokemon>();
+            foreach (var pokemonConfig in rivalPokemon)
             {
-                MoveFactory.WingAttack(),
-                MoveFactory.MegaNerf(),
-            });
-            var totodile = PokemonFactory.Totodile();
-            totodile.MoveSet.AddMoves(new List<Move>
-            {
-                MoveFactory.WingAttack()
-            });
+                var pokemon = pokemonConfig.Build();
+                pokemon.MoveSet.AddMoves(new List<Move>
+                {
+                    MoveFactory.WingAttack(),
+                    MoveFactory.MegaNerf(),
+                });
+                list.Add(pokemon);
+            }
 
-            var team = new Team(new List<Pokemon> { pidgey, totodile });
-            LogManager.Log($"Rival team: {team}", FeatureType.Action);
-
+            var team = new Team(list);
+            LogManager.Log($"Player team: {team}", FeatureType.Action);
+            
             return team;
         }
 #endregion

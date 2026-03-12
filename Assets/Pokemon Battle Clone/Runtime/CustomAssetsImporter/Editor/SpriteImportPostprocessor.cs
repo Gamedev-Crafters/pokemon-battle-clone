@@ -5,7 +5,7 @@ namespace Pokemon_Battle_Clone.Runtime.CustomAssetsImporter.Editor
 {
     public class SpriteImportPostprocessor : AssetPostprocessor
     {
-        private const string BasePath = "Assets/Pokemon Battle Clone/Sprites/Pokemons/";
+        private const string BasePath = "Assets/Pokemon Battle Clone/Sprites/Pokemon/";
 
         private void OnPreprocessTexture()
         {
