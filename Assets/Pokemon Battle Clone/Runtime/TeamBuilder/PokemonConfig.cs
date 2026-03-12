@@ -1,8 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using PokeApiNet;
 using Pokemon_Battle_Clone.Runtime.Builders;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Stats.Domain;
+using UnityEditor;
 using UnityEngine;
 using Nature = Pokemon_Battle_Clone.Runtime.Stats.Domain.Nature;
 using Pokemon = Pokemon_Battle_Clone.Runtime.Core.Domain.Pokemon;
@@ -28,15 +30,31 @@ namespace Pokemon_Battle_Clone.Runtime.TeamBuilder
         public StatSet ivs = new StatSet(31, 31, 31, 31, 31, 31);
         public StatSet evs;
 
-        private static PokeApiClient _pokeClient;
+        [Space(10)]
+        public Sprite backSprite;
+        public Sprite frontSprite;
+        public Sprite iconSprite;
 
-        private static PokeApiClient PokeClient
+        private static PokeApiClient _pokeClient;
+        private static SpritesLoader _spritesLoader;
+
+        public static PokeApiClient PokeClient
         {
             get
             {
                 if (_pokeClient == null)
                     _pokeClient = new PokeApiClient();
                 return _pokeClient;
+            }
+        }
+
+        public static SpritesLoader SpritesLoader
+        {
+            get
+            {
+                if (_spritesLoader == null)
+                    _spritesLoader = new SpritesLoader("Assets/Pokemon Battle Clone/Sprites/Pokemon");
+                return _spritesLoader;
             }
         }
 
@@ -52,11 +70,26 @@ namespace Pokemon_Battle_Clone.Runtime.TeamBuilder
                 .WithEVs(evs);
         }
 
-        [ContextMenu("Load From API")]
+        [ContextMenu("Load Data")]
         public async Task LoadFromAPI()
         {
-            var pokemon = await PokeClient.GetResourceAsync<PokeApiNet.Pokemon>(name);
+            try
+            {
+                var pokemon = await PokeClient.GetResourceAsync<PokeApiNet.Pokemon>(name);
+                
+                ApplyPokemonData(pokemon);
+                await LoadSprites(pokemon);
+                
+                EditorUtility.SetDirty(this);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Error loading pokemon \"{name}\": {e.Message}");
+            }
+        }
 
+        private void ApplyPokemonData(PokeApiNet.Pokemon pokemon)
+        {
             ID = pokemon.Id;
             baseStats = new StatSet(
                 hp: pokemon.Stats[0].BaseStat,
@@ -67,7 +100,22 @@ namespace Pokemon_Battle_Clone.Runtime.TeamBuilder
                 speed: pokemon.Stats[5].BaseStat
             );
             type1 = GetElementalType(pokemon.Types[0].Type.Name);
-            type2 = GetElementalType(pokemon.Types[1].Type.Name);
+            if (pokemon.Types.Count > 1)
+                type2 = GetElementalType(pokemon.Types[1].Type.Name);
+        }
+
+        private async Task LoadSprites(PokeApiNet.Pokemon pokemon)
+        {
+            try
+            {
+                backSprite = await SpritesLoader.LoadSprite(pokemon, SpriteType.Back);
+                frontSprite = await SpritesLoader.LoadSprite(pokemon, SpriteType.Front);
+                iconSprite = await SpritesLoader.LoadSprite(pokemon, SpriteType.Icon);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e.Message);
+            }
         }
 
         private Nature GetNature(NatureEnum natureEnum)

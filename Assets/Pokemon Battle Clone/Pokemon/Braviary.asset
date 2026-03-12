@@ -39,3 +39,6 @@ MonoBehaviour:
     <SpcAttack>k__BackingField: 0
     <SpcDefense>k__BackingField: 4
     <Speed>k__BackingField: 252
+  backSprite: {fileID: 21300000, guid: 28d28844aefa920429e44448af042a0d, type: 3}
+  frontSprite: {fileID: 21300000, guid: abbec552bc380f743ab7f2f18a8d92d5, type: 3}
+  iconSprite: {fileID: 21300000, guid: 5ef451ec14a29274797869798085e8fb, type: 3}
