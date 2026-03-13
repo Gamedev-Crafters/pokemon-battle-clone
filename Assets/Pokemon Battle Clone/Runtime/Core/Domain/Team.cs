@@ -26,7 +26,7 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Domain
             Add(pokemon);
         }
 
-        public Team(List<Pokemon> pokemonList)
+        public Team(IEnumerable<Pokemon> pokemonList)
         {
             foreach (var pokemon in pokemonList)
                 Add(pokemon);

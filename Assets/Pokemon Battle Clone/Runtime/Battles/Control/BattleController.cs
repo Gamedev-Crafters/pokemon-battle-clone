@@ -25,6 +25,9 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         public ActionsHUD actionsHUD;
         public DialogDisplayer dialogDisplayer;
 
+        public TeamConfig playerTeamConfig;
+        public TeamConfig rivalTeamConfig;
+        
         public List<PokemonConfig> playerPokemon;
         public List<PokemonConfig> rivalPokemon;
         
@@ -41,8 +44,10 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         {
             var spriteLoader = new SpritesLoader("Assets/Pokemon Battle Clone/Sprites/Pokemon");
             
-            var playerTeam = BuildPlayerTeam();
-            var rivalTeam = BuildRivalTeam();
+            // var playerTeam = BuildPlayerTeam();
+            // var rivalTeam = BuildRivalTeam();
+            var playerTeam = playerTeamConfig.Build();
+            var rivalTeam = rivalTeamConfig.Build();
             
             _battle = new Battle(playerTeam, rivalTeam, new DefaultRandom(seed: DateTime.Now.GetHashCode()));
             _turn = new Turn(new ActionsResolver(this, dialogDisplayer), actionsHUD);
@@ -117,18 +122,29 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         private Team BuildPlayerTeam()
         {
             var list = new List<Pokemon>();
-            foreach (var pokemonConfig in playerPokemon)
+            for (var i = 0; i < playerPokemon.Count; i++)
             {
-                var pokemon = pokemonConfig.Build();
-                pokemon.MoveSet.AddMoves(new List<Move>
-                {
-                    MoveFactory.IceFang(),
-                    MoveFactory.ShadowBall(),
-                    MoveFactory.QuickAttack(),
-                    MoveFactory.Leer()
-                });
+                var pokemon = playerPokemon[i].Build();
+                if (i == 0) pokemon.MoveSet.AddMove(MoveFactory.IceFang());
+                if (i == 1) pokemon.MoveSet.AddMove(MoveFactory.ShadowBall());
+                if (i == 2) pokemon.MoveSet.AddMove(MoveFactory.QuickAttack());
+                if (i == 3) pokemon.MoveSet.AddMove(MoveFactory.Leer());
+                if (i == 4) pokemon.MoveSet.AddMove(MoveFactory.WaterGun());
+                if (i == 5) pokemon.MoveSet.AddMove(MoveFactory.MegaNerf());
                 list.Add(pokemon);
             }
+            // foreach (var pokemonConfig in playerPokemon)
+            // {
+            //     var pokemon = pokemonConfig.Build();
+            //     pokemon.MoveSet.AddMoves(new List<Move>
+            //     {
+            //         MoveFactory.IceFang(),
+            //         MoveFactory.ShadowBall(),
+            //         MoveFactory.QuickAttack(),
+            //         MoveFactory.Leer()
+            //     });
+            //     list.Add(pokemon);
+            // }
 
             var team = new Team(list);
             LogManager.Log($"Player team: {team}", FeatureType.Action);

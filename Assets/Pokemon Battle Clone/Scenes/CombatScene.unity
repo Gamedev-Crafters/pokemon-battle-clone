@@ -1064,20 +1064,15 @@ MonoBehaviour:
   rivalTeamView: {fileID: 1487896682}
   actionsHUD: {fileID: 1204642374}
   dialogDisplayer: {fileID: 398039012}
+  playerTeamConfig: {fileID: 11400000, guid: dac024146b5b1294faa21a95ce743438, type: 2}
+  rivalTeamConfig: {fileID: 11400000, guid: 6c6eda3e9f4df6c4da79ea8653ba8f79, type: 2}
   playerPokemon:
+  - {fileID: 11400000, guid: ce9d151eb61d38a47bebad6957365100, type: 2}
+  - {fileID: 11400000, guid: 5321db039acb31645b224bfc063d9361, type: 2}
+  - {fileID: 11400000, guid: 272211e8b48e9b94398b9074c46f04be, type: 2}
   - {fileID: 11400000, guid: c06d353f805101e4c9fa2d7b1027943e, type: 2}
-  - {fileID: 11400000, guid: 843f9b2a96ab3524096bc12dd3ce4d66, type: 2}
-  - {fileID: 11400000, guid: 6b225f7a426b92e43831d31c4c29aeb1, type: 2}
-  - {fileID: 11400000, guid: b6060f727d292b340adb09fb6ffa5320, type: 2}
-  - {fileID: 11400000, guid: b6d91015254822b4e8510fa299b1cc90, type: 2}
-  - {fileID: 11400000, guid: 48054477629bfe3468f69302659fa237, type: 2}
   rivalPokemon:
-  - {fileID: 11400000, guid: ea8b2cc2398362d49bf40bea2dd2c262, type: 2}
-  - {fileID: 11400000, guid: b42a593657684a74198a62198ddddc47, type: 2}
-  - {fileID: 11400000, guid: bb41f01411231a4458ace557736f3b26, type: 2}
-  - {fileID: 11400000, guid: 7d7cd5312d8cb2b48b71fcc3082a3772, type: 2}
-  - {fileID: 11400000, guid: ca6a607953e701f42b738a9a6f298bd0, type: 2}
-  - {fileID: 11400000, guid: 90e8a0ebd51929e4e9b83f55775ee3ae, type: 2}
+  - {fileID: 11400000, guid: 0b77aa498acca1a48aa7604aed061558, type: 2}
 --- !u!4 &913603189
 Transform:
   m_ObjectHideFlags: 0
