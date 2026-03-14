@@ -22,7 +22,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
         {
             var user = battle.GetFirstPokemon(side);
             var target = battle.GetFirstPokemon(side.Opposite());
-            
+
             if (_applyToTarget)
                 target.Stats.Modifiers.Apply(_statsModifier);
             else

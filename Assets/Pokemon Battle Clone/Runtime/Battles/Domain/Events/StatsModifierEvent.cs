@@ -16,6 +16,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Domain.Events
             Modifier = modifier;
             UserName = userName;
             TargetName = targetName;
+            ApplyToTarget = applyToTarget;
         }
     }
 }

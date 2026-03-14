@@ -3,6 +3,7 @@ using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs;
 using Pokemon_Battle_Clone.Runtime.Stats.Domain;
+using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Battles.Control.EventHandlers
 {
