@@ -52,8 +52,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             playerTeamView.Init(playerSprites);
             
             var rivalSprites = spriteLoader.LoadAllFront(rivalTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());
-            var strategy = new BasicTrainerStrategy();
-            _rivalTrainer = new RivalTrainer(rivalTeam, strategy);
+            _rivalTrainer = new RivalTrainer(rivalTeam, new RandomTrainerStrategy());
             rivalTeamView.Init(rivalSprites);
 
             var playerIcons = spriteLoader.LoadAllIcon(playerTeam.PokemonList.Select(pokemon => pokemon.ID).ToList());

@@ -19,20 +19,20 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             _trainerStrategy = strategy;
         }
 
-        public override Task<TrainerAction> SelectActionTask()
+        public override Task<TrainerAction> SelectActionTask(Battle battle)
         {
             LogManager.Log("Rival - select action task", FeatureType.Rival);
-            var action = _trainerStrategy.SelectMove(Team);
+            var action = _trainerStrategy.Evaluate(battle, Side);
             
-            return Task.FromResult<TrainerAction>(action);
+            return Task.FromResult(action);
         }
 
-        public override Task<T> SelectActionOfType<T>(bool forceSelection)
+        public override Task<T> SelectActionOfType<T>(bool forceSelection, Battle battle)
         {
             TrainerAction action = typeof(T) switch
             {
-                var t when t == typeof(MoveAction) => _trainerStrategy.SelectMove(Team),
-                var t when t == typeof(SwapPokemonAction) => _trainerStrategy.SelectPokemon(Team),
+                var t when t == typeof(MoveAction) => _trainerStrategy.SelectMove(battle, Side),
+                var t when t == typeof(SwapPokemonAction) => _trainerStrategy.SelectPokemon(battle, Side),
                 _ => throw new InvalidOperationException($"Unsupported action type {typeof(T)}")
             };
 

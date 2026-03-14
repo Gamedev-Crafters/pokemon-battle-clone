@@ -36,13 +36,13 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             _actionsHUD.RegisterPokemonButtonPressedListener(() => ShowPokemonSelector(false));
         }
 
-        public override Task<TrainerAction> SelectActionTask()
+        public override Task<TrainerAction> SelectActionTask(Battle battle)
         {
             _actionTcs = new TaskCompletionSource<TrainerAction>();
             return _actionTcs.Task;
         }
 
-        public override Task<T> SelectActionOfType<T>(bool forceSelection)
+        public override Task<T> SelectActionOfType<T>(bool forceSelection, Battle battle)
         {
             _actionTcs = new TaskCompletionSource<TrainerAction>();
             

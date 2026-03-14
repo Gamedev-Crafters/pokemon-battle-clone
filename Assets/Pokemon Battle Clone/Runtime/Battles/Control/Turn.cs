@@ -35,7 +35,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             LogManager.Log($"--- TURN {_count} ---", FeatureType.Battle);
 
             await StartTurnAsync(battle, player, rival);
-            var actions = await SelectActionsAsync(player, rival);
+            var actions = await SelectActionsAsync(battle, player, rival);
             await ExecuteActionsAsync(battle, actions);
             await EndTurnAsync();
         }
@@ -48,10 +48,10 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             if (player.IsFirstPokemonDefeated)
             {
                 _actionsHUD.Show();
-                tasks.Add(player.SelectActionOfType<SwapPokemonAction>(forceSelection: true));
+                tasks.Add(player.SelectActionOfType<SwapPokemonAction>(forceSelection: true, battle));
             }
             if (rival.IsFirstPokemonDefeated)
-                tasks.Add(rival.SelectActionOfType<SwapPokemonAction>(forceSelection: true));
+                tasks.Add(rival.SelectActionOfType<SwapPokemonAction>(forceSelection: true, battle));
             
             if (tasks.Count > 0)
             {
@@ -62,14 +62,14 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             }
         }
         
-        private async Task<List<TrainerAction>> SelectActionsAsync(Trainer player, Trainer rival)
+        private async Task<List<TrainerAction>> SelectActionsAsync(Battle battle, Trainer player, Trainer rival)
         {
             LogManager.Log("Selecting actions...", FeatureType.Battle);
             
             _actionsHUD.Show();
             
-            var playerActionTask = player.SelectActionTask();
-            var rivalActionTask = rival.SelectActionTask();
+            var playerActionTask = player.SelectActionTask(battle);
+            var rivalActionTask = rival.SelectActionTask(battle);
             await Task.WhenAll(playerActionTask, rivalActionTask);
             
             _actionsHUD.Hide();
