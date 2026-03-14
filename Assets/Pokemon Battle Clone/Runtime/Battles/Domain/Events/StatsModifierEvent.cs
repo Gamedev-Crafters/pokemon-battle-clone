@@ -6,10 +6,11 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Domain.Events
     {
         public Side ActionSide { get; }
         public StatsModifier Modifier { get; }
+        public bool ApplyToTarget { get; }
         public string UserName { get; }
         public string TargetName { get; }
         
-        public StatsModifierEvent(Side side, StatsModifier modifier, string userName, string targetName)
+        public StatsModifierEvent(Side side, StatsModifier modifier, bool applyToTarget, string userName, string targetName)
         {
             ActionSide = side;
             Modifier = modifier;

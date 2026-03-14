@@ -27,7 +27,8 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
             else
                 user.Stats.Modifiers.Apply(_statsModifier);
 
-            return new StatsModifierEvent(side, _applyToTarget ? target.Stats.Modifiers : user.Stats.Modifiers, user.Name, target.Name);
+            return new StatsModifierEvent(side, _applyToTarget ? target.Stats.Modifiers : user.Stats.Modifiers,
+                _applyToTarget, user.Name, target.Name);
         }
     }
 }

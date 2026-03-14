@@ -18,7 +18,9 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control.EventHandlers
 
         public async Task Handle(StatsModifierEvent battleEvent)
         {
-            var view = _battleContext.GetOpponentTeamView(battleEvent.ActionSide);
+            var view = battleEvent.ApplyToTarget ? 
+                _battleContext.GetOpponentTeamView(battleEvent.ActionSide)
+                : _battleContext.GetTeamView(battleEvent.ActionSide);
             view.SetStatModifier(battleEvent.Modifier);
             await DisplayMessages(battleEvent.Modifier);
         }
