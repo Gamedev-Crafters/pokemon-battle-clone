@@ -1,4 +1,5 @@
-﻿using Pokemon_Battle_Clone.Runtime.Battles.Domain;
+﻿using System.Collections.Generic;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using UnityEngine;
 
@@ -14,14 +15,14 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
             _percentage = percentage;
         }
         
-        public IBattleEvent Apply(Move move, Battle battle, Side side)
+        public IList<IBattleEvent> Apply(Move move, Battle battle, Side side)
         {
             var user = battle.GetFirstPokemon(side);
             var regainedHealth = user.Health.Current * _percentage / 100;
             
             user.Health.Recover(regainedHealth);
             
-            return new RecoverHealthEvent(user.Name, user.Health, side);
+            return new List<IBattleEvent> { new RecoverHealthEvent(user.Name, user.Health, side) };
         }
     }
 }

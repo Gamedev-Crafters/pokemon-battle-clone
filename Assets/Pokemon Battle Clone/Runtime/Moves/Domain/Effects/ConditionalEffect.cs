@@ -1,4 +1,6 @@
-﻿using Pokemon_Battle_Clone.Runtime.Battles.Domain;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using UnityEngine;
 
@@ -16,12 +18,12 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
             _chancePercent = chancePercent;
         }
 
-        public IBattleEvent TryApply(Move move, Battle battle, Side side)
+        public IList<IBattleEvent> TryApply(Move move, Battle battle, Side side)
         {
             var hit = battle.Random.Roll(_chancePercent);
             if (hit)
                 return _effect.Apply(move, battle, side);
-            return new EmptyEvent();
+            return new List<IBattleEvent> { new EmptyEvent() };
         }
     }
 }

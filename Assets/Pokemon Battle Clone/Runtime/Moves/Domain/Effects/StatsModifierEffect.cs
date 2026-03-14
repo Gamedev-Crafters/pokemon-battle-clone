@@ -1,4 +1,5 @@
-﻿using Pokemon_Battle_Clone.Runtime.Battles.Domain;
+﻿using System.Collections.Generic;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using Pokemon_Battle_Clone.Runtime.Stats.Domain;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
             _statsModifier = statsModifier;
         }
         
-        public IBattleEvent Apply(Move move, Battle battle, Side side)
+        public IList<IBattleEvent> Apply(Move move, Battle battle, Side side)
         {
             var user = battle.GetFirstPokemon(side);
             var target = battle.GetFirstPokemon(side.Opposite());
@@ -27,8 +28,11 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
             else
                 user.Stats.Modifiers.Apply(_statsModifier);
 
-            return new StatsModifierEvent(side, _applyToTarget ? target.Stats.Modifiers : user.Stats.Modifiers,
-                _applyToTarget, user.Name, target.Name);
+            return new List<IBattleEvent>
+            {
+                new StatsModifierEvent(side, _applyToTarget ? target.Stats.Modifiers : user.Stats.Modifiers,
+                    _applyToTarget, user.Name, target.Name)
+            };
         }
     }
 }
