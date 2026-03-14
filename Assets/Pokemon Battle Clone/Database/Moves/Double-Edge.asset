@@ -20,11 +20,12 @@ MonoBehaviour:
   power: 120
   priority: 0
   mainEffect:
-    rid: 668649613526564966
+    rid: 668649632932036728
   additionalEffects: []
   references:
     version: 2
     RefIds:
-    - rid: 668649613526564966
-      type: {class: DamageEffect, ns: Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects, asm: PokemonBattleClone.Runtime}
-      data: 
+    - rid: 668649632932036728
+      type: {class: DamageAndRecoilEffect, ns: Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects, asm: PokemonBattleClone.Runtime}
+      data:
+        _recoilPercentage: 25
