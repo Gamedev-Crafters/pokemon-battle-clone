@@ -20,11 +20,12 @@ MonoBehaviour:
   power: 0
   priority: 0
   mainEffect:
-    rid: 668649613526564979
+    rid: 668649632932036720
   additionalEffects: []
   references:
     version: 2
     RefIds:
-    - rid: 668649613526564979
-      type: {class: EmptyMoveEffect, ns: Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects, asm: PokemonBattleClone.Runtime}
-      data: 
+    - rid: 668649632932036720
+      type: {class: RecoverEffect, ns: Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects, asm: PokemonBattleClone.Runtime}
+      data:
+        _percentage: 50

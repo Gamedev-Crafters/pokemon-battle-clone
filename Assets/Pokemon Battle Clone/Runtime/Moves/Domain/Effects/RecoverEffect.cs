@@ -1,0 +1,27 @@
+﻿using Pokemon_Battle_Clone.Runtime.Battles.Domain;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
+using UnityEngine;
+
+namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
+{
+    [System.Serializable]
+    public class RecoverEffect : IMoveEffect
+    {
+        [SerializeField] private int _percentage;
+
+        public RecoverEffect(int percentage)
+        {
+            _percentage = percentage;
+        }
+        
+        public IBattleEvent Apply(Move move, Battle battle, Side side)
+        {
+            var user = battle.GetFirstPokemon(side);
+            var regainedHealth = user.Health.Current * _percentage / 100;
+            
+            user.Health.Recover(regainedHealth);
+            
+            return new RecoverHealthEvent(user.Name, user.Health, side);
+        }
+    }
+}
