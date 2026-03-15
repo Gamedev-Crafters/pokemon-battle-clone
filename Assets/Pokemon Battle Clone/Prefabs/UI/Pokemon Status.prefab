@@ -428,6 +428,7 @@ MonoBehaviour:
   nameText: {fileID: 1918625727850549869}
   levelText: {fileID: 3717762731160534229}
   healthView: {fileID: 6389933869298918337}
+  statsModifiersView: {fileID: 4633519487911896000}
 --- !u!1 &4378568165665336312
 GameObject:
   m_ObjectHideFlags: 0
