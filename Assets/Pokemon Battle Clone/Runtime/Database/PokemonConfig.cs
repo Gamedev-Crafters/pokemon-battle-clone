@@ -35,7 +35,20 @@ namespace Pokemon_Battle_Clone.Runtime.Database
         public Sprite backSprite;
         public Sprite frontSprite;
         public Sprite iconSprite;
+        
+        public Pokemon Build()
+        {
+            return A.Pokemon.WithID((uint)ID)
+                .WithName(name)
+                .WithLevel(level)
+                .WithBaseStats(baseStats)
+                .WithTypes(type1, type2)
+                .WithNature(GetNature(nature))
+                .WithIVs(ivs)
+                .WithEVs(evs);
+        }
 
+#if UNITY_EDITOR
         private static PokeApiClient _pokeClient;
         private static SpritesLoader _spritesLoader;
 
@@ -57,18 +70,6 @@ namespace Pokemon_Battle_Clone.Runtime.Database
                     _spritesLoader = new SpritesLoader("Assets/Pokemon Battle Clone/Sprites/Pokemon");
                 return _spritesLoader;
             }
-        }
-
-        public Pokemon Build()
-        {
-            return A.Pokemon.WithID((uint)ID)
-                .WithName(name)
-                .WithLevel(level)
-                .WithBaseStats(baseStats)
-                .WithTypes(type1, type2)
-                .WithNature(GetNature(nature))
-                .WithIVs(ivs)
-                .WithEVs(evs);
         }
 
         public async Task LoadFromAPI()
@@ -150,5 +151,6 @@ namespace Pokemon_Battle_Clone.Runtime.Database
                 _ => Nature.Bashful()
             };
         }
+#endif
     }
 }
