@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: Kukui
   m_EditorClassIdentifier: PokemonBattleClone.Runtime::Pokemon_Battle_Clone.Runtime.TeamBuilder.TeamConfig
   pokemonList:
-  - pokemonConfig: {fileID: 11400000, guid: 3c3c01b34b888f34aab1cbc2833e32fd, type: 2}
-    movesConfig:
-    - {fileID: 11400000, guid: 6c0d7185c4d51844cad2c9a2c9a73a99, type: 2}
-    - {fileID: 11400000, guid: 88b09b67949a62341890fb13c04ac807, type: 2}
-    - {fileID: 11400000, guid: fb9793abb679e4347b00243aa5495e55, type: 2}
-    - {fileID: 11400000, guid: c574672d5ccc00043910d30b81342466, type: 2}
   - pokemonConfig: {fileID: 11400000, guid: 90689f31fa1b46f45a9a9fceab1d11bd, type: 2}
     movesConfig:
     - {fileID: 11400000, guid: f7bdeb37d3118a84ab41fe82d46c5ea6, type: 2}
     - {fileID: 11400000, guid: 1f11f37705891d74baf3d5a000a37373, type: 2}
     - {fileID: 11400000, guid: e9460d676741a3b4f93936bd02af56a2, type: 2}
     - {fileID: 11400000, guid: 4cf0b36dad71845449e450626423f177, type: 2}
+  - pokemonConfig: {fileID: 11400000, guid: 3c3c01b34b888f34aab1cbc2833e32fd, type: 2}
+    movesConfig:
+    - {fileID: 11400000, guid: 6c0d7185c4d51844cad2c9a2c9a73a99, type: 2}
+    - {fileID: 11400000, guid: 88b09b67949a62341890fb13c04ac807, type: 2}
+    - {fileID: 11400000, guid: fb9793abb679e4347b00243aa5495e55, type: 2}
+    - {fileID: 11400000, guid: c574672d5ccc00043910d30b81342466, type: 2}
   - pokemonConfig: {fileID: 11400000, guid: 6ed0120805208f94e8c2e1867c6ee44a, type: 2}
     movesConfig:
     - {fileID: 11400000, guid: 88ae09df7cb4b4d498ed209aeb345dc3, type: 2}

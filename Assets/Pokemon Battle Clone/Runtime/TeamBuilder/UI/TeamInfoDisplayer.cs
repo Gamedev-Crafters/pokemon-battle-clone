@@ -10,9 +10,27 @@ namespace Pokemon_Battle_Clone.Runtime.TeamBuilder.UI
         [SerializeField] private PokemonAssetDatabase assetDatabase;
         [SerializeField] private PokemonCard pokemonCard;
 
+        private List<Pokemon> _currentList;
+        private int _currentIndex;
+
+        public void GoLeft()
+        {
+            _currentIndex = (_currentIndex - 1 + _currentList.Count) % _currentList.Count;
+            Display(_currentList, _currentIndex);
+        }
+
+        public void GoRight()
+        {
+            _currentIndex = (_currentIndex + 1) % _currentList.Count;
+            Display(_currentList, _currentIndex);
+        }
+
         public void Display(List<Pokemon> pokemonList, int currentPokemonToDisplay = 0)
         {
-            var pokemon = pokemonList[currentPokemonToDisplay];
+            _currentList = pokemonList;
+            _currentIndex = currentPokemonToDisplay;
+            
+            var pokemon = _currentList[_currentIndex];
             var icon = assetDatabase.GetIcon(pokemon.ID);
             
             pokemonCard.Display(pokemon, icon);
