@@ -387,6 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PokemonBattleClone.Runtime::Pokemon_Battle_Clone.Runtime.TeamBuilder.Selector.TrainerTeamSelection
   assetDatabase: {fileID: 11400000, guid: 4b6d36130e7347441aa6f68599d6c291, type: 2}
+  teamInfoDisplayer: {fileID: 585297479}
   pokemonButtons:
   - {fileID: 930595041}
   - {fileID: 2028662173}
@@ -732,6 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: PokemonBattleClone.Runtime::Pokemon_Battle_Clone.Runtime.TeamBuilder.Selector.TrainerTeamSelection
   assetDatabase: {fileID: 11400000, guid: 4b6d36130e7347441aa6f68599d6c291, type: 2}
+  teamInfoDisplayer: {fileID: 585297479}
   pokemonButtons:
   - {fileID: 2104741164}
   - {fileID: 1709293526}
