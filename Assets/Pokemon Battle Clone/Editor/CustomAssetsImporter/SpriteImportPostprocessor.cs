@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Pokemon_Battle_Clone.Runtime.CustomAssetsImporter.Editor
+namespace Pokemon_Battle_Clone.Editor.CustomAssetsImporter
 {
     public class SpriteImportPostprocessor : AssetPostprocessor
     {

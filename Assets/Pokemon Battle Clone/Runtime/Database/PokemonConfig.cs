@@ -4,7 +4,6 @@ using PokeApiNet;
 using Pokemon_Battle_Clone.Runtime.Builders;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Stats.Domain;
-using Pokemon_Battle_Clone.Runtime.TeamBuilder;
 using UnityEditor;
 using UnityEngine;
 using Nature = Pokemon_Battle_Clone.Runtime.Stats.Domain.Nature;
@@ -47,78 +46,7 @@ namespace Pokemon_Battle_Clone.Runtime.Database
                 .WithIVs(ivs)
                 .WithEVs(evs);
         }
-
-#if UNITY_EDITOR
-        private static PokeApiClient _pokeClient;
-        private static SpritesLoader _spritesLoader;
-
-        private static PokeApiClient PokeClient
-        {
-            get
-            {
-                if (_pokeClient == null)
-                    _pokeClient = new PokeApiClient();
-                return _pokeClient;
-            }
-        }
-
-        private static SpritesLoader SpritesLoader
-        {
-            get
-            {
-                if (_spritesLoader == null)
-                    _spritesLoader = new SpritesLoader("Assets/Pokemon Battle Clone/Sprites/Pokemon");
-                return _spritesLoader;
-            }
-        }
-
-        public async Task LoadFromAPI()
-        {
-            try
-            {
-                var pokemon = await PokeClient.GetResourceAsync<PokeApiNet.Pokemon>(name);
-                
-                ApplyPokemonData(pokemon);
-                await LoadSprites(pokemon);
-                
-                EditorUtility.SetDirty(this);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"Error loading pokemon \"{name}\": {e.Message}");
-            }
-        }
-
-        private void ApplyPokemonData(PokeApiNet.Pokemon pokemon)
-        {
-            ID = pokemon.Id;
-            baseStats = new StatSet(
-                hp: pokemon.Stats[0].BaseStat,
-                attack: pokemon.Stats[1].BaseStat,
-                defense: pokemon.Stats[2].BaseStat,
-                spcAttack: pokemon.Stats[3].BaseStat,
-                spcDefense: pokemon.Stats[4].BaseStat,
-                speed: pokemon.Stats[5].BaseStat
-            );
-            type1 = ElementalTypeUtils.GetType(pokemon.Types[0].Type.Name);
-            if (pokemon.Types.Count > 1)
-                type2 = ElementalTypeUtils.GetType(pokemon.Types[1].Type.Name);
-        }
-
-        private async Task LoadSprites(PokeApiNet.Pokemon pokemon)
-        {
-            try
-            {
-                backSprite = await SpritesLoader.LoadSprite(pokemon, SpriteType.Back);
-                frontSprite = await SpritesLoader.LoadSprite(pokemon, SpriteType.Front);
-                iconSprite = await SpritesLoader.LoadSprite(pokemon, SpriteType.Icon);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e.Message);
-            }
-        }
-
+        
         private Nature GetNature(NatureEnum natureEnum)
         {
             return natureEnum switch
@@ -151,6 +79,5 @@ namespace Pokemon_Battle_Clone.Runtime.Database
                 _ => Nature.Bashful()
             };
         }
-#endif
     }
 }
