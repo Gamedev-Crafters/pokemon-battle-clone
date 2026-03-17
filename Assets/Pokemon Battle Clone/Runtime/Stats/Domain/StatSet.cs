@@ -1,6 +1,6 @@
 ﻿using System;
-using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Pokemon_Battle_Clone.Runtime.Stats.Domain
 {
