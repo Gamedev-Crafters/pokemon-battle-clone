@@ -5,15 +5,12 @@ using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs;
 using Pokemon_Battle_Clone.Runtime.Core.Infrastructure;
-using Pokemon_Battle_Clone.Runtime.CustomLogs;
-using Pokemon_Battle_Clone.Runtime.Database;
 using Pokemon_Battle_Clone.Runtime.RNG;
 using Pokemon_Battle_Clone.Runtime.TeamBuilder.TeamDisplayer;
 using Pokemon_Battle_Clone.Runtime.Trainers.Control;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Strategies;
 using Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions;
 using UnityEngine;
-using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 
 namespace Pokemon_Battle_Clone.Runtime.Battles.Control
 {
@@ -59,8 +56,6 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         {
             await _turn.Init(_battle, _playerTrainer, _rivalTrainer);
             
-            LogManager.Log("Battle started!", FeatureType.Battle);
-            
             while (!_battleFinished)
             {
                 await _turn.Next(_battle, _playerTrainer, _rivalTrainer);
@@ -73,23 +68,15 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         private bool CheckBattleEnd()
         {
             if (_playerTrainer.Defeated)
-            {
-                LogManager.Log("The rival has won!", FeatureType.Battle);
                 return true;
-            }
             if (_rivalTrainer.Defeated)
-            {
-                LogManager.Log("The player has won!", FeatureType.Battle);
                 return true;
-            }
 
             return false;
         }
 
         private void EndBattle()
         {
-            LogManager.Log("Battle finished!", FeatureType.Battle);
-            
             var winner = _playerTrainer.Defeated ? Side.Rival : Side.Player;
             battleEndPanel.Show(winner);
         }

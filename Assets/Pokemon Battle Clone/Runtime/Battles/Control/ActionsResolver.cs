@@ -5,9 +5,7 @@ using Pokemon_Battle_Clone.Runtime.Battles.Control.EventHandlers;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using Pokemon_Battle_Clone.Runtime.Battles.Infrastructure.Dialogs;
-using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
-using LogManager = Pokemon_Battle_Clone.Runtime.CustomLogs.LogManager;
 
 namespace Pokemon_Battle_Clone.Runtime.Battles.Control
 {
@@ -45,14 +43,9 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         public async Task HandleEvent(IBattleEvent battleEvent)
         {
             if (_handlers.TryGetValue(battleEvent.GetType(), out var handler))
-            {
                 await handler(battleEvent);
-            }
             else
-            {
-                LogManager.LogError($"Unsupported battle event of type {battleEvent.GetType().Name}", FeatureType.Action);
                 await Task.CompletedTask;
-            }
         }
     }
 }

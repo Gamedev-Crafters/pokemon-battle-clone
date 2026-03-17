@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
-using Pokemon_Battle_Clone.Runtime.CustomLogs;
 using Pokemon_Battle_Clone.Runtime.Moves.Infrastructure;
 using Pokemon_Battle_Clone.Runtime.TeamBuilder.TeamDisplayer;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
@@ -74,8 +73,6 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             var move = Team.FirstPokemon.MoveSet.Moves[index];
             var action = new MoveAction(Side, Team.FirstPokemon.Stats.Speed, move);
             _actionTcs.SetResult(action);
-            
-            LogManager.Log("Move selected", FeatureType.Player);
         }
 
         private void ShowMoveSelector(bool forceSelection)
@@ -93,8 +90,6 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             
             var action = new SwapPokemonAction(Side, index, withdrawFirstPokemon: !Team.FirstPokemon.Defeated);
             _actionTcs.SetResult(action);
-            
-            LogManager.Log("Pokemon selected", FeatureType.Player);
         }
 
         private void ShowPokemonSelector(bool forceSelection)
