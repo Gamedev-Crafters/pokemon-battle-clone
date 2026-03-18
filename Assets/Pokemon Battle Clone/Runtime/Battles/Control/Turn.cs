@@ -61,8 +61,8 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         {
             _actionsHUD.Show();
             
-            var playerActionTask = player.SelectActionTask(battle);
-            var rivalActionTask = rival.SelectActionTask(battle);
+            var playerActionTask = player.SelectAction(battle);
+            var rivalActionTask = rival.SelectAction(battle);
             await Task.WhenAll(playerActionTask, rivalActionTask);
             
             _actionsHUD.Hide();

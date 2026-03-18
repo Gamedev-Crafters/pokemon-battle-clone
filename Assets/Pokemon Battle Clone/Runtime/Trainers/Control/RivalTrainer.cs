@@ -18,7 +18,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             _trainerStrategy = strategy;
         }
 
-        public override Task<TrainerAction> SelectActionTask(Battle battle)
+        public override Task<TrainerAction> SelectAction(Battle battle)
         {
             var action = _trainerStrategy.Evaluate(battle, Side);
             

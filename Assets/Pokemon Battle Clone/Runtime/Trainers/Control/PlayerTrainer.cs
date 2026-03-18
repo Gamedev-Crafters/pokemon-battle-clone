@@ -40,7 +40,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             _actionsHUD.RegisterDisplayTeamInfoListener(OnDisplayTeamInfo);
         }
 
-        public override async Task<TrainerAction> SelectActionTask(Battle battle)
+        public override async Task<TrainerAction> SelectAction(Battle battle)
         {
             _actionTcs = new TaskCompletionSource<TrainerAction>();
             return await _actionTcs.Task;
