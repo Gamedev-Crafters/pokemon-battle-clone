@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 112}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 13615
+  controlID: 17
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 112}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 13616
+  controlID: 18
   draggingID: 0
 --- !u!114 &7
 MonoBehaviour:
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 13617
+  controlID: 19
   draggingID: 0
 --- !u!114 &8
 MonoBehaviour:
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 56}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 13671
+  controlID: 82
   draggingID: 0
 --- !u!114 &11
 MonoBehaviour:
@@ -1695,7 +1695,8 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SkipHidden: 1
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/Pokemon Battle Clone/Runtime/Database
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1788,9 +1789,10 @@ MonoBehaviour:
       m_ResourceFile: 
   m_AssetTreeState:
     scrollPos: {x: 0, y: 1085}
-    m_SelectedIDs: []
+    m_SelectedIDs:
+    - m_Data: 43060
     m_LastClickedID:
-      m_Data: 0
+      m_Data: 43060
     m_ExpandedIDs:
     - m_Data: 0
     - m_Data: 52010
@@ -1862,8 +1864,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: []
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs:
+    - m_Data: 43060
+    m_LastClickedInstanceID: 43060
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: []
     m_RenameOverlay:
@@ -1941,51 +1944,7 @@ MonoBehaviour:
       m_LastClickedID:
         m_Data: 0
       m_ExpandedIDs:
-      - m_Data: -217142
-      - m_Data: -215268
-      - m_Data: -213320
-      - m_Data: -212998
-      - m_Data: -210580
-      - m_Data: -209106
-      - m_Data: -206884
-      - m_Data: -204850
-      - m_Data: -202202
-      - m_Data: -188860
-      - m_Data: -188538
-      - m_Data: -186120
-      - m_Data: -184646
-      - m_Data: -160336
-      - m_Data: -160014
-      - m_Data: -157596
-      - m_Data: -156122
-      - m_Data: -145962
-      - m_Data: -143680
-      - m_Data: -143358
-      - m_Data: -140940
-      - m_Data: -139466
-      - m_Data: -126406
-      - m_Data: -125788
-      - m_Data: -124172
-      - m_Data: -118852
-      - m_Data: -116478
-      - m_Data: -114524
-      - m_Data: -114202
-      - m_Data: -111784
-      - m_Data: -110310
-      - m_Data: -79582
-      - m_Data: -77708
-      - m_Data: -73792
-      - m_Data: -73470
-      - m_Data: -71052
-      - m_Data: -69578
-      - m_Data: -8038
-      - m_Data: -5786
-      - m_Data: -3768
       - m_Data: -1316
-      - m_Data: 52394
-      - m_Data: 97202
-      - m_Data: 133208
-      - m_Data: 133414
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
