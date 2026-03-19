@@ -21,7 +21,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control.EventHandlers
             if (battleEvent.ActionSide == Side.Player)
                 await _dialogDisplayer.DisplayAsync($"Go ahead, {battleEvent.Pokemon.Name}!");
             else if (battleEvent.ActionSide == Side.Rival)
-                await _dialogDisplayer.DisplayAsync($"The opponent brings out {battleEvent.Pokemon.Name}!");
+                await _dialogDisplayer.DisplayAsync($"The opponent sent out {battleEvent.Pokemon.Name}!");
             
             var view = _battleContext.GetTeamView(battleEvent.ActionSide);
             await view.SendPokemon(battleEvent.Pokemon);
