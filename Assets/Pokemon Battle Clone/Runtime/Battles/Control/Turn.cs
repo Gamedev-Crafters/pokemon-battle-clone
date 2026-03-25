@@ -101,6 +101,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             if (trainer.IsFirstPokemonDefeated)
             {
                 var faintedPokemon = trainer.FirstPokemon;
+                // DEFECTO: Estamos acoplados al side del player, no sirve para el rival (con tests habría salido)
                 await _actionsResolver.HandleEvent(new FaintedEvent(Side.Player, faintedPokemon.Name, faintedPokemon.ID));
             }
         }
