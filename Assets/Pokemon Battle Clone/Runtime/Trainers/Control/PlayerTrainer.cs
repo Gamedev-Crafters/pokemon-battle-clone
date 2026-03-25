@@ -49,9 +49,11 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             return result;
         }
 
-        public override async Task<TrainerAction> SelectSwapAction(Battle battle) => await SelectActionOfType<SwapPokemonAction>(forceSelection: true, battle);
+        public override async Task<TrainerAction> SelectSwapAction(Battle battle) => await SelectActionOfType<SwapPokemonAction>(forceSelection: true);
 
-        async Task<T> SelectActionOfType<T>(bool forceSelection, Battle battle) where T : TrainerAction
+        // Podríamos quitar la complejidad de este método también, pero implica meternos en detalles de Tasks que no son tan valiosas para la sesión.
+        // Igualmente, se pueden comentar en un hilo de Discord :)
+        async Task<T> SelectActionOfType<T>(bool forceSelection) where T : TrainerAction
         {
             _actionsHUD.Show();
             _actionTcs = new TaskCompletionSource<TrainerAction>();
