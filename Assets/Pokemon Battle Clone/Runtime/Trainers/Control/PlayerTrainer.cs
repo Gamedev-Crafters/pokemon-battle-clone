@@ -40,7 +40,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             _actionsHUD.RegisterDisplayTeamInfoListener(OnDisplayTeamInfo);
         }
 
-        public override async Task<TrainerAction> SelectAction(Battle battle)
+        public override async Task<TrainerAction> SelectAction()
         {
             _actionsHUD.Show();
             _actionTcs = new TaskCompletionSource<TrainerAction>();
@@ -50,7 +50,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
         }
 
         // ¿Por qué recibimos Battle si no lo usamos?
-        public override async Task<TrainerAction> SelectSwapAction(Battle battle) => await SelectActionOfType<SwapPokemonAction>(forceSelection: true);
+        public override async Task<TrainerAction> SelectSwapAction() => await SelectActionOfType<SwapPokemonAction>(forceSelection: true);
 
         // Podríamos quitar la complejidad de este método también, pero implica meternos en detalles de Tasks que no son tan valiosas para la sesión.
         // Igualmente, se pueden comentar en un hilo de Discord :)

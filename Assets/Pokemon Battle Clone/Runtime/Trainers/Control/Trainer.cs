@@ -22,9 +22,9 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
 
         public TrainerAction Init() => SendFirstPokemon();
 
-        public abstract Task<TrainerAction> SelectAction(Battle battle);
+        public abstract Task<TrainerAction> SelectAction();
 
-        public abstract Task<TrainerAction> SelectSwapAction(Battle battle);
+        public abstract Task<TrainerAction> SelectSwapAction();
 
         protected virtual TrainerAction SendFirstPokemon() => new SendPokemonAction(Side);
     }

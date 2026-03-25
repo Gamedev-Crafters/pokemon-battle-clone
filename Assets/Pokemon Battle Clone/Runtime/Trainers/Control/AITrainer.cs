@@ -19,13 +19,13 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             _trainerStrategy = strategy;
         }
 
-        public override Task<TrainerAction> SelectAction(Battle battle)
+        public override Task<TrainerAction> SelectAction()
         {
             var action = _trainerStrategy.Evaluate(_battle, Side);
             
             return Task.FromResult(action);
         }
 
-        public override Task<TrainerAction> SelectSwapAction(Battle battle) => Task.FromResult(_trainerStrategy.SelectPokemon(_battle, Side));
+        public override Task<TrainerAction> SelectSwapAction() => Task.FromResult(_trainerStrategy.SelectPokemon(_battle, Side));
     }
 }
