@@ -24,12 +24,9 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             _rivalTrainer = rivalTrainer;
         }
 
-        public async Task Init() // not entirely convinced by this approach
-        {
-            await _actionsResolver.Resolve(_battle, _rivalTrainer.Init());
-            await _actionsResolver.Resolve(_battle, _playerTrainer.Init());
-        }
-        
+        // not entirely convinced by this approach
+        public Task Init() => ExecuteActionsAsync(new List<TrainerAction> { _rivalTrainer.Init(), _playerTrainer.Init() });
+
         public async Task Next()
         {
             _count++;
