@@ -49,7 +49,6 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             return result;
         }
 
-        // ¿Por qué recibimos Battle si no lo usamos?
         public override async Task<TrainerAction> SelectSwapAction() => await SelectActionOfType<SwapPokemonAction>(forceSelection: true);
 
         // Podríamos quitar la complejidad de este método también, pero implica meternos en detalles de Tasks que no son tan valiosas para la sesión.
