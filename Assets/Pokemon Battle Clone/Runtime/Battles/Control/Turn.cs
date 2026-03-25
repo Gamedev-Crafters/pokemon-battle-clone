@@ -41,17 +41,14 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         {
             var tasks = new List<Task<SwapPokemonAction>>();
             if (player.IsFirstPokemonDefeated)
-            {
-                _actionsHUD.Show();
                 tasks.Add(player.SelectSwapAction(battle));
-            }
+            
             if (rival.IsFirstPokemonDefeated)
                 tasks.Add(rival.SelectSwapAction(battle));
             
             if (tasks.Count > 0)
             {
                 await Task.WhenAll(tasks);
-                _actionsHUD.Hide();
                 foreach (var task in tasks)
                     await _actionsResolver.Resolve(battle, task.Result);
             }
@@ -59,13 +56,9 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         
         private async Task<List<TrainerAction>> SelectActionsAsync(Battle battle, Trainer player, Trainer rival)
         {
-            _actionsHUD.Show();
-            
             var playerActionTask = player.SelectAction(battle);
             var rivalActionTask = rival.SelectAction(battle);
             await Task.WhenAll(playerActionTask, rivalActionTask);
-            
-            _actionsHUD.Hide();
             
             return new List<TrainerAction> { playerActionTask.Result, rivalActionTask.Result };
         }
