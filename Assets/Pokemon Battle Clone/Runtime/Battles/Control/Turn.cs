@@ -91,7 +91,6 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
                 await _actionsResolver.Resolve(_battle, action);
 
                 // I need to think of another approach 
-                // ¿Igual ahora que tenemos la dependencia inyectada podemos preguntar directamente?
                 await CheckFaintedPokemon(_playerTrainer);
                 await CheckFaintedPokemon(_rivalTrainer);
             }
