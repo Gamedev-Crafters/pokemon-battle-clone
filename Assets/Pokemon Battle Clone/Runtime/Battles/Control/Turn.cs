@@ -2,8 +2,6 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain;
-using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
-using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainers.Control;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
 using Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions;
