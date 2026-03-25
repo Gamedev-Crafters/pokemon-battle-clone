@@ -91,17 +91,27 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
                 await _actionsResolver.Resolve(_battle, action);
 
                 // I need to think of another approach 
-                await CheckForFaintedPokemon(Side.Player);
-                await CheckForFaintedPokemon(Side.Rival);
+                // ¿Igual ahora que tenemos la dependencia inyectada podemos preguntar directamente?
+                await CheckForPlayerFaintedPokemon();
+                await CheckForRivalFaintedPokemon();
             }
         }
-
-        private async Task CheckForFaintedPokemon(Side side)
+        
+        private async Task CheckForPlayerFaintedPokemon()
         {
-            if (_battle.PokemonFainted(side))
+            if (_playerTrainer.IsFirstPokemonDefeated)
             {
-                var faintedPokemon = _battle.GetFirstPokemon(side);
-                await _actionsResolver.HandleEvent(new FaintedEvent(side, faintedPokemon.Name, faintedPokemon.ID));
+                var faintedPokemon = _playerTrainer.FirstPokemon;
+                await _actionsResolver.HandleEvent(new FaintedEvent(Side.Player, faintedPokemon.Name, faintedPokemon.ID));
+            }
+        }
+        
+        private async Task CheckForRivalFaintedPokemon()
+        {
+            if (_rivalTrainer.IsFirstPokemonDefeated)
+            {
+                var faintedPokemon = _rivalTrainer.FirstPokemon;
+                await _actionsResolver.HandleEvent(new FaintedEvent(Side.Player, faintedPokemon.Name, faintedPokemon.ID));
             }
         }
     }
