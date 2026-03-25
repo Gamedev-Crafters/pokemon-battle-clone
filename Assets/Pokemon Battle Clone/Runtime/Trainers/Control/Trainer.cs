@@ -24,7 +24,6 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
 
         public abstract Task<TrainerAction> SelectAction(Battle battle);
 
-        public abstract Task<T> SelectActionOfType<T>(bool forceSelection, Battle battle) where T : TrainerAction;
         public abstract Task<SwapPokemonAction> SelectSwapAction(Battle battle);
 
         protected virtual TrainerAction SendFirstPokemon() => new SendPokemonAction(Side);
