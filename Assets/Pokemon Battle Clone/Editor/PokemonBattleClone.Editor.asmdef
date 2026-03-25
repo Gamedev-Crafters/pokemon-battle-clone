@@ -1,0 +1,18 @@
+{
+    "name": "PokemonBattleClone.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7f75275fcf115174fa5f7515748c3d72"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

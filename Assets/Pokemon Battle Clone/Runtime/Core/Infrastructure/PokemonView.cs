@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +31,8 @@ namespace Pokemon_Battle_Clone.Runtime.Core.Infrastructure
         public Task PlayAttackAnimation() => PlayAnimation("Attack");
         public Task PlayHitAnimation() => PlayAnimation("Hit");
         public Task PlayFaintAnimation() => PlayAnimation("Faint");
+        public Task PlaySendAnimation() => PlayAnimation("Send");
+        public Task PlayWithdrawAnimation() => PlayAnimation("Withdraw");
 
         private Task PlayAnimation(string stateName)
         {

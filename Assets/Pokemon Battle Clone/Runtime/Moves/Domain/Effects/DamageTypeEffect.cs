@@ -1,0 +1,34 @@
+﻿using System.Collections.Generic;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
+
+namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
+{
+    public abstract class DamageTypeEffect : IMoveEffect
+    {
+        public abstract IList<IBattleEvent> Apply(Move move, Battle battle, Side side);
+        
+        protected int GetDamage(Move move, Battle battle, Side side)
+        {
+            var user = battle.GetFirstPokemon(side);
+            var target = battle.GetFirstPokemon(side.Opposite());
+            
+            var level = user.Stats.Level;
+            var attack = user.Stats.GetAttackByCategory(move.Category);
+            var defense = target.Stats.GetDefenseByCategory(move.Category);
+            var power = move.Power;
+            var targets = 1f;
+            var weather = 1f;
+            var critical = 1f;
+            var randomFactor = PokemonUtils.RandomDamageFactor(battle.Random);
+            var stab = user.STAB(move.Type);
+            var effectiveness = move.Type.EffectivenessAgainst(target.Type1, target.Type2);
+            var burn = 1f;
+            var other = 1f;
+
+            return PokemonUtils.CalculateDamage(level, attack, defense, power, targets, weather, critical, randomFactor, stab,
+                effectiveness, burn, other);
+        }
+    }
+}

@@ -1,13 +1,16 @@
-﻿using Pokemon_Battle_Clone.Runtime.Core.Domain;
-using Pokemon_Battle_Clone.Runtime.RNG;
+﻿using System.Collections.Generic;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using Pokemon_Battle_Clone.Runtime.Stats.Domain;
+using UnityEngine;
 
 namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
 {
+    [System.Serializable]
     public class StatsModifierEffect : IMoveEffect
     {
-        private readonly bool _applyToTarget;
-        private readonly StatSet _statsModifier;
+        [SerializeField] private bool _applyToTarget;
+        [SerializeField] private StatSet _statsModifier;
 
         public StatsModifierEffect(bool applyToTarget, StatSet statsModifier)
         {
@@ -15,12 +18,21 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects
             _statsModifier = statsModifier;
         }
         
-        public void Apply(Move move, Pokemon user, Pokemon target, IRandom random)
+        public IList<IBattleEvent> Apply(Move move, Battle battle, Side side)
         {
+            var user = battle.GetFirstPokemon(side);
+            var target = battle.GetFirstPokemon(side.Opposite());
+
             if (_applyToTarget)
                 target.Stats.Modifiers.Apply(_statsModifier);
             else
                 user.Stats.Modifiers.Apply(_statsModifier);
+
+            return new List<IBattleEvent>
+            {
+                new StatsModifierEvent(side, _applyToTarget ? target.Stats.Modifiers : user.Stats.Modifiers,
+                    _applyToTarget, user.Name, target.Name)
+            };
         }
     }
 }

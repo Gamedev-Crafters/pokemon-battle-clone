@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
         public int MaxPP;
         public int CurrentPP;
         public string Name;
+        public ElementalType Type;
     }
     
     public struct MoveSetDTO
@@ -25,7 +27,8 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Infrastructure
                 {
                     MaxPP = move.PP.Max,
                     CurrentPP = move.PP.Value,
-                    Name = move.Name
+                    Name = move.Name,
+                    Type = move.Type
                 });
             }
             

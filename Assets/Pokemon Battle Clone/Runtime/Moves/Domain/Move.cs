@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain;
+using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
 using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Moves.Domain.Effects;
-using Pokemon_Battle_Clone.Runtime.RNG;
 using UnityEngine.Assertions;
 
 namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
@@ -21,9 +22,10 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
         public int Power { get; }
         public int Priority { get; }
 
-        private readonly List<IMoveEffect> _effects = new List<IMoveEffect>();
+        private readonly IMoveEffect _mainEffect;
+        private readonly List<ConditionalEffect> _additionalEffects = new List<ConditionalEffect>();
 
-        public Move(string name, ElementalType type, MoveCategory category, uint pp, uint accuracy, uint power, int priority)
+        public Move(string name, ElementalType type, MoveCategory category, uint pp, uint accuracy, uint power, int priority, IMoveEffect mainEffect)
         {
             Name = name;
             Type = type;
@@ -32,23 +34,42 @@ namespace Pokemon_Battle_Clone.Runtime.Moves.Domain
             Accuracy = (int)accuracy;
             Power = (int)power;
             Priority = priority;
+            _mainEffect = mainEffect;
         }
 
-        public void AddEffects(IEnumerable<IMoveEffect> effects)
+        public void AddEffects(IEnumerable<ConditionalEffect> effects)
         {
             foreach (var effect in effects)
                 AddEffect(effect);
         }
         
-        public void AddEffect(IMoveEffect effect) => _effects.Add(effect);
+        public void AddEffect(ConditionalEffect effect) => _additionalEffects.Add(effect);
         
-        public void Execute(Pokemon user, Pokemon target, IRandom random)
+        public IEnumerable<IBattleEvent> Execute(Battle  battle, Side side)
         {
             Assert.IsTrue(PP > 0);
             PP.Value--;
             
-            foreach (var effect in _effects)
-                effect.Apply(this, user, target, random);
+            var events = new List<IBattleEvent>();
+            events.Add(new ExecuteMoveEvent(side, battle.GetFirstPokemon(side).Name, this.Name));
+
+            var target = battle.GetFirstPokemon(side.Opposite());
+            if (target.Type1.IsImmuneTo(this.Type) || target.Type2.IsImmuneTo(this.Type))
+            {
+                events.Add(new ImmuneMoveEvent(target.Name));
+                return events;
+            }
+            
+            var effectEvent = _mainEffect.Apply(move: this, battle, side);
+            events.AddRange(effectEvent);
+
+            foreach (var effect in _additionalEffects)
+            {
+                var additionalEvent = effect.TryApply(move: this, battle, side);
+                events.AddRange(additionalEvent);
+            }
+
+            return events;
         }
     }
 }
