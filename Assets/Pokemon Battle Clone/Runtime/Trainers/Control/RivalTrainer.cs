@@ -25,6 +25,8 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             return Task.FromResult(action);
         }
 
+        // Smell: RTTI
+        // No separar query de comando
         public override Task<T> SelectActionOfType<T>(bool forceSelection, Battle battle)
         {
             TrainerAction action = typeof(T) switch
@@ -36,5 +38,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
 
             return Task.FromResult((T)action);
         }
+
+        public override Task<SwapPokemonAction> SelectSwapAction(Battle battle) => Task.FromResult(_trainerStrategy.SelectPokemon(battle, Side));
     }
 }

@@ -46,6 +46,10 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             return await _actionTcs.Task;
         }
 
+        public override Task<SwapPokemonAction> SelectSwapAction(Battle battle) {
+            return SelectActionOfType<SwapPokemonAction>(forceSelection: true, battle);
+        }
+
         public override async Task<T> SelectActionOfType<T>(bool forceSelection, Battle battle)
         {
             _actionTcs = new TaskCompletionSource<TrainerAction>();
@@ -56,7 +60,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
             var result = await _actionTcs.Task;
             return (T)result;
         }
-        
+
         protected override TrainerAction SendFirstPokemon()
         {
             _actionsHUD.HideSelectors();
