@@ -40,6 +40,12 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         
         private async Task StartTurnAsync(Battle battle, Trainer player, Trainer rival)
         {
+            var actions = await SelectPreTurnActions(battle, player, rival);
+            await ExecuteActionsAsync(battle, actions);
+        }
+
+        private async Task<List<TrainerAction>> SelectPreTurnActions(Battle battle, Trainer player, Trainer rival)
+        {
             var tasks = new List<Task<TrainerAction>>();
             if (player.IsFirstPokemonDefeated)
                 tasks.Add(player.SelectSwapAction(battle));
@@ -47,13 +53,10 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             if (rival.IsFirstPokemonDefeated)
                 tasks.Add(rival.SelectSwapAction(battle));
             
-            if (tasks.Count > 0)
-            {
-                await Task.WhenAll(tasks);
-                await ExecuteActionsAsync(battle, tasks.Select(x => x.Result).ToList());
-            }
+            await Task.WhenAll(tasks);
+            return tasks.Select(x => x.Result).ToList();
         }
-        
+
         private async Task<List<TrainerAction>> SelectActionsAsync(Battle battle, Trainer player, Trainer rival)
         {
             var playerActionTask = player.SelectAction(battle);
