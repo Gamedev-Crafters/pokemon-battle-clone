@@ -12,8 +12,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
         protected readonly Team Team;
 
         public bool Defeated => Team.Defeated;
-        public bool IsFirstPokemonDefeated => FirstPokemon.Defeated;
-        public Pokemon FirstPokemon => Team.FirstPokemon;
+        public bool IsFirstPokemonDefeated => Team.FirstPokemon.Defeated;
         public abstract Side Side { get; }
 
         protected Trainer(Team team)
@@ -28,5 +27,7 @@ namespace Pokemon_Battle_Clone.Runtime.Trainers.Control
         public abstract Task<TrainerAction> SelectSwapAction();
 
         protected virtual TrainerAction SendFirstPokemon() => new SendPokemonAction(Side);
+
+        public FaintedEvent FaintedEvent() => new(Side, Team.FirstPokemon.Name, Team.FirstPokemon.ID);
     }
 }

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain;
 using Pokemon_Battle_Clone.Runtime.Battles.Domain.Events;
+using Pokemon_Battle_Clone.Runtime.Core.Domain;
 using Pokemon_Battle_Clone.Runtime.Trainers.Control;
 using Pokemon_Battle_Clone.Runtime.Trainers.Domain.Actions;
 using Pokemon_Battle_Clone.Runtime.Trainers.Infrastructure.Actions;
@@ -99,12 +100,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         private async Task CheckFaintedPokemon(Trainer trainer)
         {
             if (trainer.IsFirstPokemonDefeated)
-            {
-                // Smell: Este método usa demasiados campos del trainer, podríamos mover esta lógica a algún otro lado.
-                var faintedPokemon = trainer.FirstPokemon;
-                var faintedEvent = new FaintedEvent(trainer.Side, faintedPokemon.Name, faintedPokemon.ID);
-                await _actionsResolver.HandleEvent(faintedEvent);
-            }
+                await _actionsResolver.HandleEvent(trainer.FaintedEvent());
         }
     }
 }
