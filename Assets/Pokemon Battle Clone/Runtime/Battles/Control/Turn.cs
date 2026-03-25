@@ -49,6 +49,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
             await ExecuteActionsAsync(battle, actions);
         }
 
+        // Hay algo de paralelismo entre este método y el SelectActionsAsync, pero lo dejamos por ahora ya que no duele. 
         private async Task<List<TrainerAction>> SelectPreTurnActions(Battle battle, Trainer player, Trainer rival)
         {
             var tasks = new List<Task<TrainerAction>>();
