@@ -54,6 +54,7 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
 
         private async Task RunBattleAsync()
         {
+            // Smell: Lista de parámetros un poco larga (no tanto en realidad), pero se repite abajo, así que es sospechoso.
             await _turn.Init(_battle, _playerTrainer, _rivalTrainer);
             
             while (!_battleFinished)
