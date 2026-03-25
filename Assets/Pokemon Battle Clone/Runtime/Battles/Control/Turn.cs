@@ -100,9 +100,10 @@ namespace Pokemon_Battle_Clone.Runtime.Battles.Control
         {
             if (trainer.IsFirstPokemonDefeated)
             {
+                // Smell: Este método usa demasiados campos del trainer, podríamos mover esta lógica a algún otro lado.
                 var faintedPokemon = trainer.FirstPokemon;
-                // DEFECTO: Estamos acoplados al side del player, no sirve para el rival (con tests habría salido)
-                await _actionsResolver.HandleEvent(new FaintedEvent(trainer.Side, faintedPokemon.Name, faintedPokemon.ID));
+                var faintedEvent = new FaintedEvent(trainer.Side, faintedPokemon.Name, faintedPokemon.ID);
+                await _actionsResolver.HandleEvent(faintedEvent);
             }
         }
     }
